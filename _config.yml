@@ -1,0 +1,31 @@
+title: Statistics Study Guide
+description: Statisztika – tanulási jegyzetek
+
+baseurl: "/stats-study"
+url: "https://szappanka.github.io"
+
+plugins:
+  - jekyll-relative-links
+
+nav:
+  - title: Kezdőlap
+    url: /
+  - title: Alapfogalmak
+    url: /docs/01-alapfogalmak
+  - title: Becsléselmélet
+    url: /docs/02-becslestelmelet
+  - title: Paraméteres tesztek
+    url: /docs/03-parameteres-tesztek
+  - title: Nemparaméteres tesztek
+    url: /docs/04-nemparameteres-tesztek
+  - title: Többmintás egzakt tesztek
+    url: /docs/05-tobbmintas-egzakt-tesztek
+  - title: Lineáris regresszió
+    url: /docs/06-linearis-regresszio
+  - title: Idősorok
+    url: /docs/07-idosorok
+  - title: Statisztikai csapdák
+    url: /docs/08-statisztikai-csapdak
+
+exclude:
+  - README.md

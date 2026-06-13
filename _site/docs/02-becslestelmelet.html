@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="hu" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        var saved = localStorage.getItem("stats-theme");
+        var theme =
+          saved ||
+          (window.matchMedia("(prefers-color-scheme: light)").matches
+            ? "light"
+            : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+    <title>
+      Becsléselmélet · Statistics Study Guide
+    </title>
+    <meta
+      name="description"
+      content="Statisztika – tanulási jegyzetek"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23e05b78' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 30 L6 50 L22 70'/%3E%3Cpath d='M78 30 L94 50 L78 70'/%3E%3Cpath d='M50 30 L68 40 L50 50 L32 40 Z'/%3E%3Cpath d='M32 40 L50 50 L50 70 L32 60 Z'/%3E%3Cpath d='M50 50 L68 40 L68 60 L50 70 Z'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link
+      rel="stylesheet"
+      href="/stats-study/assets/css/style.css"
+    />
+  </head>
+  <body>
+    
+
+    <!-- Backdrop (mobil drawer overlay) -->
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-inner">
+        <a class="brand" href="/stats-study/">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 100 100" width="28" height="28" role="img">
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-width="6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M 22 30 L 6 50 L 22 70" />
+                <path d="M 78 30 L 94 50 L 78 70" />
+                <path d="M 50 30 L 68 40 L 50 50 L 32 40 Z" />
+                <path d="M 32 40 L 50 50 L 50 70 L 32 60 Z" />
+                <path d="M 50 50 L 68 40 L 68 60 L 50 70 Z" />
+              </g>
+            </svg>
+          </span>
+          <span class="brand-text">Statistics Study Guide</span>
+        </a>
+
+        <nav class="sidebar-nav" aria-label="Főnavigáció">
+          
+          <a
+            href="/stats-study/"
+            
+            >Kezdőlap</a
+          >
+          
+          <a
+            href="/stats-study/docs/01-alapfogalmak"
+            
+            >Alapfogalmak</a
+          >
+          
+          <a
+            href="/stats-study/docs/02-becslestelmelet"
+            class="active" aria-current="page"
+            >Becsléselmélet</a
+          >
+          
+          <a
+            href="/stats-study/docs/03-parameteres-tesztek"
+            
+            >Paraméteres tesztek</a
+          >
+          
+          <a
+            href="/stats-study/docs/04-nemparameteres-tesztek"
+            
+            >Nemparaméteres tesztek</a
+          >
+          
+          <a
+            href="/stats-study/docs/05-tobbmintas-egzakt-tesztek"
+            
+            >Többmintás egzakt tesztek</a
+          >
+          
+          <a
+            href="/stats-study/docs/06-linearis-regresszio"
+            
+            >Lineáris regresszió</a
+          >
+          
+          <a
+            href="/stats-study/docs/07-idosorok"
+            
+            >Idősorok</a
+          >
+          
+          <a
+            href="/stats-study/docs/08-statisztikai-csapdak"
+            
+            >Statisztikai csapdák</a
+          >
+          
+        </nav>
+
+        <div class="sidebar-footer">
+          <button
+            class="theme-toggle"
+            role="switch"
+            aria-checked="false"
+            aria-label="Sötét / világos téma"
+            title="Téma váltás"
+          >
+            <span class="theme-track">
+              <span class="theme-thumb">
+                <svg
+                  class="icon-moon"
+                  viewBox="0 0 24 24"
+                  width="13"
+                  height="13"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"
+                  />
+                </svg>
+                <svg
+                  class="icon-sun"
+                  viewBox="0 0 24 24"
+                  width="13"
+                  height="13"
+                  aria-hidden="true"
+                >
+                  <g
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  >
+                    <circle cx="12" cy="12" r="4.2" />
+                    <path
+                      d="M12 2v2.5M12 19.5V22M22 12h-2.5M4.5 12H2M19 5l-1.8 1.8M6.8 17.2 5 19M19 19l-1.8-1.8M6.8 6.8 5 5"
+                    />
+                  </g>
+                </svg>
+              </span>
+            </span>
+          </button>
+          <span class="sidebar-theme-label">Téma</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Főterület -->
+    <div class="main-wrap">
+      <!-- Topbar (csak mobilon látszik) -->
+      <header class="topbar">
+        <button
+          class="sidebar-toggle"
+          id="sidebar-toggle"
+          aria-label="Menü megnyitása"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+        <a class="brand" href="/stats-study/">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 100 100" width="28" height="28" role="img">
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-width="6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M 22 30 L 6 50 L 22 70" />
+                <path d="M 78 30 L 94 50 L 78 70" />
+                <path d="M 50 30 L 68 40 L 50 50 L 32 40 Z" />
+                <path d="M 32 40 L 50 50 L 50 70 L 32 60 Z" />
+                <path d="M 50 50 L 68 40 L 68 60 L 50 70 Z" />
+              </g>
+            </svg>
+          </span>
+          <span class="brand-text">Statistics Study Guide</span>
+        </a>
+        <button
+          class="theme-toggle"
+          role="switch"
+          aria-checked="false"
+          aria-label="Sötét / világos téma"
+          title="Téma váltás"
+        >
+          <span class="theme-track">
+            <span class="theme-thumb">
+              <svg
+                class="icon-moon"
+                viewBox="0 0 24 24"
+                width="13"
+                height="13"
+                aria-hidden="true"
+              >
+                <path
+                  fill="currentColor"
+                  d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"
+                />
+              </svg>
+              <svg
+                class="icon-sun"
+                viewBox="0 0 24 24"
+                width="13"
+                height="13"
+                aria-hidden="true"
+              >
+                <g
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                >
+                  <circle cx="12" cy="12" r="4.2" />
+                  <path
+                    d="M12 2v2.5M12 19.5V22M22 12h-2.5M4.5 12H2M19 5l-1.8 1.8M6.8 17.2 5 19M19 19l-1.8-1.8M6.8 6.8 5 5"
+                  />
+                </g>
+              </svg>
+            </span>
+          </span>
+        </button>
+      </header>
+
+      <main class="content has-toc">
+        <article class="prose">
+          
+       
+          <nav class="pager" aria-label="Lapozó">
+               
+            <a class="pager-link prev" href="/stats-study/docs/01-alapfogalmak">
+              <span class="pager-dir">← Előző</span>
+              <span class="pager-title">Alapfogalmak</span>
+            </a>
+              
+            <a class="pager-link next" href="/stats-study/docs/03-parameteres-tesztek">
+              <span class="pager-dir">Következő →</span>
+              <span class="pager-title">Paraméteres tesztek</span>
+            </a>
+            
+          </nav>
+           
+        </article>
+        
+        <aside class="toc" aria-label="Ezen az oldalon">
+          <p class="toc-title">Ezen az oldalon</p>
+          <nav class="toc-list"><!-- JS tölti fel a h2 címekből --></nav>
+        </aside>
+        
+      </main>
+
+      <footer class="site-footer">
+        <p>Statistics Study Guide</p>
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        var sidebarEl = document.getElementById("sidebar");
+        var backdropEl = document.getElementById("sidebar-backdrop");
+        var toggleBtn = document.getElementById("sidebar-toggle");
+
+        function openSidebar() {
+          sidebarEl.classList.add("open");
+          backdropEl.classList.add("visible");
+          if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "true");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeSidebar() {
+          sidebarEl.classList.remove("open");
+          backdropEl.classList.remove("visible");
+          if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "false");
+          document.body.style.overflow = "";
+        }
+
+        if (toggleBtn) {
+          toggleBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            sidebarEl.classList.contains("open") ? closeSidebar() : openSidebar();
+          });
+        }
+
+        if (backdropEl) {
+          backdropEl.addEventListener("click", closeSidebar);
+        }
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") closeSidebar();
+        });
+
+        // Téma váltás — mindkét toggle-ra (sidebar + topbar)
+        var root = document.documentElement;
+        var themeBtns = document.querySelectorAll(".theme-toggle");
+        function syncToggle() {
+          var isLight = root.getAttribute("data-theme") === "light";
+          Array.prototype.forEach.call(themeBtns, function (btn) {
+            btn.setAttribute("aria-checked", isLight ? "true" : "false");
+          });
+        }
+        syncToggle();
+        Array.prototype.forEach.call(themeBtns, function (btn) {
+          btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            var next =
+              root.getAttribute("data-theme") === "light" ? "dark" : "light";
+            root.setAttribute("data-theme", next);
+            localStorage.setItem("stats-theme", next);
+            syncToggle();
+          });
+        });
+
+        // Tartalomjegyzék (TOC) építése a h2 címekből + scroll-spy
+        var tocList = document.querySelector(".toc-list");
+        if (tocList) {
+          var headings = Array.prototype.slice.call(
+            document.querySelectorAll(".prose h2"),
+          );
+          if (headings.length < 2) {
+            var aside = document.querySelector(".toc");
+            if (aside) aside.remove();
+            var contentEl = document.querySelector(".content");
+            if (contentEl) contentEl.classList.remove("has-toc");
+          } else {
+            var slug = function (t) {
+              return t
+                .toLowerCase()
+                .replace(/[^\wáéíóöőúüű\s-]/g, "")
+                .trim()
+                .replace(/\s+/g, "-");
+            };
+            var tocLinks = [];
+            headings.forEach(function (h) {
+              if (!h.id) h.id = slug(h.textContent);
+              var a = document.createElement("a");
+              a.href = "#" + h.id;
+              a.textContent = h.textContent;
+              tocList.appendChild(a);
+              tocLinks.push(a);
+            });
+
+            var spy = function () {
+              var top = window.scrollY + 120;
+              var activeIdx = 0;
+              headings.forEach(function (h, i) {
+                if (h.offsetTop <= top) activeIdx = i;
+              });
+              tocLinks.forEach(function (a, i) {
+                a.classList.toggle("active", i === activeIdx);
+              });
+            };
+            window.addEventListener("scroll", spy, { passive: true });
+            spy();
+          }
+        }
+      })();
+    </script>
+
+    <script>
+      // Szakasz-felolvasás magyarul (böngésző Web Speech API). Minden h2/h3
+      // cím mellé tesz egy hangszóró-ikont; kattintásra felolvassa a szakaszt
+      // a következő (azonos vagy feljebbi szintű) címig, a kódblokkokat kihagyva.
+      (function () {
+        var synth = window.speechSynthesis;
+        if (!synth || typeof SpeechSynthesisUtterance === "undefined") return;
+
+        var ICON_PLAY =
+          '<svg viewBox="0 0 24 24" aria-hidden="true">' +
+          '<path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3z"/>' +
+          '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16 8.5a5 5 0 0 1 0 7M18.7 6a8.5 8.5 0 0 1 0 12"/>' +
+          "</svg>";
+        var ICON_STOP =
+          '<svg viewBox="0 0 24 24" aria-hidden="true">' +
+          '<rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/>' +
+          "</svg>";
+
+        var voice = null;
+        function pickVoice() {
+          var voices = synth.getVoices();
+          if (!voices || !voices.length) return;
+          for (var i = 0; i < voices.length; i++) {
+            if (/^hu(-|_|$)/i.test(voices[i].lang)) {
+              voice = voices[i];
+              break;
+            }
+          }
+        }
+        pickVoice();
+        if (typeof synth.addEventListener === "function") {
+          synth.addEventListener("voiceschanged", pickVoice);
+        }
+
+        function headingLevel(el) {
+          return el && /^H[1-6]$/.test(el.tagName) ? +el.tagName.charAt(1) : 0;
+        }
+
+        function sectionText(h, title) {
+          var level = headingLevel(h);
+          var parts = [title];
+          var node = h.nextElementSibling;
+          while (node) {
+            var l = headingLevel(node);
+            if (l && l <= level) break;
+            if (node.tagName !== "PRE") {
+              var t = node.textContent.replace(/\s+/g, " ").trim();
+              if (t) parts.push(t);
+            }
+            node = node.nextElementSibling;
+          }
+          return parts.join(". ");
+        }
+
+        function chunk(text) {
+          var sentences = text.match(/[^.!?]+[.!?]*\s*/g) || [text];
+          var out = [],
+            buf = "";
+          for (var i = 0; i < sentences.length; i++) {
+            if ((buf + sentences[i]).length > 200 && buf) {
+              out.push(buf);
+              buf = "";
+            }
+            buf += sentences[i];
+          }
+          if (buf.trim()) out.push(buf);
+          return out;
+        }
+
+        var activeBtn = null;
+
+        function stop() {
+          synth.cancel();
+          if (activeBtn) {
+            activeBtn.classList.remove("speaking");
+            activeBtn.innerHTML = ICON_PLAY;
+            activeBtn.setAttribute("aria-label", "Szakasz felolvasása");
+            activeBtn = null;
+          }
+        }
+
+        function speak(btn, text) {
+          stop();
+          var chunks = chunk(text);
+          var i = 0;
+          activeBtn = btn;
+          btn.classList.add("speaking");
+          btn.innerHTML = ICON_STOP;
+          btn.setAttribute("aria-label", "Felolvasás leállítása");
+
+          function next() {
+            if (btn !== activeBtn) return;
+            if (i >= chunks.length) {
+              stop();
+              return;
+            }
+            var u = new SpeechSynthesisUtterance(chunks[i++]);
+            u.lang = "hu-HU";
+            if (voice) u.voice = voice;
+            u.onend = next;
+            u.onerror = function () {
+              stop();
+            };
+            synth.speak(u);
+          }
+          next();
+        }
+
+        var headings = document.querySelectorAll(".prose h2, .prose h3");
+        Array.prototype.forEach.call(headings, function (h) {
+          var title = h.textContent.replace(/\s+/g, " ").trim();
+          if (!title) return;
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "tts-btn";
+          btn.innerHTML = ICON_PLAY;
+          btn.setAttribute("aria-label", "Szakasz felolvasása");
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (activeBtn === btn) {
+              stop();
+              return;
+            }
+            speak(btn, sectionText(h, title));
+          });
+          h.appendChild(btn);
+        });
+
+        window.addEventListener("beforeunload", function () {
+          synth.cancel();
+        });
+      })();
+    </script>
+  </body>
+</html>
