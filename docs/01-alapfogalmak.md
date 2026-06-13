@@ -7,7 +7,7 @@ title: Alapfogalmak
 
 ## Populáció és statisztikai változó
 
-<mark>Populáció</mark>: a vizsgált egyedek halmaza. A matematikai modellben a populációt a $\Omega$ mintaterrel azonosítjuk.
+<mark>Populáció</mark>: a vizsgált egyedek halmaza. A matematikai modellben a populációt az $\Omega$ mintatérrel azonosítjuk.
 
 Tehát a "populáció" nem csak embereket jelent – lehet az összes gyártott csavar, az összes nap hőmérséklete, bármi, amit vizsgálni akarunk.
 

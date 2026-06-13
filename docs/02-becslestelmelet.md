@@ -47,7 +47,7 @@ $$\text{Bias}(\hat{\theta}) = E[\hat{\theta}] - \theta$$
 
 $$\text{MSE}(\hat{\theta}) = E\left[(\hat{\theta} - \theta)^2\right] = V(\hat{\theta}) + \left[\text{Bias}(\hat{\theta})\right]^2$$
 
-Tehát egy becslő lehet pontos kétféleképpen: ha kicsi a varianciája, ha kicsi a torzítása, vagy ha mindkettő kicsi.
+Tehát egy becslő pontossága két dolgon múlik: a variancián és a torzításon. Mindkettőnek kicsinek kell lennie a kis MSE-hez.
 
 <div class="callout tip" markdown="1">
 **Tipp:** A torzítás a szisztematikus hibát méri (mindig ugyanolyan irányba tévedünk), a variancia a véletlenszerű ugrálást (néha feljebb, néha lejjebb). A lövész-analógia: torzítás = rendszeresen mellé lőünk, variancia = szétszórtan lőünk.

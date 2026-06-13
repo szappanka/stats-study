@@ -10,6 +10,8 @@ plugins:
 nav:
   - title: Kezdőlap
     url: /
+  - title: Témák
+    url: /docs/temak
   - title: Alapfogalmak
     url: /docs/01-alapfogalmak
   - title: Becsléselmélet
