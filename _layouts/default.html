@@ -14,6 +14,21 @@
         document.documentElement.setAttribute("data-theme", theme);
       })();
     </script>
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ],
+        },
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <title>
       {% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}
     </title>
@@ -30,8 +45,6 @@
       rel="stylesheet"
       href="{{ '/assets/css/style.css' | relative_url }}"
     />
-    <script>MathJax = { tex: { inlineMath: [['$','$']] } };</script>
-    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   </head>
   <body>
     {% assign current = page.url | remove: '.html' %}
@@ -65,11 +78,7 @@
 
         <nav class="sidebar-nav" aria-label="Főnavigáció">
           {% for item in site.nav %}
-          <a
-            href="{{ item.url | relative_url }}"
-            {% if current == item.url %}class="active" aria-current="page"{% endif %}
-            >{{ item.title }}</a
-          >
+          <a href="{{ item.url | relative_url }}"{% if current == item.url %} class="active" aria-current="page"{% endif %}>{{ item.title }}</a>
           {% endfor %}
         </nav>
 
@@ -201,17 +210,18 @@
 
       <main class="content{% if page.url != '/' %} has-toc{% endif %}">
         <article class="prose">
-          {{ content }} {% comment %} Lapozó: a nav fát kilapítjuk doksi-sorrendbe
-          (kezdőlap nélkül) {% endcomment %} {% if page.url != '/' %} {% assign
-          flat = "" | split: "" %} {% for item in site.nav %} {% unless item.url
-          == '/' %} {% assign flat = flat | push: item %} {% endunless %} {% if
-          item.children %} {% for child in item.children %} {% assign flat = flat
-          | push: child %} {% endfor %} {% endif %} {% endfor %} {% assign idx =
-          -1 %} {% for entry in flat %} {% if entry.url == current %}{% assign idx
-          = forloop.index0 %}{% endif %} {% endfor %} {% if idx != -1 %}
+          {{ content }} {% comment %} Lapozó: a nav fát kilapítjuk
+          doksi-sorrendbe (kezdőlap nélkül) {% endcomment %} {% if page.url !=
+          '/' %} {% assign flat = "" | split: "" %} {% for item in site.nav %}
+          {% unless item.url == '/' %} {% assign flat = flat | push: item %} {%
+          endunless %} {% if item.children %} {% for child in item.children %}
+          {% assign flat = flat | push: child %} {% endfor %} {% endif %} {%
+          endfor %} {% assign idx = -1 %} {% for entry in flat %} {% if
+          entry.url == current %}{% assign idx = forloop.index0 %}{% endif %} {%
+          endfor %} {% if idx != -1 %}
           <nav class="pager" aria-label="Lapozó">
-            {% assign prev_i = idx | minus: 1 %} {% assign next_i = idx | plus: 1
-            %} {% if idx > 0 %} {% assign prev = flat[prev_i] %}
+            {% assign prev_i = idx | minus: 1 %} {% assign next_i = idx | plus:
+            1 %} {% if idx > 0 %} {% assign prev = flat[prev_i] %}
             <a class="pager-link prev" href="{{ prev.url | relative_url }}">
               <span class="pager-dir">← Előző</span>
               <span class="pager-title">{{ prev.title }}</span>
@@ -262,7 +272,9 @@
         if (toggleBtn) {
           toggleBtn.addEventListener("click", function (e) {
             e.stopPropagation();
-            sidebarEl.classList.contains("open") ? closeSidebar() : openSidebar();
+            sidebarEl.classList.contains("open")
+              ? closeSidebar()
+              : openSidebar();
           });
         }
 
