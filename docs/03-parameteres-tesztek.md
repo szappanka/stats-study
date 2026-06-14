@@ -13,95 +13,142 @@ A paraméteres tesztek akkor alkalmazhatók, ha a minta normális eloszlásból 
 
 ---
 
-## Alapfogalmak
+## Null- és alternatív hipotézis
 
-### Null- és alternatív hipotézis
+<div class="concept" markdown="1">
+**Statisztikai hipotézis:** állítás egy paraméter értékéről, több paraméterről, vagy egy eloszlás alakjáról.
 
-<mark>Statisztikai hipotézis</mark>: állítás egy paraméter értékéről, több paraméterről, vagy egy eloszlás alakjáról.
+**Nullhipotézis (\\(H_0\\)):** az az állítás, amelyet kezdetben igaznak feltételezünk. Általában egyenlőséget tartalmaz, pl. \\(H_0: \mu = 130\\).
 
-<mark>Nullhipotézis</mark> (\\(H_0\\)): az az állítás, amelyet kezdetben igaznak feltételezünk – az "alapértelmezett hit". Általában egy egyenlőséget tartalmaz (pl. \\(H_0: \mu = 130\\)).
+**Alternatív hipotézis (\\(H_1\\)):** a \\(H_0\\)-val ellentétes állítás, amit bizonyítani szeretnénk.
 
-<mark>Alternatív hipotézis</mark> (\\(H_1\\)): a \\(H_0\\)-val ellentétes állítás, amit bizonyítani szeretnénk.
-
-A döntés mindig: **elutasítjuk \\(H_0\\)-t** vagy **nem utasítjuk el \\(H_0\\)-t** (nem "elfogadjuk" – ez fontos különbség!).
-
-<div class="callout tip" markdown="1">
-**Tipp:** A logika olyan mint egy bírósági tárgyaláson: \\(H_0\\) az ártatlanság vélelme. Csak akkor ítélünk el (utasítjuk el \\(H_0\\)-t), ha az adatok ezt "nagyon erősen" indokolják. Ha nem elég a bizonyíték, "nem utasítjuk el" – de ez nem jelenti, hogy bebizonyítottuk az ártatlanságot.
+A döntés mindig: **elutasítjuk \\(H_0\\)-t** vagy **nem utasítjuk el \\(H_0\\)-t**. Fontos: "nem utasítjuk el" nem jelenti azt, hogy "bebizonyítottuk" – csak azt, hogy az adatok nem mondtak ellent elég erősen.
 </div>
 
-**Amit "bizonyítani" akarunk, azt mindig \\(H_1\\)-nek tesszük.** Például: ha új gyógyszer hatékonyságát akarjuk bizonyítani, \\(H_0\\): nem hatékony, \\(H_1\\): hatékony.
+<div class="callout tip" markdown="1">
+**Tipp:** Amit "bizonyítani" akarunk, azt mindig \\(H_1\\)-nek tesszük. Például ha egy új gyógyszer hatékonyságát akarjuk bizonyítani: \\(H_0\\): nem hatékony, \\(H_1\\): hatékony.
+</div>
 
-### Egy- és kétoldali tesztek
+---
 
-A nullhipotézis általában \\(\theta = \theta_0\\) alakú. Az alternatív hipotézis három féle lehet:
+## Egy- és kétoldali tesztek
 
-| Típus | \\(H_1\\) alakja | Mikor használjuk |
-|---|---|---|
-| **Jobboldali (right-tailed)** | \\(\theta > \theta_0\\) | Ha azt várjuk, hogy a valódi érték nagyobb |
-| **Baloldali (left-tailed)** | \\(\theta < \theta_0\\) | Ha azt várjuk, hogy a valódi érték kisebb |
-| **Kétoldali (two-tailed)** | \\(\theta \neq \theta_0\\) | Ha csak annyit tudunk, hogy különbözik |
+<div class="concept" markdown="1">
+A nullhipotézis általában \\(\theta = \theta_0\\) alakú. Az alternatív hipotézis háromféle lehet:
 
-### Tesztstatisztika, kritikus tartomány, elfogadási tartomány
+<table>
+  <thead>
+    <tr><th>Típus</th><th>H1 alakja</th><th>Mikor használjuk</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Jobboldali (right-tailed)</td><td>θ &gt; θ₀</td><td>Ha azt várjuk, hogy a valódi érték nagyobb</td></tr>
+    <tr><td>Baloldali (left-tailed)</td><td>θ &lt; θ₀</td><td>Ha azt várjuk, hogy a valódi érték kisebb</td></tr>
+    <tr><td>Kétoldali (two-tailed)</td><td>θ ≠ θ₀</td><td>Ha csak annyit tudunk, hogy különbözik</td></tr>
+  </tbody>
+</table>
+</div>
 
-<mark>Tesztstatisztika</mark>: a mintából számolt mennyiség, amely méri, mennyire "ütközik" az adat a \\(H_0\\)-val. Minél szélsőségesebb az értéke, annál inkább ellentmond \\(H_0\\)-nak.
+---
 
-<mark>Kritikus tartomány (rejection region, R)</mark>: a tesztstatisztika azon értékeinek halmaza, amelyek esetén elutasítjuk \\(H_0\\)-t.
+## Tesztstatisztika, kritikus tartomány, elfogadási tartomány
 
-<mark>Elfogadási tartomány (acceptance region)</mark>: a kritikus tartomány komplementere – ha a tesztstatisztika ide esik, nem utasítjuk el \\(H_0\\)-t.
+<div class="concept" markdown="1">
+**Tesztstatisztika:** a mintából számolt mennyiség, amely méri, mennyire "ütközik" az adat a \\(H_0\\)-val. Minél szélsőségesebb az értéke, annál inkább ellentmond \\(H_0\\)-nak.
 
-A döntési szabály: **elutasítjuk \\(H_0\\)-t, ha a tesztstatisztika a kritikus tartományba esik.**
+**Kritikus tartomány (rejection region, R):** a tesztstatisztika azon értékeinek halmaza, amelyek esetén elutasítjuk \\(H_0\\)-t.
 
-### I. és II. típusú hiba
+**Elfogadási tartomány (acceptance region):** a kritikus tartomány komplementere. Ha a tesztstatisztika ide esik, nem utasítjuk el \\(H_0\\)-t.
 
+**Döntési szabály:** elutasítjuk \\(H_0\\)-t, ha a tesztstatisztika a kritikus tartományba esik.
+
+**Kritikus értékek:** a \\(C_1(\varepsilon)\\) és \\(C_2(\varepsilon)\\) számok, amelyekre:
+
+$$P_\theta(C_1(\varepsilon) < T_n < C_2(\varepsilon)) > 1 - \varepsilon$$
+
+Általában szimmetrikus esetben \\(C_2(\varepsilon) = -C_1(\varepsilon)\\).
+</div>
+
+---
+
+## I. és II. típusú hiba
+
+<div class="concept" markdown="1">
 Kétféle hibát követhetünk el:
 
 | | \\(H_0\\) igaz | \\(H_0\\) hamis |
 |---|---|---|
 | **Nem utasítjuk el \\(H_0\\)-t** | Helyes döntés | **II. típusú hiba (\\(\beta\\))** |
-| **Elutasítjuk \\(H_0\\)-t** | **I. típusú hiba** | Helyes döntés (power) |
+| **Elutasítjuk \\(H_0\\)-t** | **I. típusú hiba** | Helyes döntés |
 
-<mark>I. típusú hiba</mark>: elutasítjuk \\(H_0\\)-t, pedig igaz. Valószínűsége:
+**I. típusú hiba:** elutasítjuk \\(H_0\\)-t, pedig igaz. Valószínűsége:
 
-$$P(\text{I. típusú hiba}) = P(\text{Elutasítjuk } H_0 \mid H_0 \text{ igaz}) = P(T_n \in R \mid H_0)$$
+$$P(\text{I. típusú hiba}) = P(T_n \in R \mid H_0)$$
 
-<mark>II. típusú hiba</mark> (\\(\beta\\)): nem utasítjuk el \\(H_0\\)-t, pedig hamis:
+**II. típusú hiba (\\(\beta\\)):** nem utasítjuk el \\(H_0\\)-t, pedig hamis:
 
 $$\beta(\theta) = P(\text{Elfogadjuk } H_0 \mid H_1 \text{ igaz})$$
-
-<div class="callout tip" markdown="1">
-**Tipp:** A két hiba között trade-off van. Ha szigorítjuk a tesztet (kisebb kritikus tartomány), az I. típusú hiba csökken, de a II. típusú hiba nő. Mint a tűzjelző: ha kevésbé érzékeny, kevesebb hamis riasztás (kisebb I.), de több valódi tüzet nem jelez (nagyobb II.).
 </div>
 
-### Szignifikanciaszint
+<div class="callout tip" markdown="1">
+**Tipp:** A két hiba között trade-off van. Ha szigorítjuk a tesztet (kisebb kritikus tartomány), az I. típusú hiba csökken, de a II. típusú hiba nő – és fordítva. Ezért rögzítjük az I. típusú hiba maximumát (szignifikanciaszint), és ezen belül minimalizáljuk a II. típusú hibát.
+</div>
 
-<mark>Szignifikanciaszint</mark> (\\(\varepsilon\\)): az I. típusú hiba maximálisan megengedett valószínűsége. Ha \\(P(\text{I. típusú hiba}) \leq \varepsilon\\), akkor a teszt **\\(\varepsilon\\) szintű teszt**. Minél nagyobb \\(\varepsilon\\), annál merészebben utasítja el a teszt \\(H_0\\)-t.
+---
 
-Tipikus értékek: \\(\varepsilon = 0.05\\) (5%) vagy \\(\varepsilon = 0.01\\) (1%).
+## Szignifikanciaszint
 
-### p-érték (p-value)
+<div class="concept" markdown="1">
+**Szignifikanciaszint (\\(\varepsilon\\)):** az I. típusú hiba maximálisan megengedett valószínűsége. Ha \\(P(\text{I. típusú hiba}) \leq \varepsilon\\), a teszt **\\(\varepsilon\\) szintű teszt**. Minél nagyobb \\(\varepsilon\\), annál merészebben utasítja el a teszt \\(H_0\\)-t.
 
-<mark>p-érték</mark>: annak valószínűsége, hogy – feltéve, hogy \\(H_0\\) igaz – legalább olyan extrém tesztstatisztika értéket kapunk, mint amit a mintából kaptunk.
+Tipikus értékek: \\(\varepsilon = 0.01\\), \\(\varepsilon = 0.05\\), \\(\varepsilon = 0.1\\).
 
-$$\text{p-value} = P(Z \geq z \mid H_0 \text{ igaz}) \quad \text{(jobboldali teszt esetén)}$$
+Fontos: elfogadhatjuk \\(H_0\\)-t egy adott szignifikanciaszinten, és elutasíthatjuk egy magasabb szinten.
+</div>
 
-**Hogyan számoljuk:**
-- Jobboldali teszt: \\(P(Z \geq z)\\) vagy \\(P(T_{n-1} \geq t)\\)
-- Baloldali teszt: \\(P(Z \leq z)\\) vagy \\(P(T_{n-1} \leq t)\\)
-- Kétoldali teszt: \\(2 \times P(Z \leq -|z|)\\) vagy \\(2 \times P(T_{n-1} \leq -|t|)\\)
+---
+
+## p-érték
+
+<div class="concept" markdown="1">
+**p-érték:** annak valószínűsége, hogy – feltéve, hogy \\(H_0\\) igaz – legalább olyan extrém tesztstatisztika értéket kapnánk, mint amit a mintából kaptunk.
+
+<p>Hogyan számoljuk:</p>
+<ul>
+  <li>Jobboldali teszt: P(Z ≥ z) vagy P(T<sub>n-1</sub> ≥ t)</li>
+  <li>Baloldali teszt: P(Z ≤ z) vagy P(T<sub>n-1</sub> ≤ t)</li>
+  <li>Kétoldali teszt: 2 × P(Z ≤ −|z|) vagy 2 × P(T<sub>n-1</sub> ≤ −|t|)</li>
+</ul>
 
 **Döntési szabály p-értékkel:** elutasítjuk \\(H_0\\)-t, ha \\(\text{p-value} < \varepsilon\\).
 
-<div class="callout tip" markdown="1">
-**Tipp:** A p-érték és a kritikus értékű módszer ugyanannak két oldala. A p-érték azért praktikusabb, mert közvetlenül megmutatja, mennyire "meglepő" az adat \\(H_0\\) alatt – az olvasónak nem kell ismernie az eloszlástáblákat.
+A p-érték és a kritikus értékes módszer ekvivalens – csak két különböző módja ugyanannak a döntésnek. A p-érték azért praktikusabb, mert nem kell eloszlástáblázatot nézni.
 </div>
 
 <div class="callout trap" markdown="1">
-**Figyelem:** A p-érték NEM annak valószínűsége, hogy \\(H_0\\) igaz. Ez a leggyakoribb félreértés. A p-érték egy feltételes valószínűség: feltéve, hogy \\(H_0\\) igaz, mekkora valószínűséggel kapnánk ilyen extrém adatot?
+**Figyelem:** A p-érték NEM annak valószínűsége, hogy \\(H_0\\) igaz. A p-érték azt mondja: "ha \\(H_0\\) igaz lenne, mekkora valószínűséggel kapnánk ilyen extrém adatot?" Ez egy feltételes valószínűség – nem \\(H_0\\) valószínűsége.
 </div>
 
-### Konfidenciaintervallum és hipotézisvizsgálat kapcsolata
+---
 
-A tesztstatisztika a kritikus tartományba esik pontosan akkor, ha a \\((1-\varepsilon) \cdot 100\%\\)-os konfidenciaintervallum **nem** tartalmazza \\(\mu_0\\)-t. Ez nem véletlen – matematikailag ekvivalens a két megközelítés.
+## Független mintás és páros mintás tesztek
+
+<div class="concept" markdown="1">
+**Független mintás teszt (independent-samples test):** a két minta teljesen független egymástól – különböző személyek, különböző csoportok.
+
+**Páros mintás teszt (paired-samples test):** a két minta páronként összetartozó – például ugyanazon személyek mérése kezelés előtt és után. Ilyenkor a különbségekre végzünk egymintás tesztet.
+</div>
+
+---
+
+## Nagy mintás tesztek
+
+<div class="concept" markdown="1">
+**Nagy mintás teszt (large-sample test):** ha nem tudjuk, milyen az eloszlás, de a minta nagy, a Centrális Határeloszlás tétel alapján a tesztstatisztika közelítőleg standard normális:
+
+$$Z = \frac{\bar{X} - \mu_0}{s_n^{\ast}/\sqrt{n}} \overset{\text{approx.}}{\sim} N(0,1)$$
+
+A döntési szabály ugyanaz mint a z-tesztnél.
+</div>
 
 ---
 
@@ -109,200 +156,207 @@ A tesztstatisztika a kritikus tartományba esik pontosan akkor, ha a \\((1-\vare
 
 ### Egymintás, kétoldali z-teszt
 
-**Feltételek:** \\(X_1, \ldots, X_n \overset{\text{iid}}{\sim} N(\mu, \sigma^2)\\), \\(\sigma^2\\) **ismert**.
+<div class="tetel" markdown="1">
+**Feltételek:** ...
 
-**Hipotézisek:** \\(H_0: \mu = \mu_0\\) versus \\(H_1: \mu \neq \mu_0\\)
-
-**Levezetés:** Ha \\(H_0\\) igaz, akkor \\(\bar{X} \sim N(\mu_0, \sigma^2/n)\\), standardizálva:
+**Levezetés:** Ha H₀ igaz, X̄ ~ N(μ₀, σ²/n), standardizálva:
 
 $$Z = \frac{\bar{X} - \mu_0}{\sigma/\sqrt{n}} \sim N(0,1)$$
 
-Ez az a mennyiség, amelynek ismerjük az eloszlását \\(H_0\\) alatt. Szimmetrikus kritikus tartományt keresünk: elutasítjuk \\(H_0\\)-t, ha \\(\lvert Z \rvert\\) túl nagy. A \\(c\\) kritikus értéket úgy választjuk, hogy \\(P(\lvert Z \rvert < c \mid H_0) = 1 - \varepsilon\\), amiből \\(c = z_{\varepsilon/2} = \Phi^{-1}(1 - \varepsilon/2)\\).
+A standard normális szimmetriája miatt:
 
-**Döntés:** Elfogadjuk \\(H_0\\)-t \\(\varepsilon\\) szignifikanciaszinten, ha:
+$$1-\varepsilon = P(|Z| < c \mid H_0) = 2\Phi(c) - 1 \implies c = z_{\varepsilon/2} = \Phi^{-1}\!\left(1 - \frac{\varepsilon}{2}\right)$$
+
+**Döntés:** elfogadjuk H₀-t, ha:
 
 $$\left|\frac{\bar{X} - \mu_0}{\sigma/\sqrt{n}}\right| \leq z_{\varepsilon/2}$$
+</div>
 
 ### Egymintás, egyoldali z-teszt
 
-**Hipotézisek:** \\(H_0: \mu \leq \mu_0\\) versus \\(H_1: \mu > \mu_0\\) (jobboldali)
-
-A tesztstatisztika ugyanaz. A kritikus értéket úgy választjuk, hogy az I. típusú hiba \\(\leq \varepsilon\\) legyen. Ez \\(c = z_\varepsilon\\)-t ad.
+<div class="tetel" markdown="1">
+**Feltételek:** ugyanaz mint fent.
 
 **Döntés:**
-- Jobboldali: elfogadjuk \\(H_0\\)-t, ha \\(z_{\text{test}} \leq z_\varepsilon\\)
-- Baloldali: elfogadjuk \\(H_0\\)-t, ha \\(z_{\text{test}} \geq -z_\varepsilon\\)
-
-### Nagy mintás z-teszt (large-sample test)
-
-Ha nem tudjuk, milyen az eloszlás, de a minta nagy, a CLT alapján:
-
-$$Z = \frac{\bar{X} - \mu_0}{s_n^*/\sqrt{n}} \overset{\text{approx.}}{\sim} N(0,1)$$
-
-Ez a közelítés nagy \\(n\\)-nél nagyon jó. A döntési szabály ugyanaz, mint az egzakt z-tesztnél.
+- Jobboldali (\\(H_0: \mu \leq \mu_0\\) vs \\(H_1: \mu > \mu_0\\)): elfogadjuk \\(H_0\\)-t, ha \\(z_{\text{test}} \leq z_\varepsilon\\)
+- Baloldali (\\(H_0: \mu \geq \mu_0\\) vs \\(H_1: \mu < \mu_0\\)): elfogadjuk \\(H_0\\)-t, ha \\(z_{\text{test}} \geq -z_\varepsilon\\)
+</div>
 
 ### Kétmintás, kétoldali z-teszt
 
-**Feltételek:** Két független normális minta, **mindkét variancia ismert**:
+<div class="tetel" markdown="1">
+**Feltételek:** két független normális minta, mindkét variancia ismert:
 
 $$X_1,\ldots,X_n \overset{\text{iid}}{\sim} N(\mu_X, \sigma_X^2), \quad Y_1,\ldots,Y_m \overset{\text{iid}}{\sim} N(\mu_Y, \sigma_Y^2)$$
 
-**Hipotézisek:** \\(H_0: \mu_X = \mu_Y\\) versus \\(H_1: \mu_X \neq \mu_Y\\)
+**Hipotézisek:** \\(H_0: \mu_X = \mu_Y\\) vs \\(H_1: \mu_X \neq \mu_Y\\)
 
 **Levezetés:** \\(H_0\\) alatt \\(\bar{X} - \bar{Y} \sim N(0, \sigma_X^2/n + \sigma_Y^2/m)\\), standardizálva:
 
 $$Z = \frac{\bar{X}_n - \bar{Y}_m}{\sqrt{\frac{\sigma_X^2}{n} + \frac{\sigma_Y^2}{m}}} \sim N(0,1)$$
 
-**Döntés:** Elfogadjuk \\(H_0\\)-t, ha \\(\lvert z_{\text{test}} \rvert < z_{\varepsilon/2}\\).
+**Döntés:** elfogadjuk \\(H_0\\)-t, ha \\(|z_{\text{test}}| < z_{\varepsilon/2}\\).
+</div>
 
 ### Kétmintás, egyoldali z-teszt
 
-**Hipotézisek:** \\(H_0: \mu_X \geq \mu_Y\\) vs \\(H_1: \mu_X < \mu_Y\\) (baloldali), vagy \\(H_0: \mu_X \leq \mu_Y\\) vs \\(H_1: \mu_X > \mu_Y\\) (jobboldali).
-
-A tesztstatisztika ugyanaz. **Döntés:**
-- Baloldali: elfogadjuk \\(H_0\\)-t, ha \\(-z_\varepsilon < z_{\text{test}}\\)
-- Jobboldali: elfogadjuk \\(H_0\\)-t, ha \\(z_{\text{test}} < z_\varepsilon\\)
-
-<div class="callout exam" markdown="1">
-**Vizsgán:** A z-teszt levezetésének lényege: standardizáljuk a mintaátlagot (vagy a különbséget), és \\(H_0\\) alatt ez standard normálishoz konvergál. A kritikus értéket ebből az eloszlásból olvassuk ki.
+<div class="tetel" markdown="1">
+**Döntés:**
+- Baloldali (\\(H_0: \mu_X \geq \mu_Y\\)): elfogadjuk \\(H_0\\)-t, ha \\(-z_\varepsilon < z_{\text{test}}\\)
+- Jobboldali (\\(H_0: \mu_X \leq \mu_Y\\)): elfogadjuk \\(H_0\\)-t, ha \\(z_{\text{test}} < z_\varepsilon\\)
 </div>
 
 ---
 
 ## t-teszt
 
-A z-teszt feltételezi, hogy \\(\sigma\\) ismert. Ha nem ismert, \\(s_n^*\\)-gal helyettesítjük – és ekkor már nem standard normálist, hanem t-eloszlást kapunk.
+Ha \\(\sigma\\) ismeretlen, \\(s_n^{\ast}\\)-gal helyettesítjük. Ekkor t-eloszlást kapunk, mert \\(s_n^{\ast}\\) maga is véletlenszerű – ez extra bizonytalanságot visz be.
 
 ### Egymintás, kétoldali t-teszt
 
-**Feltételek:** \\(X_1,\ldots,X_n \overset{\text{iid}}{\sim} N(\mu, \sigma^2)\\), \\(\sigma^2\\) **ismeretlen**.
+<div class="tetel" markdown="1">
+**Feltételek:** \\(X_1,\ldots,X_n \overset{\text{iid}}{\sim} N(\mu, \sigma^2)\\), \\(\sigma^2\\) ismeretlen.
 
-**Hipotézisek:** \\(H_0: \mu = \mu_0\\) versus \\(H_1: \mu \neq \mu_0\\)
+**Hipotézisek:** \\(H_0: \mu = \mu_0\\) vs \\(H_1: \mu \neq \mu_0\\)
 
 **Tesztstatisztika:**
 
-$$T = \frac{\bar{X} - \mu_0}{s_n^*/\sqrt{n}} \sim t_{n-1} \quad \text{ha } H_0 \text{ igaz}$$
+$$T = \frac{\bar{X} - \mu_0}{s_n^{\ast}/\sqrt{n}} \sim t_{n-1} \quad \text{ha } H_0 \text{ igaz}$$
 
-ahol \\(s_n^*\\) a korrigált mintaszórás. Ez pontosan ugyanolyan logikájú, mint a z-tesztnél, csak \\(\sigma\\) helyett \\(s_n^*\\)-t írunk, és a standard normális helyett \\(t_{n-1}\\) eloszlást kapunk.
-
-**Döntés:** Elfogadjuk \\(H_0\\)-t \\(\varepsilon\\) szignifikanciaszinten, ha:
-
-$$|t_{\text{test}}| < t_{\varepsilon/2,\, n-1}$$
-
-ahol \\(t_{\varepsilon/2, n-1}\\) a \\(t_{n-1}\\) eloszlás \\(\varepsilon/2\\) felső kvantilise.
+**Döntés:** elfogadjuk \\(H_0\\)-t, ha \\(|t_{\text{test}}| < t_{\varepsilon/2,\, n-1}\\).
+</div>
 
 ### Egymintás, egyoldali t-teszt
 
-A tesztstatisztika ugyanaz. **Döntés:**
+<div class="tetel" markdown="1">
+**Döntés:**
 - Baloldali (\\(H_0: \mu \geq \mu_0\\)): elfogadjuk \\(H_0\\)-t, ha \\(-t_{\varepsilon, n-1} < t_{\text{test}}\\)
 - Jobboldali (\\(H_0: \mu \leq \mu_0\\)): elfogadjuk \\(H_0\\)-t, ha \\(t_{\text{test}} < t_{\varepsilon, n-1}\\)
+</div>
 
 ### Kétmintás t-teszt
 
-**Feltételek:** Két független normális minta, **egyenlő, de ismeretlen varianciák** (\\(\sigma_X^2 = \sigma_Y^2 = \sigma^2\\)):
+<div class="tetel" markdown="1">
+**Feltételek:** két független normális minta, ismeretlen de egyenlő varianciák (\\(\sigma_X^2 = \sigma_Y^2 = \sigma^2\\)).
 
-$$X_1,\ldots,X_n \overset{\text{iid}}{\sim} N(\mu_X, \sigma^2), \quad Y_1,\ldots,Y_m \overset{\text{iid}}{\sim} N(\mu_Y, \sigma^2)$$
-
-<div class="callout trap" markdown="1">
-**Figyelem:** Az egyenlő variancia feltételét F-teszttel kell előbb ellenőrizni. Ha az F-teszt elveti az egyenlőséget, Welch-tesztet kell használni.
-</div>
-
-A pooled (összevont) varianciabecslés:
-
-$$s^2 = \frac{(n-1)(s_{X,n}^*)^2 + (m-1)(s_{Y,m}^*)^2}{m+n-2}$$
+**Hipotézisek:** \\(H_0: \mu_X = \mu_Y\\) vs \\(H_1: \mu_X \neq \mu_Y\\)
 
 **Tesztstatisztika:**
 
-$$T = \frac{\bar{X}_n - \bar{Y}_m}{\sqrt{(n-1)(s_{X,n}^*)^2 + (m-1)(s_{Y,m}^*)^2}} \cdot \sqrt{\frac{nm(n+m-2)}{n+m}}$$
+$$T = \frac{\bar{X}_n - \bar{Y}_m}{\sqrt{(n-1)(s_{X,n}^{\ast})^2 + (m-1)(s_{Y,m}^{\ast})^2}} \cdot \sqrt{\frac{nm(n+m-2)}{n+m}} \sim t_{n+m-2}$$
 
-Ha \\(H_0: \mu_X = \mu_Y\\) igaz, akkor \\(T \sim t_{n+m-2}\\).
+**Döntés (kétoldali):** elfogadjuk H₀-t, ha:
 
-**Döntés (kétoldali):** Elfogadjuk \\(H_0\\)-t, ha \\(\lvert t_{\text{test}} \rvert < t_{\varepsilon/2,\, n+m-2}\\).
+$$|t_{\text{test}}| < t_{\varepsilon/2,\, n+m-2}$$
 
-**Egyoldali esetben:**
+**Döntés (egyoldali):**
 - Baloldali: elfogadjuk \\(H_0\\)-t, ha \\(-t_{\varepsilon, n+m-2} < t_{\text{test}}\\)
 - Jobboldali: elfogadjuk \\(H_0\\)-t, ha \\(t_{\text{test}} < t_{\varepsilon, n+m-2}\\)
+</div>
 
-### Páros t-teszt (Paired t-test)
+<div class="callout trap" markdown="1">
+**Figyelem:** A kétmintás t-teszt csak akkor alkalmazható, ha a varianciák egyenlők. Ezt előbb F-teszttel kell ellenőrizni. Ha az F-teszt elveti az egyenlőséget, Welch-tesztet kell használni.
+</div>
 
-**Mikor használjuk:** Ha a két minta nem független, hanem páronként összetartozó (pl. ugyanazon személyek mérése kezelés előtt és után).
+### Páros t-teszt
 
-Az adatok: \\(n\\) független pár \\((X_1, Y_1), \ldots, (X_n, Y_n)\\), ahol \\(E[X_i] = \mu_X\\), \\(E[Y_i] = \mu_Y\\).
+<div class="tetel" markdown="1">
+**Mikor használjuk:** ha a két minta páronként összetartozó (pl. ugyanazon személyek mérése kezelés előtt és után).
 
-**Alapötlet:** Számítsuk ki a különbségeket \\(D_i = X_i - Y_i\\), és ezeken végezzük el az egymintás t-tesztet! Mivel \\(X_i\\) és \\(Y_i\\) nem feltétlenül független, \\(\sigma_{X-Y}^2 \neq \sigma_X^2 + \sigma_Y^2\\) – ezért nem alkalmazható a kétmintás t-teszt.
+**Alapötlet:** számítsuk ki a különbségeket \\(D_i = X_i - Y_i\\), és ezeken végezzük az egymintás t-tesztet. Azért nem alkalmazható a kétmintás t-teszt, mert \\(X_i\\) és \\(Y_i\\) nem feltétlenül független, ezért \\(\sigma_{X-Y}^2 \neq \sigma_X^2 + \sigma_Y^2\\).
 
-**Hipotézisek:** \\(H_0: \mu_X = \mu_Y\\) (azaz \\(\mu_{X-Y} = 0\\)) versus \\(H_1: \mu_X \neq \mu_Y\\)
+**Hipotézisek:** \\(H_0: \mu_X = \mu_Y\\) vs \\(H_1: \mu_X \neq \mu_Y\\)
 
 **Tesztstatisztika:**
 
-$$T = \frac{\bar{X}_n - \bar{Y}_n}{s_{X-Y,n}^*/\sqrt{n}} \sim t_{n-1} \quad \text{ha } H_0 \text{ igaz}$$
+$$T = \frac{\bar{X}_n - \bar{Y}_n}{s_{X-Y,n}^{\ast}/\sqrt{n}} \sim t_{n-1} \quad \text{ha } H_0 \text{ igaz}$$
 
-Ez pontosan egy egymintás t-teszt a különbségekre. Ha a minta nem normális, nagy mintánál nagy mintás tesztet lehet használni.
+Ha a minta nem normális, nagy mintánál nagy mintás tesztet lehet használni.
+</div>
 
 ---
 
 ## F-teszt
 
-Az F-teszt a két minta varianciájának egyenlőségét ellenőrzi – ezt a kétmintás t-teszt alkalmazása előtt kell elvégezni.
+A kétmintás t-teszt alkalmazása előtt ellenőrizni kell, hogy a két variancia egyenlő-e. Erre való az F-teszt.
 
-**Feltételek:** Két független normális minta, ismeretlen várható értékek és varianciák:
+<div class="tetel" markdown="1">
+**Feltételek:** két független normális minta, ismeretlen várható értékek és varianciák.
 
-$$X_1,\ldots,X_n \overset{\text{iid}}{\sim} N(\mu_X, \sigma_X^2), \quad Y_1,\ldots,Y_m \overset{\text{iid}}{\sim} N(\mu_Y, \sigma_Y^2)$$
+**Hipotézisek:** \\(H_0: \sigma_X^2 = \sigma_Y^2\\) vs \\(H_1: \sigma_X \neq \sigma_Y\\)
 
-**Hipotézisek:** \\(H_0: \sigma_X^2 = \sigma_Y^2\\) versus \\(H_1: \sigma_X \neq \sigma_Y\\)
+**Tesztstatisztika:** ha \\(s_{X,n}^{\ast} \geq s_{Y,m}^{\ast}\\):
 
-**Tesztstatisztika:** Ha \\(s_{X,n}^* \geq s_{Y,m}^*\\):
+$$F = \frac{(s_{X,n}^{\ast})^2}{(s_{Y,m}^{\ast})^2} \sim F_{n-1,\, m-1} \quad \text{ha } H_0 \text{ igaz}$$
 
-$$F = \frac{(s_{X,n}^*)^2}{(s_{Y,m}^*)^2}$$
-
-Ha \\(H_0\\) igaz, akkor \\(F \sim F_{n-1, m-1}\\) (Fisher-eloszlás).
-
-**Döntés:** Legyen \\(F_\varepsilon\\) a kritikus érték \\(\varepsilon\\) szignifikanciaszinten. Elfogadjuk \\(H_0\\)-t, ha \\(F_{\text{test}} < F_\varepsilon\\), különben elutasítjuk.
+**Döntés:** legyen \\(F_\varepsilon\\) a kritikus érték. Elfogadjuk \\(H_0\\)-t, ha \\(F_{\text{test}} < F_\varepsilon\\).
+</div>
 
 <div class="callout exam" markdown="1">
-**Vizsgán:** Az F-teszt logikája: ha a két variancia egyenlő, akkor a mintavarianciák hányadosa \\(F\\)-eloszlást követ. Ha a hányados túl nagy (messze van 1-től), elutasítjuk az egyenlőséget.
+**Vizsgán:** Az F-teszt logikája: ha a két variancia egyenlő, a mintavarianciák hányadosa F-eloszlást követ. Ha a hányados túl nagy (messze van 1-től), elutasítjuk az egyenlőséget, és Welch-tesztet kell használni.
 </div>
 
 ---
 
 ## Welch-teszt
 
-**Mikor használjuk:** Ha az F-teszt elveti a varianciák egyenlőségét, a kétmintás t-teszt nem alkalmazható. A Welch-teszt ezt az esetet kezeli.
+<div class="tetel" markdown="1">
+**Mikor használjuk:** ha az F-teszt elveti a varianciák egyenlőségét.
 
-**Feltételek:** Két független normális minta, ismeretlen és **nem feltétlenül egyenlő** varianciák.
+**Feltételek:** két független normális minta, ismeretlen és nem feltétlenül egyenlő varianciák.
 
-**Hipotézisek:** \\(H_0: \mu_X = \mu_Y\\) versus \\(H_1: \mu_X \neq \mu_Y\\)
+**Hipotézisek:** \\(H_0: \mu_X = \mu_Y\\) vs \\(H_1: \mu_X \neq \mu_Y\\)
 
 **Tesztstatisztika:**
 
-$$W_{n,m} = \frac{\bar{X}_n - \bar{Y}_m}{\sqrt{\frac{(s_{X,n}^*)^2}{n} + \frac{(s_{Y,m}^*)^2}{m}}}$$
+$$W_{n,m} = \frac{\bar{X}_n - \bar{Y}_m}{\sqrt{\frac{(s_{X,n}^{\ast})^2}{n} + \frac{(s_{Y,m}^{\ast})^2}{m}}}$$
 
-Welch megmutatta, hogy ha \\(H_0\\) igaz, \\(W_{n,m}\\) közelítőleg \\(t_{[f]}\\) eloszlású, ahol a szabadsági fok:
+Welch megmutatta, hogy \\(H_0\\) esetén \\(W_{n,m}\\) közelítőleg \\(t_{[f]}\\) eloszlású, ahol a szabadsági fok:
 
-$$\frac{1}{f} = \frac{c^2}{n-1} + \frac{(1-c)^2}{m-1}, \quad c = \frac{(s_{X,n}^*)^2/n}{(s_{X,n}^*)^2/n + (s_{Y,m}^*)^2/m}$$
+$$\frac{1}{f} = \frac{c^2}{n-1} + \frac{(1-c)^2}{m-1}, \quad c = \frac{(s_{X,n}^{\ast})^2/n}{(s_{X,n}^{\ast})^2/n + (s_{Y,m}^{\ast})^2/m}$$
 
 A szabadsági fok képlete **nem szükséges a vizsgán.**
 
 **Döntés:**
-- Kétoldali: elfogadjuk \\(H_0\\)-t, ha \\(\lvert t_{\text{test}} \rvert < t_{\varepsilon/2, f}\\)
-- Jobboldali: elfogadjuk \\(H_0\\)-t, ha \\(t_{\text{test}} \leq t_{\varepsilon, f}\\)
-- Baloldali: elfogadjuk \\(H_0\\)-t, ha \\(t_{\text{test}} \geq -t_{\varepsilon, f}\\)
 
-<div class="callout tip" markdown="1">
-**Tipp:** Összefoglalva a tesztek logikája: először F-teszttel ellenőrzöm a varianciákat. Ha egyenlők: kétmintás t-teszt. Ha nem egyenlők: Welch-teszt. Ha \\(\sigma\\) ismert: z-teszt. Ha a minta páros: páros t-teszt.
+Kétoldali – elfogadjuk H₀-t, ha:
+$$|t_{\text{test}}| < t_{\varepsilon/2, f}$$
+
+Jobboldali – elfogadjuk H₀-t, ha:
+$$t_{\text{test}} \leq t_{\varepsilon, f}$$
+
+Baloldali – elfogadjuk H₀-t, ha:
+$$t_{\text{test}} \geq -t_{\varepsilon, f}$$
+</div>
+
+---
+
+## Hipotézisvizsgálat általános lépései
+
+<div class="eljaras" markdown="1">
+**Lépések:**
+
+1. Válasszuk ki a megfelelő tesztet
+2. Rögzítsük a szignifikanciaszintet \\(\varepsilon\\)-t
+3. Olvassuk le a kritikus értéket a megfelelő eloszlástáblázatból
+4. Számítsuk ki a tesztstatisztika értékét a mintából
+5. Hasonlítsuk össze a kritikus értékkel és hozzuk meg a döntést
 </div>
 
 <div class="callout exam" markdown="1">
-**Vizsgán – összefoglaló táblázat:**
-
-| Teszt | Minta | \\(\sigma\\) | Feltétel |
-|---|---|---|---|
-| Egymintás z | 1 minta | ismert | normális |
-| Nagy mintás z | 1 minta | ismeretlen | nagy \\(n\\) |
-| Egymintás t | 1 minta | ismeretlen | normális |
-| Kétmintás z | 2 független | mindkettő ismert | normális |
-| F-teszt | 2 független | ismeretlen | normális, varianciák összehasonlítása |
-| Kétmintás t | 2 független | ismeretlen, egyenlő | normális, F-teszt nem utasított el |
-| Welch | 2 független | ismeretlen, nem egyenlő | normális, F-teszt elutasított |
-| Páros t | 2 függő pár | ismeretlen | normális különbségek |
+<table>
+  <thead>
+    <tr><th>Teszt</th><th>Minta</th><th>σ</th><th>Feltétel</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Egymintás z</td><td>1 minta</td><td>ismert</td><td>normális</td></tr>
+    <tr><td>Nagy mintás z</td><td>1 minta</td><td>ismeretlen</td><td>nagy n</td></tr>
+    <tr><td>Egymintás t</td><td>1 minta</td><td>ismeretlen</td><td>normális</td></tr>
+    <tr><td>Kétmintás z</td><td>2 független</td><td>mindkettő ismert</td><td>normális</td></tr>
+    <tr><td>F-teszt</td><td>2 független</td><td>ismeretlen</td><td>varianciák összehasonlítása</td></tr>
+    <tr><td>Kétmintás t</td><td>2 független</td><td>ismeretlen, egyenlő</td><td>F-teszt nem utasított el</td></tr>
+    <tr><td>Welch</td><td>2 független</td><td>ismeretlen, nem egyenlő</td><td>F-teszt elutasított</td></tr>
+    <tr><td>Páros t</td><td>2 függő pár</td><td>ismeretlen</td><td>összetartozó megfigyelések</td></tr>
+  </tbody>
+</table>
 </div>

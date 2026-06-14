@@ -528,6 +528,18 @@ body {
   --cl-icon: "🎯";
 }
 
+/* ===== Tartalomtípus-blokkok (fogalom / tétel / eljárás) ===== */
+.prose .concept,
+.prose .tetel,
+.prose .eljaras {
+  padding-left: 1.1em;
+  margin: 1.2em 0;
+}
+
+.prose .concept  { border-left: 4px solid #58a6ff; }
+.prose .tetel    { border-left: 4px solid #3fb950; }
+.prose .eljaras  { border-left: 4px solid #f78166; }
+
 /* Táblázat */
 .prose table {
   display: block;

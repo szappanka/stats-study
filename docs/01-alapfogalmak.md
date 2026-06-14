@@ -5,197 +5,152 @@ title: Alapfogalmak
 
 # Alapfogalmak
 
-## Populáció és statisztikai változó
+## Populáció
 
-<mark>Populáció</mark>: a vizsgált egyedek halmaza. A matematikai modellben a populációt az $\Omega$ mintatérrel azonosítjuk.
-
-Tehát a "populáció" nem csak embereket jelent – lehet az összes gyártott csavar, az összes nap hőmérséklete, bármi, amit vizsgálni akarunk.
-
-<mark>Statisztikai változó</mark>: a populáció valamely tulajdonsága. Fontos, hogy mindig számokat rendelünk a tulajdonságokhoz, még akkor is, ha azok minőségi jellegűek. A változók típusai:
-
-| Típus | Mit jelent | Példa |
-|---|---|---|
-| **Kategória** | A számok csak címkék, nincs sorrendjük | nem (férfi=1, nő=2) |
-| **Ordinális** | A számok sorrendet fejeznek ki, de a távolságok nem értelmesek | elégedettség (1–5) |
-| **Metrikus – intervallumskála** | A különbségek értelmesek, de a nulla konvencionális | hőmérséklet (°C) |
-| **Metrikus – arányskála** | A különbségek és az arányok is értelmesek, a nulla valódi | hossz, csapadék |
-
-<div class="callout trap" markdown="1">
-**Figyelem:** kategória- és ordinális változóknál az átlag számítása kérdéses. Ha a nem változónál férfi=1, nő=2, az átlag 1.5-nek semmi értelme nincs.
+<div class="concept" markdown="1">
+**Populáció:** a vizsgált egyedek teljes halmaza. A matematikai modellben a populációt a \\(\Omega\\) (omega) mintaterrel azonosítjuk.
 </div>
-
-<div class="callout trap" markdown="1">
-**TODO:** Data matrix definíciója hiányzik a PDF-ből – utánanézni és pótolni.
-</div>
-
----
-
-## A matematikai modell
-
-Az alapötlet: a valóságban megfigyelt adatokat valószínűségi változókkal modellezzük.
-
-- A **nagybetűs** $X_1, X_2, \ldots, X_n$ a modell – valószínűségi változók, amiket még nem figyeltünk meg.
-- A **kisbetűs** $x_1, x_2, \ldots, x_n$ a konkrét megfigyelt értékek.
-
-Például az átlag: modellben $\frac{1}{n}\sum_i X_i$, adatok esetén $\frac{1}{n}\sum_i x_i$.
-
-<mark>Véletlen minta (random sample)</mark>: az $X_1, X_2, \ldots, X_n$ változókat véletlen mintának nevezzük, ha egymástól független, azonos eloszlású (i.i.d.) valószínűségi változók.
-
-Formálisan ez két dolgot jelent egyszerre:
-
-**1. Azonos eloszlás** – mindenki ugyanabból a "kalapból" kerül ki:
-$$F_{X_i}(\cdot) = F_{X_j}(\cdot) \quad \forall\, 1 \leq i, j \leq n$$
-
-**2. Függetlenség** – az egyik megfigyelés nem befolyásolja a másikat:
-$$F(X_{i_1} < x_1, \ldots, X_{i_k} < x_k) = \prod_{i=1}^{k} F_{X_i}(x_i)$$
-
-Jelölés: $X_1, \ldots, X_n \overset{\text{iid}}{\sim} \text{Normal}(\mu, \sigma^2)$
 
 <div class="callout tip" markdown="1">
-**Tipp:** Az i.i.d. feltétel az egész statisztika alapja. Ha a minta nem i.i.d. (pl. idősorokban egymást követő értékek összefüggnek), teljesen más eszközökre van szükség.
+**Tipp:** A populáció nem csak embereket jelent – bármi lehet, amit vizsgálunk. A lényeg, hogy az összes lehetséges egyedet tartalmazza, nem csak azokat, amelyeket ténylegesen megfigyeltünk.
 </div>
 
----
+## Minta
 
-## Statisztika
+<div class="concept" markdown="1">
+**Minta (sample):** a populációból kiválasztott egyedek részhalmaza, amelyeket ténylegesen megfigyeltünk. A mérés előtt minden egyes megfigyelés bizonytalan – ezt modellezzük \\(X_1, X_2, \ldots, X_n\\) valószínűségi változókkal, ahol \\(n\\) a mintaméret. A mérés után kapjuk a konkrét \\(x_1, x_2, \ldots, x_n\\) értékeket. Például 10 háztartás áramfogyasztásának mérésekor \\(X_1, \ldots, X_{10}\\) a mérés előtti bizonytalanság, \\(x_1 = 210, x_2 = 340, \ldots\\) a tényleges mért értékek kWh-ban.
+</div>
 
-<mark>Statisztika</mark>: legyen $T_n$ egy $n$ változós valós függvény. Ekkor a
+<div class="concept" markdown="1">
+**Véletlen minta (random sample):** az \\(X_1, X_2, \ldots, X_n\\) változókat véletlen mintának nevezzük, ha egymástól független és azonos eloszlású (i.i.d.) valószínűségi változók. Jelölés: \\(X_1, \ldots, X_n \overset{\text{iid}}{\sim} F\\).
+</div>
 
-$$T_n = T_n(X_1, X_2, \ldots, X_n)$$
+<div class="callout tip" markdown="1">
+**Tipp:** A nagybetűs \\(X_i\\) a modell – egy véletlenszerű változó, mielőtt megfigyeljük. A kisbetűs \\(x_i\\) a konkrét megfigyelt érték. Ez ugyanolyan különbség, mint az esővalószínűség (véletlen) és a ténylegesen lehullott csapadék (konkrét szám) között.
+</div>
 
-(a véletlen minta függvénye) egy **statisztika**.
+<div class="callout trap" markdown="1">
+**Figyelem:** Az i.i.d. feltétel kritikus. Ha a megfigyelések összefüggnek egymással (pl. idősorokban egymást követő értékek), a minta nem i.i.d., és teljesen más eszközökre van szükség.
+</div>
 
-Egyszerűbben: a statisztika bármilyen számítás, amit a mintán végzünk – átlag, maximum, variancia, stb. A lényeg, hogy **maga is valószínűségi változó**, tehát van eloszlása. Ezt az eloszlást **mintavételi eloszlásnak** (sampling distribution) nevezzük.
+## Adatmátrix
 
-A $T_n(x_1, \ldots, x_n)$ konkrét számadat a statisztika **értéke**, miután már megfigyeltük az adatokat.
+<div class="concept" markdown="1">
+**Adatmátrix (data matrix):**
 
-**Példák:**
+<div class="callout trap" markdown="1">
+**TODO:** Az adatmátrix definíciója nem szerepel a PDF-ben – utánanézni és pótolni.
+</div>
+</div>
 
-$$T(X_1, \ldots, X_n) = \frac{1}{n}\sum_{i=1}^n X_i = \bar{X}$$
 
-$$T(X_1, \ldots, X_n) = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar{X})^2 = (s_n^*)^2$$
+## Átlag, empirikus variancia, korrigált empirikus variancia
 
-$$T(X_1, \ldots, X_n) = \max(X_1, \ldots, X_n)$$
+<div class="concept" markdown="1">
+**Mintaátlag (mean):** a minta értékeinek számtani átlaga – azt mutatja meg, hogy "jellemzően" mekkora értékeket figyeltünk meg:
 
----
+$$\bar{X} = X_n = \frac{\sum_{i=1}^n X_i}{n}$$
+</div>
 
-## Leíró statisztikák
-
-### Középértékek
-
-Legyen $(X_1^*, X_2^*, \ldots, X_n^*)$ a **rendezett minta**, ahol $X_k^* = \text{ord}_k\{X_1,\ldots,X_n\}$ a $k$-adik legkisebb elem. Tehát $X_1^* = \min$, $X_n^* = \max$.
-
-| Statisztika | Képlet / leírás |
-|---|---|
-| **Mintaátlag** | $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$ |
-| **Medián** | $X^*_{\frac{n+1}{2}}$ ha $n$ páratlan; $\frac{X^*_{\frac{n}{2}} + X^*_{\frac{n}{2}+1}}{2}$ ha $n$ páros |
-| **Módusz** | a leggyakrabban előforduló elem (lehet több is) |
-| **Terjedelem** | $X_n^* - X_1^*$ |
-
-### Szórásmértékek
-
-A variancia azt méri, mennyire "szóródnak" az értékek az átlag körül.
-
-<mark>Empirikus variancia (korrigálatlan)</mark>:
+<div class="concept" markdown="1">
+**Empirikus variancia (uncorrected sample variance):** azt méri, mennyire "ugrálnak" az értékek az átlag körül. Ha mindenki pontosan az átlagot méri, a variancia nulla. Minél jobban szóródnak az értékek, annál nagyobb:
 
 $$s_n^2 = \frac{1}{n}\sum_{i=1}^n (X_i - \bar{X})^2$$
 
-<mark>Korrigált empirikus variancia</mark>:
+**Korrigált empirikus variancia (corrected sample variance):** ugyanolyan logikájú, de \\(n-1\\) a nevező. Azért korrigált, mert az átlagot is a mintából számoltuk – ez egy kis torzítást visz be, amit az \\(n-1\\) kompenzál:
 
-$$(s_n^*)^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar{X})^2$$
+$$({s_n^*})^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar{X})^2$$
 
-<mark>Empirikus szórás</mark>: $s_n = \sqrt{s_n^2}$, illetve $s_n^* = \sqrt{(s_n^*)^2}$
+**Empirikus szórás:** a variancia négyzetgyöke. A variancia mértékegysége az eredeti adat négyzetében van (pl. cm²), ami nehezen értelmezhető. A négyzetgyök visszahozza az eredeti mértékegységet (pl. cm), így a szórás már közvetlenül összehasonlítható az adatokkal:
 
-<div class="callout tip" markdown="1">
-**Tipp:** Az $n-1$ nevező azért szerepel a korrigált változatban, mert az átlagot is a mintából becsültük – ezzel "elveszítettünk" egy szabadságfokot. A korrigált variancia torzítatlan becslése a populáció varianciájának, a korrigálatlan csak aszimptotikusan az. (Ez a 2. témakörben lesz bizonyítva.)
+$$s_n = \sqrt{s_n^2}, \quad s_n^* = \sqrt{({s_n^*})^2}$$
 </div>
 
-### Momentumok
-
-A $k$-adik **populációs momentum**: $E[X^k]$
-
-A $k$-adik **minta-momentum**: $\dfrac{1}{n}\sum_{i=1}^n X_i^k$
-
-$k=1$ esetén: a várható érték az első populációs momentum, a mintaátlag az első minta-momentum.
-
-### Ferdeség és csúcsosság
-
-<mark>Ferdeség (Skewness)</mark>: az eloszlás szimmetriáját méri.
-
-$$s = \frac{\frac{1}{n}\sum_{i=1}^n (X_i - \bar{X})^3}{\left(\frac{1}{n}\sum_{i=1}^n (X_i - \bar{X})^2\right)^{3/2}}$$
-
-- $s \approx 0$: szimmetrikus eloszlás
-- $s > 0$: jobbra ferde (a hosszabb farok jobbra nyúlik)
-- $s < 0$: balra ferde (a hosszabb farok balra nyúlik)
-
-<mark>Csúcsosság (Kurtosis)</mark>: azt méri, mennyire "nehézfarkú" az eloszlás a normálishoz képest.
-
-$$c = \frac{\frac{1}{n}\sum_{i=1}^n (X_i - \bar{X})^4}{\left(\frac{1}{n}\sum_{i=1}^n (X_i - \bar{X})^2\right)^2} - 3$$
-
-- $c < 0$: lapos eloszlás (könnyebb farkak)
-- $c > 0$: csúcsos eloszlás (nehezebb farkak, több extrém érték)
-
-A $-3$ azért szerepel, hogy a normális eloszlásnál $c = 0$ legyen – így a csúcsosság a normálistól való eltérést méri.
-
----
+<div class="callout tip" markdown="1">
+**Tipp:** A variancia azért négyzeteli a különbségeket, mert különben a pozitív és negatív eltérések kiejtenék egymást – és az átlagtól való eltérések összege mindig nulla lenne.
+</div>
 
 ## Empirikus eloszlásfüggvény
 
-Az eloszlásfüggvény azt adja meg, hogy a minta hány százaléka esik $x$ alá. Lépcsős függvény: minden megfigyelési pontnál $\frac{1}{n}$-vel ugrik.
+<div class="concept" markdown="1">
+**Empirikus eloszlásfüggvény:** azt mutatja meg, hogy a mintában szereplő értékek hány százaléka esik egy adott \\(x\\) érték alá. Arra való, hogy az adatokból közelítsük az ismeretlen valódi eloszlást.
 
-<mark>Empirikus eloszlásfüggvény</mark>:
+Például ha 10 mérésünk van és \\(x = 5\\), akkor \\(F_n(5)\\) megmondja, hogy a 10 mérésből hány esett 5 alá – mondjuk 3, akkor \\(F_n(5) = 0.3\\).
 
-$$F_n(x) = \begin{cases} 0 & \text{ha } x \leq X_1^* \\ \frac{k}{n} & \text{ha } X_k^* < x \leq X_{k+1}^* \quad (k = 1,\ldots,n-1) \\ 1 & \text{ha } X_n^* < x \end{cases}$$
+Ha az összes mérést sorba rendezzük \\((X_1^{\ast}, X_2^{\ast}, \ldots, X_n^{\ast})\\) alakban (legkisebbtől legnagyobbig), a függvény így néz ki:
 
-Ekvivalens alak indikátorfüggvénnyel:
+$$F_n(x) = \begin{cases} 0 & \text{ha } x \leq X_1^* \\ \frac{k}{n} & \text{ha } X_k^* < x \leq X_{k+1}^* \\ 1 & \text{ha } X_n^* < x \end{cases}$$
 
-$$F_n(x) = \frac{1}{n}\sum_{i=1}^n \mathbf{1}_{X_i < x}, \quad \text{ahol} \quad \mathbf{1}_{X_i < x} = \begin{cases} 0 & \text{ha } x \leq X_i \\ 1 & \text{ha } X_i < x \end{cases}$$
-
-### Kiszámítása – példa
-
-Minta: $(-15.4,\ -8.8,\ 8.2,\ 3.4,\ -7.1,\ 4.5,\ -12.7,\ 5.2,\ -10.6,\ -11.2)$
-
-Rendezés után: $-15.4,\ -12.7,\ -11.2,\ -10.6,\ -8.8,\ -7.1,\ 3.4,\ 4.5,\ 5.2,\ 8.2$
-
-| $x$ | $F_n(x)$ |
-|---|---|
-| $x < -15.4$ | $0$ |
-| $x = -15.4$ | $0.1$ |
-| $x = -12.7$ | $0.2$ |
-| $x = -11.2$ | $0.3$ |
-| $x = -10.6$ | $0.4$ |
-| $x = -8.8$ | $0.5$ |
-| $x = -7.1$ | $0.6$ |
-| $x = 3.4$ | $0.7$ |
-| $x = 4.5$ | $0.8$ |
-| $x = 5.2$ | $0.9$ |
-| $x \geq 8.2$ | $1$ |
-
-<div class="callout exam" markdown="1">
-**Vizsgán:** Rendezd a mintát növekvő sorrendbe, majd minden elemnél add hozzá $\frac{1}{n}$-t az előző értékhez. Az első elem előtt $F_n = 0$, az utolsó elem után $F_n = 1$.
+Olvasata: a legkisebb érték előtt 0, minden egyes megfigyelésnél \\(\frac{1}{n}\\)-vel ugrik, a legnagyobb után 1. Ezért hívják lépcsős függvénynek.
 </div>
 
----
+<div class="callout tip" markdown="1">
+**Tipp:** Az indikátorfüggvényes alak ugyanezt fejezi ki tömörebben:
+
+$$F_n(x) = \frac{1}{n}\sum_{i=1}^n \mathbf{1}_{X_i < x}$$
+
+A \\(\mathbf{1}_{X_i < x}\\) csak 1-et vagy 0-t vesz fel: 1 ha \\(X_i < x\\), különben 0. Tehát az összeg megszámolja, hány megfigyelés esik \\(x\\) alá, majd elosztjuk \\(n\\)-nel hogy arányt kapjunk.
+</div>
+
 
 ## Glivenko–Cantelli-tétel
 
-Ez az empirikus eloszlásfüggvény legfontosabb tulajdonsága: nagy mintánál az empirikus eloszlásfüggvény "utolér" a valódi eloszlásfüggvényt.
-
-<mark>Glivenko–Cantelli-tétel</mark>:
+<div class="tetel" markdown="1">
+**Glivenko–Cantelli-tétel:** ahogy a mintaméret növekszik, az empirikus eloszlásfüggvény egyre jobban közelíti a valódi eloszlásfüggvényt – mégpedig egyszerre az összes \\(x\\) értékre:
 
 $$P\!\left(\lim_{n \to \infty} \sup_{x \in \mathbb{R}} |F_n(x) - F(x)| = 0\right) = 1$$
 
 Az empirikus eloszlásfüggvény **egyenletesen, majdnem biztosan** konvergál a valódi eloszlásfüggvényhez.
-
-Mit jelent ez pontosan:
-
-- **Egyenletesen**: nem csak egy adott $x$ pontban, hanem egyszerre az összes $x$-re.
-- **Majdnem biztosan**: valószínűség 1-gyel, azaz kivételes esettől eltekintve mindig teljesül.
-
-<div class="callout exam" markdown="1">
-**Vizsgán:** A tétel kimondja, hogy $\sup_{x \in \mathbb{R}} |F_n(x) - F(x)| \to 0$ majdnem biztosan, ahogy $n \to \infty$. Ez az alap ahhoz, hogy az empirikus eloszlásfüggvényt egyáltalán használhassuk a valódi eloszlás közelítésére.
 </div>
 
 <div class="callout tip" markdown="1">
-**Tipp:** A Glivenko–Cantelli-tétel az alapja a Kolmogorov–Smirnov tesztnek (4. témakör), amellyel azt vizsgálhatjuk, hogy a minta egy adott eloszlásból származik-e.
+**Tipp:** A tétel három dolgot mond egyszerre:
+
+- **Szuprémum:** minden \\(x\\) pontban kiszámoljuk a különbséget \\(|F_n(x) - F(x)|\\) és ezek közül a legnagyobbat nézzük – tehát a legrosszabb esetben is jól kell közelíteni, nem elég csak néhány pontban.
+- **Egyenletesen:** egyszerre az összes \\(x\\)-re közelít. Nem fordulhat elő, hogy egyik pontban jól közelít, másikban rosszul.
+- **Majdnem biztosan:** valószínűsége 1 hogy bekövetkezik. Elméletileg léteznek kivételek, de ezek valószínűsége nulla – a gyakorlatban sosem fordulnak elő.
+</div>
+
+<div class="callout exam" markdown="1">
+**Vizsgán:** A tétel lényege: nagy mintánál az empirikus eloszlásfüggvény "utolér" a valódi eloszlásfüggvényt – ezért egyáltalán érdemes az empirikus eloszlásfüggvényt használni a valódi közelítésére.
+</div>
+
+## Az empirikus eloszlásfüggvény kiszámítása
+
+<div class="eljaras" markdown="1">
+**Lépések:**
+
+1. Rendezd sorba a mintát növekvő sorrendben: \\(X_1^{\ast} \leq X_2^{\ast} \leq \ldots \leq X_n^{\ast}\\)
+2. A legkisebb érték előtt \\(F_n = 0\\)
+3. Minden elemnél add hozzá \\(\frac{1}{n}\\)-t az előző értékhez – ha 10 elem van, minden lépésnél 0.1-et
+4. Az utolsó elem után \\(F_n = 1\\)
+
+**Hogyan olvasod le:** ha tudni akarod, hogy a minta hány százaléka esik egy adott érték alá, megkeresed a táblázatban a megfelelő sort. Például \\(x = -8.8\\)-nál \\(F_n = 0.5\\) azt jelenti, hogy a minta 50%-a esik \\(-8.8\\) alá.
+
+**Példa:** minta: \\((-15.4,\ -8.8,\ 8.2,\ 3.4,\ -7.1,\ 4.5,\ -12.7,\ 5.2,\ -10.6,\ -11.2)\\), \\(n = 10\\)
+
+Rendezés után: \\(-15.4,\ -12.7,\ -11.2,\ -10.6,\ -8.8,\ -7.1,\ 3.4,\ 4.5,\ 5.2,\ 8.2\\)
+
+<table>
+  <thead>
+    <tr><th>x</th><th>Fn(x)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>x &lt; −15.4</td><td>0</td></tr>
+    <tr><td>x = −15.4</td><td>0.1</td></tr>
+    <tr><td>x = −12.7</td><td>0.2</td></tr>
+    <tr><td>x = −11.2</td><td>0.3</td></tr>
+    <tr><td>x = −10.6</td><td>0.4</td></tr>
+    <tr><td>x = −8.8</td><td>0.5</td></tr>
+    <tr><td>x = −7.1</td><td>0.6</td></tr>
+    <tr><td>x = 3.4</td><td>0.7</td></tr>
+    <tr><td>x = 4.5</td><td>0.8</td></tr>
+    <tr><td>x = 5.2</td><td>0.9</td></tr>
+    <tr><td>x ≥ 8.2</td><td>1</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout exam" markdown="1">
+**Vizsgán:** Rendezd a mintát növekvő sorrendbe, majd minden elemnél add hozzá \\(\frac{1}{n}\\)-t. Az első elem előtt \\(F_n = 0\\), az utolsó után \\(F_n = 1\\). Egy adott \\(x\\) értékre \\(F_n(x)\\) megmutatja, hogy a minta hány százaléka esik \\(x\\) alá.
 </div>
