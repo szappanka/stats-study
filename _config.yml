@@ -28,6 +28,9 @@ nav:
     url: /docs/07-idosorok
   - title: Statisztikai csapdák
     url: /docs/08-statisztikai-csapdak
+  - title: "⚡ Felismerési puska"
+    url: /docs/09-puska
+    highlight: true
 
 exclude:
   - README.md
