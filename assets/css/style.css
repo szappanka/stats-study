@@ -686,6 +686,86 @@ body {
   .research-card-arrow { display: none; }
 }
 
+/* ===== Tooltip buborék (.tip) ===== */
+.tip {
+  position: relative;
+  cursor: help;
+  border-bottom: 1px dotted var(--accent);
+  color: inherit;
+}
+
+.tip::before {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 12px);
+  transform: translateX(-50%);
+  width: 280px;
+  padding: 9px 13px;
+  background: var(--bg-elev);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--text);
+  white-space: normal;
+  box-shadow: 0 6px 20px var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 200;
+}
+
+.tip::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 5px);
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-top-color: var(--accent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 200;
+}
+
+.tip:hover::before,
+.tip:hover::after {
+  opacity: 1;
+}
+
+/* ===== test-table (6. fejezet táblázat) ===== */
+.test-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  margin: 1.2em 0;
+}
+
+.test-table th,
+.test-table td {
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.test-table thead th {
+  background: var(--bg-elev);
+  font-weight: 600;
+  color: var(--heading);
+}
+
+.test-table tbody tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+[data-theme="light"] .test-table tbody tr:nth-child(even) td {
+  background: rgba(0, 0, 0, 0.03);
+}
+
 /* ===== Reszponzív: mobil ===== */
 @media (max-width: 1024px) {
   /* Sidebar: slide-in drawer balról */
