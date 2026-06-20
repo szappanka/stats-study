@@ -487,5 +487,74 @@
         });
       })();
     </script>
+
+    <script>
+      // Tooltip buborék .tip elemekhez – position:fixed, nem vágja le semmi
+      (function () {
+        var bubble = document.createElement("div");
+        bubble.className = "tip-bubble";
+        document.body.appendChild(bubble);
+
+        function show(el) {
+          bubble.textContent = el.getAttribute("data-tip") || "";
+          bubble.style.display = "block";
+
+          var rect = el.getBoundingClientRect();
+          var bw = bubble.offsetWidth;
+          var bh = bubble.offsetHeight;
+          var gap = 10;
+          var arrowH = 7;
+
+          // Alapból felülre tesszük
+          var top = rect.top - bh - arrowH - gap;
+          var above = true;
+          if (top < 8) {
+            // Ha nincs hely felül, alulra kerül
+            top = rect.bottom + arrowH + gap;
+            above = false;
+          }
+
+          // Vízszintesen középre, de viewport-on belül maradjon
+          var left = rect.left + rect.width / 2 - bw / 2;
+          left = Math.max(8, Math.min(left, window.innerWidth - bw - 8));
+
+          // A nyíl (tail) vízszintes pozíciója a buborékon belül
+          var tailX = rect.left + rect.width / 2 - left;
+          tailX = Math.max(16, Math.min(tailX, bw - 16));
+
+          bubble.style.left = left + "px";
+          bubble.style.top = top + "px";
+          bubble.style.setProperty("--tail-x", tailX + "px");
+          bubble.classList.toggle("above", above);
+          bubble.classList.toggle("below", !above);
+        }
+
+        function hide() {
+          bubble.style.display = "none";
+        }
+
+        document.addEventListener("mouseover", function (e) {
+          var el = e.target;
+          while (el && el !== document.body) {
+            if (el.classList && el.classList.contains("tip") && el.getAttribute("data-tip")) {
+              show(el);
+              return;
+            }
+            el = el.parentElement;
+          }
+        });
+
+        document.addEventListener("mouseout", function (e) {
+          var el = e.target;
+          while (el && el !== document.body) {
+            if (el.classList && el.classList.contains("tip")) {
+              hide();
+              return;
+            }
+            el = el.parentElement;
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

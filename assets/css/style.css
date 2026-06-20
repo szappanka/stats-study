@@ -686,20 +686,17 @@ body {
   .research-card-arrow { display: none; }
 }
 
-/* ===== Tooltip buborék (.tip) ===== */
+/* ===== Tooltip (.tip) – JS pozicionálja, position:fixed a body-n ===== */
 .tip {
-  position: relative;
   cursor: help;
   border-bottom: 1px dotted var(--accent);
   color: inherit;
 }
 
-.tip::before {
-  content: attr(data-tip);
-  position: absolute;
-  left: 50%;
-  bottom: calc(100% + 12px);
-  transform: translateX(-50%);
+.tip-bubble {
+  display: none;
+  position: fixed;
+  z-index: 9999;
   width: 280px;
   padding: 9px 13px;
   background: var(--bg-elev);
@@ -709,31 +706,26 @@ body {
   font-weight: 400;
   line-height: 1.55;
   color: var(--text);
-  white-space: normal;
   box-shadow: 0 6px 20px var(--shadow);
-  opacity: 0;
   pointer-events: none;
-  transition: opacity 0.15s ease;
-  z-index: 200;
 }
 
-.tip::after {
+.tip-bubble::after {
   content: '';
   position: absolute;
-  left: 50%;
-  bottom: calc(100% + 5px);
+  left: var(--tail-x, 50%);
   transform: translateX(-50%);
   border: 7px solid transparent;
-  border-top-color: var(--accent);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.15s ease;
-  z-index: 200;
 }
 
-.tip:hover::before,
-.tip:hover::after {
-  opacity: 1;
+.tip-bubble.above::after {
+  top: 100%;
+  border-top-color: var(--accent);
+}
+
+.tip-bubble.below::after {
+  bottom: 100%;
+  border-bottom-color: var(--accent);
 }
 
 /* ===== test-table (6. fejezet táblázat) ===== */

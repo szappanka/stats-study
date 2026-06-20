@@ -125,3 +125,18 @@ Kis mintánál, kontingenciatáblán a pontos valószínűségét számolja ki a
 
 **Kolmogorov-Smirnov**
 A minta empirikus eloszlásfüggvénye és az elméleti (vagy másik minta) eloszlásfüggvénye közötti legnagyobb függőleges távolságot nézi.
+
+
+## 9. Mit hasonlítunk: átlag, medián vagy arány?
+
+A teszt családja szabja meg mit kell írnod H0/H1-ben és az értelmezésben.
+
+| Teszt családja | Mit hasonlítunk | Kulcsszó a válaszban |
+|---|---|---|
+| t, z, F, ANOVA, Welch | várható érték (μ) | "átlag", "várható érték" |
+| Wilcoxon, Mann-Whitney, Kruskal-Wallis, Friedman, sign test | medián / eloszlás elhelyezkedése | "medián", "eloszlás" |
+| χ², Fisher exact, McNemar, binomiális teszt | arány / gyakoriság | "arány", "gyakoriság" |
+
+- Paraméteres tesztek a normális eloszlás paraméterét (μ) becsülik, ezért itt mindig átlagról/várható értékről beszélünk
+- Nemparaméteres tesztek nem teszik fel a normalitást, ezért nem az átlagot hasonlítják (ami torzítható szélsőértékekkel), hanem a mediánt vagy az eloszlás elhelyezkedését
+- Kategorikus teszteknél nincs számszerű érték aminek átlagát vagy mediánját vennéd, csak arányokat/gyakoriságokat hasonlítasz
