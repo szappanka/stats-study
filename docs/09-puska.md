@@ -42,10 +42,11 @@ Itt nem átlagot hasonlítunk, hanem gyakoriságokat/arányokat
 - Van-e trend/szezonalitás → idősor diagnosztika (Dickey-Fuller, Ljung-Box)
 - Kicsi a minta, extrém pontos eredmény kell → egzakt teszt (Fisher exact, Lady Tasting Tea)
 
-## 5. Szórások egyenlősége (két csoportnál)
+## 5. Szórások egyenlősége (két csoportnál) - csak paraméteresnél (t-teszt esetén)
 - Ha feltesszük hogy egyenlő a szórás → sima kétmintás t-teszt
 - Ha nem feltesszük → Welch-teszt
 - A szórások egyenlőségét magát az F-teszttel vizsgáljuk
+- Ha nemparaméteres útra mentél (2-3. lépésben), ez a pont nem releváns
 
 ## 6. Paraméteres vs nemparaméteres párok
 
