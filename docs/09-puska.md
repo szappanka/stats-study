@@ -340,9 +340,13 @@ Ha a csoportok közötti eltérés **sokkal nagyobb**, mint amit a véletlen zaj
 
 Legyen \\(k\\) a csoportok száma, \\(n\\) az összes megfigyelés száma, \\(\bar{X}\\) az összátlag, \\(\bar{X}_j\\) a \\(j\\)-edik csoport átlaga.
 
+<div class="callout tip">
+  <p><strong>Jelölések:</strong> SS = Sum of Squares (négyzetösszeg), MS = Mean Square (átlagos négyzetösszeg); a végső betű: <strong>T</strong>otal (összesen), <strong>B</strong>etween groups (csoportok között), <strong>W</strong>ithin groups (csoporton belül).</p>
+</div>
+
 A teljes négyzetösszeg felbontása:
 
-$$SST = SSB + SSW$$
+$$\underbrace{SST}_{\text{összesen}} = \underbrace{SSB}_{\text{csoportok között}} + \underbrace{SSW}_{\text{csoporton belül}}$$
 
 ahol
 
@@ -360,11 +364,11 @@ a csoporton belüli négyzetösszeg (mennyire szórnak az egyedi értékek a saj
 
 Mindkét négyzetösszeget elosztjuk a megfelelő szabadságfokával, hogy átlagos négyzetösszeget (varianciabecslést) kapjunk:
 
-$$MSB = \frac{SSB}{k-1}, \qquad MSW = \frac{SSW}{n-k}$$
+$$\underbrace{MSB}_{\text{csop. között}} = \frac{SSB}{k-1}, \qquad \underbrace{MSW}_{\text{csop. belül}} = \frac{SSW}{n-k}$$
 
 A tesztstatisztika ezek hányadosa:
 
-$$F = \frac{MSB}{MSW} \sim F(k-1,\ n-k)$$
+$$F = \frac{\underbrace{MSB}_{\text{csop. között}}}{\underbrace{MSW}_{\text{csop. belül}}} \sim F(k-1,\ n-k)$$
 
 Ha \\(H_0\\) igaz (minden csoportátlag egyenlő), \\(MSB\\) és \\(MSW\\) hasonló nagyságúak, \\(F\approx 1\\). Ha a csoportok között valódi eltérés van, \\(MSB\\) nagy lesz \\(MSW\\)-hez képest, \\(F\\) nagy lesz.
 
@@ -377,9 +381,11 @@ Ha \\(H_0\\) igaz (minden csoportátlag egyenlő), \\(MSB\\) és \\(MSW\\) hason
 
 3 tanítási módszer hatását hasonlítjuk diákok vizsgaeredményén, csoportonként 5 diák (\\(n=15\\), \\(k=3\\)):
 
-A módszer: 70, 75, 72, 68, 74 → átlag 71.8
-B módszer: 80, 85, 82, 78, 84 → átlag 81.8
-C módszer: 65, 70, 68, 63, 69 → átlag 67
+* A módszer: 70, 75, 72, 68, 74 → átlag 71.8
+
+* B módszer: 80, 85, 82, 78, 84 → átlag 81.8
+
+* C módszer: 65, 70, 68, 63, 69 → átlag 67
 
 Összátlag: \\(\bar{X} = (71.8+81.8+67)/3 \approx 73.5\\)
 
@@ -387,7 +393,7 @@ $$SSB = 5(71.8-73.5)^2+5(81.8-73.5)^2+5(67-73.5)^2 \approx 5(2.89)+5(68.89)+5(42
 
 Tegyük fel \\(SSW \approx 100\\) (csoporton belüli szórásokból számolva).
 
-$$MSB = 569/(3-1) = 284.5, \qquad MSW = 100/(15-3)=8.33$$
+$$\underbrace{MSB}_{\text{csop. között}} = 569/(3-1) = 284.5, \qquad \underbrace{MSW}_{\text{csop. belül}} = 100/(15-3)=8.33$$
 
 $$F = 284.5/8.33 \approx 34.2$$
 

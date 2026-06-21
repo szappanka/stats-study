@@ -365,6 +365,12 @@ body {
 .prose h2 { scroll-margin-top: 28px; }
 .prose h3 { scroll-margin-top: 28px; }
 
+mjx-container[display="true"] {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
 @media (max-width: 1000px) {
   .content.has-toc {
     display: block;
