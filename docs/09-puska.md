@@ -108,7 +108,9 @@ Itt nem átlagot hasonlítunk, hanem gyakoriságokat/arányokat
 
 ## 8. Tesztstatisztika logikája (mit csinál a teszt valójában)
 
-**Megjegyzés:** a Tételsor szerint a legtöbb tesztnél elég a feltételeket, a hipotéziseket, a tesztstatisztikát és annak eloszlását fogalmi szinten ismerni — nem kell kézzel levezetni vagy kiszámolni. Van viszont 4 kivétel, ahol kifejezetten **levezetést** várnak el: az egy- és kétmintás z-teszt, az egymintás t-teszt képlete, az ANOVA tesztstatisztika levezetése, és az R² képletének levezetése. Ezeket lentebb külön, részletesebben kifejtve találod.
+<div class="callout exam">
+  <p><strong>Vizsgán:</strong> a Tételsor szerint a legtöbb tesztnél elég a feltételeket, a hipotéziseket, a tesztstatisztikát és annak eloszlását fogalmi szinten ismerni — nem kell kézzel levezetni vagy kiszámolni. Van viszont 4 kivétel, ahol kifejezetten <strong>levezetést</strong> várnak el: az egy- és kétmintás z-teszt, az egymintás t-teszt képlete, az ANOVA tesztstatisztika levezetése, és az R² képletének levezetése. Ezeket lentebb külön, részletesebben kifejtve találod.</p>
+</div>
 
 ---
 
@@ -148,9 +150,10 @@ $$Z = \frac{488 - 500}{40 / \sqrt{64}} = \frac{-12}{5} = -2.4$$
 
 Ez a Z-érték (\\(-2.4\\)) elég messze van 0-tól (a kritikus érték kétoldali \\(\alpha = 0.05\\)-nél kb. \\(\pm 1.96\\)), tehát \\(\lvert Z \rvert > 1.96\\), elutasítjuk \\(H_0\\)-t — a valódi átlagélettartam valószínűleg nem 500 óra.
 
-**Mire figyelj a felismerésnél**
-
-A z-teszt felismerésének egyetlen konkrét jele: a szöveg explicit megadja vagy kimondja, hogy ismert a populáció szórása. Ha ez nincs kimondva, t-tesztre kell váltani.
+<div class="callout exam">
+  <p><strong>Mire figyelj a felismerésnél</strong></p>
+  <p>A z-teszt felismerésének egyetlen konkrét jele: a szöveg explicit megadja vagy kimondja, hogy ismert a populáció szórása. Ha ez nincs kimondva, t-tesztre kell váltani.</p>
+</div>
 
 ### t-teszt (egymintás)
 
@@ -186,9 +189,10 @@ $$T = \frac{23.8 - 25}{3 / \sqrt{16}} = \frac{-1.2}{0.75} = -1.6$$
 
 Szabadságfok: \\(n-1 = 15\\). A kritikus érték kétoldali \\(\alpha=0.05\\)-nél, 15 szabadságfoknál kb. \\(\pm 2.131\\). Mivel \\(\lvert T \rvert = 1.6 < 2.131\\), **nem utasítjuk el** \\(H_0\\)-t — nincs elég bizonyíték arra, hogy a valódi átlag eltérne a 25 g-tól.
 
-**Mire figyelj a felismerésnél**
-
-Ez a leggyakoribb egymintás teszt a gyakorlatban, mert a populáció szórását ritkán ismerjük előre. Ha a szöveg nem ad meg explicit \\(\sigma\\)-t, vagy kimondja hogy "ismeretlen a szórás" → t-teszt.
+<div class="callout exam">
+  <p><strong>Mire figyelj a felismerésnél</strong></p>
+  <p>Ez a leggyakoribb egymintás teszt a gyakorlatban, mert a populáció szórását ritkán ismerjük előre. Ha a szöveg nem ad meg explicit \\(\sigma\\)-t, vagy kimondja hogy "ismeretlen a szórás" → t-teszt.</p>
+</div>
 
 ### z-teszt / t-teszt (kétmintás)
 
@@ -253,11 +257,14 @@ $$T = \frac{50.2-49.5}{1.45\sqrt{\frac{1}{20}+\frac{1}{20}}} = \frac{0.7}{1.45 \
 
 Szabadságfok: \\(n_1+n_2-2=38\\). Kritikus érték kétoldali \\(\alpha=0.05\\)-nél kb. \\(\pm 2.02\\). Mivel \\(\lvert T\rvert = 1.53 < 2.02\\), **nem utasítjuk el** \\(H_0\\)-t — nincs elég bizonyíték a két gyár átlagos csavarhossza közti különbségre.
 
-**Mire figyelj a felismerésnél**
-
-- 2 független csoport, ismert mindkét \\(\sigma\\) → z-teszt (ritka)
-- 2 független csoport, ismeretlen \\(\sigma\\), feltehető egyenlő szórás → sima t-teszt
-- 2 független csoport, ismeretlen \\(\sigma\\), nem feltehető egyenlő szórás (vagy az F-teszt ezt mutatja) → Welch-teszt
+<div class="callout exam">
+  <p><strong>Mire figyelj a felismerésnél</strong></p>
+  <ul>
+    <li>2 független csoport, ismert mindkét \\(\sigma\\) → z-teszt (ritka)</li>
+    <li>2 független csoport, ismeretlen \\(\sigma\\), feltehető egyenlő szórás → sima t-teszt</li>
+    <li>2 független csoport, ismeretlen \\(\sigma\\), nem feltehető egyenlő szórás (vagy az F-teszt ezt mutatja) → Welch-teszt</li>
+  </ul>
+</div>
 
 ### páros t-teszt
 
@@ -312,9 +319,10 @@ $$T = \frac{6 - 0}{2.62/\sqrt{8}} = \frac{6}{0.926} \approx 6.48$$
 
 Szabadságfok: \\(n-1=7\\). Kritikus érték kétoldali \\(\alpha=0.05\\)-nél, 7 szabadságfoknál kb. \\(\pm 2.36\\). Mivel \\(\lvert T\rvert = 6.48 \gg 2.36\\), **elutasítjuk** \\(H_0\\)-t — a gyógyszer szignifikánsan csökkenti a vérnyomást.
 
-**Mire figyelj a felismerésnél**
-
-A kulcsszó: **ugyanazok az alanyok**, kétszer mérve (vagy természetesen összetartozó párok, pl. ikerpárok). Ha két **különböző** csoportról van szó, az kétmintás teszt, nem páros.
+<div class="callout exam">
+  <p><strong>Mire figyelj a felismerésnél</strong></p>
+  <p>A kulcsszó: <strong>ugyanazok az alanyok</strong>, kétszer mérve (vagy természetesen összetartozó párok, pl. ikerpárok). Ha két <strong>különböző</strong> csoportról van szó, az kétmintás teszt, nem páros.</p>
+</div>
 
 ### ANOVA
 
@@ -399,9 +407,10 @@ $$F = 284.5/8.33 \approx 34.2$$
 
 Szabadságfok: (2, 12). Kritikus érték \\(\alpha=0.05\\)-nél kb. 3.89. Mivel \\(F=34.2 \gg 3.89\\), **elutasítjuk** \\(H_0\\)-t — legalább két módszer között szignifikáns különbség van az átlagos eredményben.
 
-**Mire figyelj a felismerésnél**
-
-3 vagy több **független** csoport, numerikus, normális eloszlású változó, és a kérdés az, hogy "különböznek-e az átlagok valahol" — ekkor ANOVA. Ha a szignifikáns ANOVA után tudni akarod **melyik** csoportok különböznek pontosan, post-hoc tesztek kellenek (pl. páronkénti összehasonlítások korrekcióval, mint a házidban is csináltad).
+<div class="callout exam">
+  <p><strong>Mire figyelj a felismerésnél</strong></p>
+  <p>3 vagy több <strong>független</strong> csoport, numerikus, normális eloszlású változó, és a kérdés az, hogy "különböznek-e az átlagok valahol" — ekkor ANOVA. Ha a szignifikáns ANOVA után tudni akarod <strong>melyik</strong> csoportok különböznek pontosan, post-hoc tesztek kellenek (pl. páronkénti összehasonlítások korrekcióval).</p>
+</div>
 
 ### Repeated-measures ANOVA
 
@@ -461,9 +470,10 @@ Negatív rangok összege (a −1, −2 különbségekhez tartozók): kb. 1+3=4
 
 Ha a pozitív rangösszeg sokkal nagyobb mint a negatív, az arra utal, hogy az adatok inkább a 10 perc fölött vannak — tehát a valódi medián valószínűleg nagyobb mint 10 perc. A pontos p-érték táblázatból vagy szoftverrel számolható (kis mintánál egzakt eloszlásból, nagy mintánál az aszimptotikus normális közelítésből).
 
-**Mire figyelj a felismerésnél**
-
-1 minta, ordinális vagy nem normális numerikus változó, egy konkrét mediánhoz hasonlítva → Wilcoxon signed-rank (egymintás). Ez a nemparaméteres párja az egymintás t-tesztnek.
+<div class="callout exam">
+  <p><strong>Mire figyelj a felismerésnél</strong></p>
+  <p>1 minta, ordinális vagy nem normális numerikus változó, egy konkrét mediánhoz hasonlítva → Wilcoxon signed-rank (egymintás). Ez a nemparaméteres párja az egymintás t-tesztnek.</p>
+</div>
 
 ### Wilcoxon signed-rank (páros)
 
@@ -505,9 +515,10 @@ A 0 különbségű párokat (2. és 5. beteg) kihagyjuk a rangsorolásból, mert
 
 Mivel minden megmaradt különbség pozitív irányú (csökkenés), a pozitív rangok összege maximális, a negatív rangok összege 0 — ez erős jele annak, hogy szisztematikus csökkenés történt.
 
-**Mire figyelj a felismerésnél**
-
-Ugyanazok az alanyok, kétszer mérve, de ordinális vagy nem normális adat → Wilcoxon signed-rank (páros). Ez a nemparaméteres párja a páros t-tesztnek. Ha mindkét mérés bináris (pl. igen/nem), akkor nem ez kell, hanem a McNemar teszt.
+<div class="callout exam">
+  <p><strong>Mire figyelj a felismerésnél</strong></p>
+  <p>Ugyanazok az alanyok, kétszer mérve, de ordinális vagy nem normális adat → Wilcoxon signed-rank (páros). Ez a nemparaméteres párja a páros t-tesztnek. Ha mindkét mérés bináris (pl. igen/nem), akkor nem ez kell, hanem a McNemar teszt.</p>
+</div>
 
 ### Mann-Whitney (Wilcoxon rank-sum)
 
@@ -545,9 +556,10 @@ B módszer rangjai: 5, 6, 7, 8 → rangösszeg = 26
 
 Ha nem lenne különbség a két módszer közt, a rangoknak nagyjából egyenletesen kéne keveredniük (mindkét csoport rangösszege kb. 18 körül lenne, mert az összes rang összege 36, két egyenlő csoportnál fejenként 18). Itt B csoport rangösszege (26) sokkal nagyobb az elvárt 18-nál, A csoporté (10) sokkal kisebb — ez arra utal, hogy B módszer szisztematikusan jobb eredményt hozott. A pontos p-érték a Mann-Whitney U statisztikából (vagy a rangösszegekből) számolható, kis mintánál egzakt eloszlással, nagy mintánál aszimptotikus normális közelítéssel.
 
-**Mire figyelj a felismerésnél**
-
-2 független csoport, ordinális vagy nem normális numerikus változó → Mann-Whitney. Ez a nemparaméteres párja a kétmintás t-tesztnek. Ha ugyanazok az alanyok mindkét csoportban (páros adat), nem ez kell, hanem a Wilcoxon signed-rank (páros).
+<div class="callout exam">
+  <p><strong>Mire figyelj a felismerésnél</strong></p>
+  <p>2 független csoport, ordinális vagy nem normális numerikus változó → Mann-Whitney. Ez a nemparaméteres párja a kétmintás t-tesztnek. Ha ugyanazok az alanyok mindkét csoportban (páros adat), nem ez kell, hanem a Wilcoxon signed-rank (páros).</p>
+</div>
 
 ### Kruskal-Wallis
 
