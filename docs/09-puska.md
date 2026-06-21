@@ -1,6 +1,7 @@
 ---
 title: Felismerési puska
 layout: default
+has_todo: true
 ---
 
 # Felismerési puska – Matstat teszt választás

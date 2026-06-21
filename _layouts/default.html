@@ -307,13 +307,14 @@
           });
         });
 
-        // Tartalomjegyzék (TOC) építése a h2 címekből + scroll-spy
+        // Tartalomjegyzék (TOC) építése a h2/h3 címekből + scroll-spy
         var tocList = document.querySelector(".toc-list");
         if (tocList) {
           var headings = Array.prototype.slice.call(
-            document.querySelectorAll(".prose h2"),
+            document.querySelectorAll(".prose h2, .prose h3"),
           );
-          if (headings.length < 2) {
+          var h2Count = document.querySelectorAll(".prose h2").length;
+          if (h2Count < 2) {
             var aside = document.querySelector(".toc");
             if (aside) aside.remove();
             var contentEl = document.querySelector(".content");
@@ -332,6 +333,7 @@
               var a = document.createElement("a");
               a.href = "#" + h.id;
               a.textContent = h.textContent;
+              if (h.tagName === "H3") a.classList.add("toc-sub");
               tocList.appendChild(a);
               tocLinks.push(a);
             });
@@ -556,5 +558,111 @@
         });
       })();
     </script>
+
+    {% if page.has_todo %}
+    <button class="todo-fab" id="todo-fab" aria-label="Haladás mutató" aria-expanded="false">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path fill="currentColor" d="M3 5h2V3H3v2zm0 8h2v-2H3v2zm0 8h2v-2H3v2zm4-16v2h14V5H7zm0 10h14v-2H7v2zm0 8h14v-2H7v2z"/>
+      </svg>
+      <span class="todo-badge" id="todo-badge" hidden></span>
+    </button>
+
+    <div class="todo-panel" id="todo-panel" hidden>
+      <div class="todo-panel-header">
+        <span class="todo-panel-title">8. fejezet haladás</span>
+        <button class="todo-panel-close" id="todo-panel-close" aria-label="Bezárás">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+            <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="todo-progress-wrap">
+        <div class="todo-progress-bar"><div class="todo-progress-fill" id="todo-progress-fill"></div></div>
+        <span class="todo-progress-label" id="todo-progress-label"></span>
+      </div>
+      <ul class="todo-list" id="todo-list"></ul>
+    </div>
+
+    <script>
+      (function () {
+        var LS_KEY = "stats-todo-09";
+        var fab = document.getElementById("todo-fab");
+        var panel = document.getElementById("todo-panel");
+        var closeBtn = document.getElementById("todo-panel-close");
+        var listEl = document.getElementById("todo-list");
+        var badge = document.getElementById("todo-badge");
+        var fill = document.getElementById("todo-progress-fill");
+        var label = document.getElementById("todo-progress-label");
+
+        // Összes h3 cím a .prose-ből
+        var headings = Array.prototype.slice.call(
+          document.querySelectorAll(".prose h3")
+        );
+        if (!headings.length) return;
+
+        var saved = {};
+        try { saved = JSON.parse(localStorage.getItem(LS_KEY) || "{}"); } catch (e) {}
+
+        function slugOf(el) {
+          return el.id || el.textContent.toLowerCase().replace(/\s+/g, "-").replace(/[^\wáéíóöőúüű-]/g, "");
+        }
+
+        function updateProgress() {
+          var total = listEl.querySelectorAll("input").length;
+          var done = listEl.querySelectorAll("input:checked").length;
+          fill.style.width = (total ? (done / total * 100) : 0) + "%";
+          label.textContent = done + " / " + total;
+          if (done > 0) {
+            badge.textContent = done + "/" + total;
+            badge.hidden = false;
+          } else {
+            badge.hidden = true;
+          }
+        }
+
+        headings.forEach(function (h) {
+          var key = slugOf(h);
+          var title = h.textContent.replace(/\s+/g, " ").trim();
+          var li = document.createElement("li");
+          var id = "todo-cb-" + key;
+          var cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.id = id;
+          cb.checked = !!saved[key];
+          cb.addEventListener("change", function () {
+            saved[key] = cb.checked;
+            try { localStorage.setItem(LS_KEY, JSON.stringify(saved)); } catch (e) {}
+            updateProgress();
+          });
+          var lbl = document.createElement("label");
+          lbl.htmlFor = id;
+          lbl.textContent = title;
+          li.appendChild(cb);
+          li.appendChild(lbl);
+          listEl.appendChild(li);
+        });
+
+        updateProgress();
+
+        fab.addEventListener("click", function () {
+          var open = !panel.hidden;
+          panel.hidden = open;
+          fab.setAttribute("aria-expanded", String(!open));
+        });
+
+        closeBtn.addEventListener("click", function () {
+          panel.hidden = true;
+          fab.setAttribute("aria-expanded", "false");
+        });
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && !panel.hidden) {
+            panel.hidden = true;
+            fab.setAttribute("aria-expanded", "false");
+          }
+        });
+      })();
+    </script>
+    {% endif %}
   </body>
 </html>
