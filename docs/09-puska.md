@@ -463,7 +463,13 @@ Egy cég azt állítja, hogy egy feladat elvégzésének medián ideje 10 perc. 
 
 Különbségek a 10-től: 2, −1, 5, −2, 1, 4
 
-Abszolút értékek rangsorolva (legkisebb=1): |−1|=1→rang 1, |1|=1→rang 1 (átlagolt rang, mert egyenlő), |2|=2→rang 3, |−2|=2→rang 3, |4|=4→rang 5, |5|=5→rang 6
+<p>Abszolút értékek rangsorolva (legkisebb=1):<br>
+|−1|=1 → rang 1<br>
+|1|=1 → rang 1 (átlagolt rang, mert egyenlő)<br>
+|2|=2 → rang 3<br>
+|−2|=2 → rang 3<br>
+|4|=4 → rang 5<br>
+|5|=5 → rang 6</p>
 
 Pozitív rangok összege (a 2, 1, 5, 4 különbségekhez tartozó rangok): kb. 3+1+6+5=15
 Negatív rangok összege (a −1, −2 különbségekhez tartozók): kb. 1+3=4
