@@ -579,7 +579,10 @@ Ha nem lenne különbség a két módszer közt, a rangoknak nagyjából egyenle
 
 **Mini példa** 3 diéta hatását hasonlítjuk testsúlycsökkenésen, csoportonként 3 fő. Az összes 9 értéket közösen rangsoroljuk 1-9-ig, majd csoportonként összeadjuk a rangokat. Ha az egyik csoport rangösszege sokkal nagyobb a többinél (pl. 21 a várt 15 helyett), az arra utal, hogy az a diéta szisztematikusan jobb eredményt hozott. A tesztstatisztika (H) ezekből a rangösszegekből számolódik, és nagy mintánál \\(\chi^2(k-1)\\) eloszlást közelít.
 
-**Felismerés** 3+ független csoport, nem normális vagy ordinális adat → Kruskal-Wallis (ANOVA nemparaméteres párja).
+<div class="callout exam">
+  <p><strong>Mire figyelj a felismerésnél</strong></p>
+  <p>3+ független csoport, nem normális vagy ordinális adat → Kruskal-Wallis (ANOVA nemparaméteres párja).</p>
+</div>
 
 ---
 
@@ -603,9 +606,10 @@ A Kruskal-Wallis ismételt mérésekre általánosított változata: minden alan
 \\(H_0\colon\\) minden feltétel eloszlása azonos (a feltételek rangja véletlenszerűen oszlik el alanyonként)
 \\(H_1\colon\\) legalább egy feltétel szisztematikusan eltér a többitől
 
-**Felismerés**
-
-3+ feltétel/időpont, ugyanazok az alanyok, ordinális vagy nem normális adat → Friedman teszt. Ez a Repeated-measures ANOVA nemparaméteres párja, ahogy Kruskal-Wallis az ANOVA párja.
+<div class="callout exam">
+  <p><strong>Mire figyelj a felismerésnél</strong></p>
+  <p>3+ feltétel/időpont, ugyanazok az alanyok, ordinális vagy nem normális adat → Friedman teszt. Ez a Repeated-measures ANOVA nemparaméteres párja, ahogy Kruskal-Wallis az ANOVA párja.</p>
+</div>
 
 ### χ²-teszt
 
@@ -623,7 +627,10 @@ ahol \\(O\\) a megfigyelt, \\(E\\) az elvárt gyakoriság minden cellában.
 
 **Mini példa** Nem (férfi/nő) és fizetési mód (kártya/utalás) kapcsolata, 200 vásárlónál. Egy 2×2-es kontingenciatáblát készítünk a megfigyelt gyakoriságokról, majd kiszámoljuk az elvárt gyakoriságokat (ha függetlenek lennének, a peremgyakoriságokból). Ha pl. a férfiaknál sokkal több kártyás fizetés van a vártnál, az nagy \\(\chi^2\\) értéket ad, ami azt jelzi: a két változó összefügg. A statisztika \\(\chi^2((r-1)(c-1))\\) eloszlást követ, ahol \\(r,c\\) a sorok/oszlopok száma.
 
-**Felismerés** Két kategorikus változó kapcsolata → függetlenségvizsgálat. Egy kategorikus változó egy elméleti eloszláshoz hasonlítva → illeszkedésvizsgálat.
+<div class="callout exam">
+  <p><strong>Mire figyelj a felismerésnél</strong></p>
+  <p>Két kategorikus változó kapcsolata → függetlenségvizsgálat. Egy kategorikus változó egy elméleti eloszláshoz hasonlítva → illeszkedésvizsgálat.</p>
+</div>
 
 ---
 
@@ -639,7 +646,10 @@ ahol \\(O\\) a megfigyelt, \\(E\\) az elvárt gyakoriság minden cellában.
 
 **Mini példa (Lady Tasting Tea)** Egy hölgy azt állítja, meg tudja különböztetni, hogy a teába előbb öntötték-e a tejet vagy a teát. 8 csészét kap (4-4 mindkét típusból), és neki kell eltalálnia melyik melyik. A Fisher exact teszt pontosan kiszámolja, mekkora az esélye, hogy véletlenül is ennyire jó (vagy jobb) találati arányt érne el, ha valójában nem tudja megkülönböztetni őket.
 
-**Felismerés** Kis minta + kontingenciatábla + kategorikus változók kapcsolata → Fisher exact, nem χ².
+<div class="callout exam">
+  <p><strong>Mire figyelj a felismerésnél</strong></p>
+  <p>Kis minta + kontingenciatábla + kategorikus változók kapcsolata → Fisher exact, nem χ².</p>
+</div>
 
 ---
 
@@ -655,7 +665,10 @@ ahol \\(O\\) a megfigyelt, \\(E\\) az elvárt gyakoriság minden cellában.
 
 **Mini példa** 100 választó véleményét kérdezik egy jelöltről, kampány előtt és után (támogatja/nem támogatja). 15-en váltottak nem→igen irányba, 5-en igen→nem irányba (a többi nem változott). Mivel 15 és 5 nagyon eltér egymástól, ez arra utal, hogy a kampány szisztematikusan növelte a támogatottságot.
 
-**Felismerés** Páros adat + bináris kimenet (igen/nem) → McNemar. Ha a kimenet nem bináris hanem numerikus/ordinális, akkor páros t-teszt vagy Wilcoxon signed-rank kell.
+<div class="callout exam">
+  <p><strong>Mire figyelj a felismerésnél</strong></p>
+  <p>Páros adat + bináris kimenet (igen/nem) → McNemar. Ha a kimenet nem bináris hanem numerikus/ordinális, akkor páros t-teszt vagy Wilcoxon signed-rank kell.</p>
+</div>
 
 ---
 
@@ -671,7 +684,10 @@ ahol \\(O\\) a megfigyelt, \\(E\\) az elvárt gyakoriság minden cellában.
 
 **Mini példa** Egy cég azt állítja, az új tablettájuk legalább 70%-ban hatásos. 150 betegnél tesztelik, 95-nél volt hatásos (63.3%). \\(H_0\colon p\geq 0.70\\), \\(H_1\colon p<0.70\\). A binomiális teszt kiszámolja, mekkora valószínűséggel kapnánk 95-nél kevesebb (vagy annyi) sikert 150 próbálkozásból, ha valójában \\(p=0.70\\) lenne — ha ez a valószínűség kicsi (pl. \\(p<0.05\\)), elutasítjuk H0-t, és arra következtetünk, hogy a valódi hatásosság alacsonyabb a 70%-nál.
 
-**Felismerés** 1 minta + bináris kimenet + konkrét állított arányhoz hasonlítva → binomiális teszt.
+<div class="callout exam">
+  <p><strong>Mire figyelj a felismerésnél</strong></p>
+  <p>1 minta + bináris kimenet + konkrét állított arányhoz hasonlítva → binomiális teszt.</p>
+</div>
 
 
 ### Kolmogorov-Smirnov teszt
@@ -702,9 +718,10 @@ ahol \\(F_n\\) az empirikus, \\(F\\) az elméleti (vagy másik minta) eloszlásf
 
 Egy gyár azt állítja, hogy egy alkatrész élettartama \\(N(500, 40^2)\\) eloszlású. 50 alkatrészt megmérünk, és felrajzoljuk az empirikus eloszlásfüggvényt, majd összevetjük az elméleti \\(N(500,40^2)\\) eloszlásfüggvénnyel. Ha a két görbe a legnagyobb eltérés pontján (\\(D\\)) túl messze kerül egymástól ahhoz a kritikus értékhez képest, amit a Kolmogorov-Smirnov táblázat ad az adott mintaméretre, elutasítjuk, hogy az élettartam ezt az eloszlást követi.
 
-**Felismerés**
-
-A kérdés "illeszkedik-e az adat egy eloszlásra" (vagy két minta eloszlása azonos-e) → Kolmogorov-Smirnov. Eltér a χ²-illeszkedésvizsgálattól abban, hogy folytonos eloszlásra alkalmazható (nem kategorizált adatra), és nem csak néhány kategóriát hasonlít, hanem a teljes eloszlásgörbét.
+<div class="callout exam">
+  <p><strong>Mire figyelj a felismerésnél</strong></p>
+  <p>A kérdés "illeszkedik-e az adat egy eloszlásra" (vagy két minta eloszlása azonos-e) → Kolmogorov-Smirnov. Eltér a χ²-illeszkedésvizsgálattól abban, hogy folytonos eloszlásra alkalmazható (nem kategorizált adatra), és nem csak néhány kategóriát hasonlít, hanem a teljes eloszlásgörbét.</p>
+</div>
 
 ---
 
@@ -741,7 +758,7 @@ $$\hat\beta_1 = \frac{\sum (x_i-\bar{x})(y_i-\bar{y})}{\sum (x_i-\bar{x})^2}, \q
 
 A teljes változékonyságot (SST) két részre bontjuk, ugyanúgy mint ANOVA-nál:
 
-$$SST = SSR + SSE$$
+$$\underbrace{SST}_{\text{összesen}} = \underbrace{SSR}_{\text{modell}} + \underbrace{SSE}_{\text{hiba}}$$
 
 ahol \\(SSR\\) a modell által megmagyarázott rész, \\(SSE\\) a meg nem magyarázott (hiba) rész.
 
@@ -753,9 +770,10 @@ $$R^2 = \frac{SSR}{SST} = 1-\frac{SSE}{SST}$$
 
 10 dolgozó fizetését (\\(Y\\), ezer Ft) és munkatapasztalatát (\\(X\\), év) vizsgáljuk. A becsült modell: \\(\hat{Y} = 250 + 15x\\). Ez azt jelenti, minden plusz év tapasztalat átlagosan 15 ezer Ft-tal növeli a fizetést. Ha \\(R^2=0.72\\), az azt jelenti, a tapasztalat a fizetés varianciájának 72%-át magyarázza meg, a maradék 28% más, a modellben nem szereplő tényezőknek (pl. képzettség, iparág) tudható be.
 
-**Felismerés**
-
-Két (vagy több) numerikus változó közötti kapcsolat/hatás kérdése → regresszió.
+<div class="callout exam">
+  <p><strong>Mire figyelj a felismerésnél</strong></p>
+  <p>Két (vagy több) numerikus változó közötti kapcsolat/hatás kérdése → regresszió.</p>
+</div>
 
 ---
 
@@ -785,9 +803,10 @@ Azt vizsgálja, hogy egy idősor **stacionárius-e**, vagy van benne **egységgy
 
 Egy napi árfolyam-idősorra ARIMA modellt illesztünk. A Ljung-Box teszttel ellenőrizzük, hogy a modell reziduumaiban maradt-e még mintázat (ha igen, a modell javítható). A Dickey-Fuller teszttel pedig azt nézzük meg illesztés előtt, hogy szükség van-e differenciálásra (az eredeti árfolyam-sor valószínűleg nem stacionárius, mert van benne trend, ezért a Dickey-Fuller teszt nem utasítja el a "van egységgyök" nullhipotézist).
 
-**Felismerés**
-
-"Van-e még mintázat a reziduumokban" → Ljung-Box. "Stacionárius-e az idősor / van-e benne trend" → Dickey-Fuller.
+<div class="callout exam">
+  <p><strong>Mire figyelj a felismerésnél</strong></p>
+  <p>"Van-e még mintázat a reziduumokban" → Ljung-Box. "Stacionárius-e az idősor / van-e benne trend" → Dickey-Fuller.</p>
+</div>
 
 ## 9. Mit hasonlítunk: átlag, medián vagy arány?
 
