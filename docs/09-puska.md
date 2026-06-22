@@ -729,53 +729,127 @@ Egy gyár azt állítja, hogy egy alkatrész élettartama \\(N(500, 40^2)\\) elo
 
 **Mi a probléma, amit megold?**
 
-Azt modellezi, hogyan függ egy numerikus változó (\\(Y\\)) egy vagy több másik numerikus változótól (\\(X\\)). Pl. hogyan függ a fizetés a munkatapasztalattól.
+Azt modellezi, hogyan függ egy numerikus változó (\\(Y\\)) egy vagy több másik numerikus változótól (\\(X\\)). Pl. hogyan függ a fizetés a munkatapasztalattól. Az egyenes megmutatja a kapcsolat irányát és erősségét, és lehetővé teszi az előrejelzést.
 
 **A modell**
 
 $$Y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$$
 
-ahol \\(\beta_0\\) a tengelymetszet, \\(\beta_1\\) a meredekség (mennyit változik \\(Y\\) átlagosan, ha \\(x\\) eggyel nő), \\(\varepsilon_i\\) a hibatag.
+ahol \\(\beta_0\\) a tengelymetszet (ha x=0, mennyi Y várható értéke), \\(\beta_1\\) a meredekség (mennyit változik Y átlagosan, ha x eggyel nő), \\(\varepsilon_i\\) a hibatag (amit a modell nem magyaráz meg).
 
-**Feltételek a hibatagra (Gauss-Markov)**
+**Feltételek a hibatagra (Gauss-Markov feltételek)**
 
-- Várható értéke 0
-- Állandó varianciája van (homoszcedaszticitás)
-- A hibatagok egymástól függetlenek
-- (Normalitás csak a szignifikanciatesztekhez kell, magához a becsléshez nem)
+- Várható értéke 0 — a modell átlagosan nem téved el szisztematikusan
+- Állandó varianciája van (homoszcedaszticitás) — a szórás nem nő vagy csökken x mentén
+- A hibatagok egymástól függetlenek — az egyik megfigyelés hibája nem befolyásolja a másikét
+- Normalitás — csak a szignifikanciatesztekhez (t-teszt, F-teszt) kell, magához a becsléshez nem
 
 **Gauss-Markov tétel**
 
-Ha a fenti feltételek teljesülnek, a legkisebb négyzetek módszerével becsült paraméterek **torzítatlanok**, és az összes lineáris torzítatlan becslés közül **minimális varianciájúak** (BLUE: best linear unbiased estimator).
+Ha a fenti feltételek teljesülnek, a legkisebb négyzetek módszerével becsült paraméterek torzítatlanok, és az összes lineáris torzítatlan becslés közül minimális varianciájúak.
 
-**Legkisebb négyzetek becslés (egy magyarázó változó esetén)**
+Ezt hívják BLUE-nak: Best Linear Unbiased Estimator — vagyis a legjobb (legkisebb varianciájú) lineáris torzítatlan becslő.
 
-A becslés azt a \\(\hat\beta_0, \hat\beta_1\\) párt keresi, ami minimalizálja a megfigyelt és becsült értékek közötti eltérések négyzetösszegét:
+**Legkisebb négyzetek becslés — levezetés**
 
-$$\hat\beta_1 = \frac{\sum (x_i-\bar{x})(y_i-\bar{y})}{\sum (x_i-\bar{x})^2}, \qquad \hat\beta_0 = \bar{y} - \hat\beta_1 \bar{x}$$
+A cél: megtalálni azt a \\(\hat\beta_0, \hat\beta_1\\) párt, ami minimalizálja a megfigyelt és becsült értékek közötti eltérések négyzetösszegét (SSE):
+
+$$SSE = \sum_{i=1}^n (y_i - \hat\beta_0 - \hat\beta_1 x_i)^2 \to \min$$
+
+Miért négyzetösszeg? Mert a pozitív és negatív eltérések ne ejtsék ki egymást, és a nagy eltérések erősebben büntessenek.
+
+Az SSE-t minimalizáljuk \\(\hat\beta_0\\) és \\(\hat\beta_1\\) szerint — parciális deriváltakat veszünk és nullává tesszük:
+
+$$\frac{\partial SSE}{\partial \hat\beta_0} = -2\sum(y_i - \hat\beta_0 - \hat\beta_1 x_i) = 0$$
+
+$$\frac{\partial SSE}{\partial \hat\beta_1} = -2\sum x_i(y_i - \hat\beta_0 - \hat\beta_1 x_i) = 0$$
+
+Az első egyenletből: \\(\hat\beta_0 = \bar{y} - \hat\beta_1 \bar{x}\\)
+
+Visszahelyettesítve a másodikba és rendezve:
+
+$$\hat\beta_1 = \frac{\sum (x_i-\bar{x})(y_i-\bar{y})}{\sum (x_i-\bar{x})^2}$$
+
+Ez a számlálóban az x és y együttes ingadozása (kovariancia), a nevező az x ingadozása (variancia). Tehát a meredekség azt mutatja, mennyire mozog együtt Y és x.
+
+**Standardizált együtthatók**
+
+A normál \\(\hat\beta_1\\) az x eredeti mértékegységében értelmezett (pl. "1 év tapasztalat = +15 ezer Ft"). Ha több magyarázó változód van különböző mértékegységekkel (pl. tapasztalat évben és életkor évben), nem tudod közvetlenül összehasonlítani őket.
+
+A standardizált együttható (\\(\beta^*\\)) azt mutatja, mennyit változik Y (szórásban mérve), ha x egy szórásnyit nő:
+
+$$\beta^* = \hat\beta_1 \cdot \frac{s_x}{s_y}$$
+
+Így összehasonlíthatóvá válnak a különböző mértékegységű változók — melyik magyarázó változónak van nagyobb hatása Y-ra.
 
 **R² levezetése**
 
-A teljes változékonyságot (SST) két részre bontjuk, ugyanúgy mint ANOVA-nál:
+A teljes változékonyságot (SST) két részre bontjuk:
 
-$$\underbrace{SST}_{\text{összesen}} = \underbrace{SSR}_{\text{modell}} + \underbrace{SSE}_{\text{hiba}}$$
+$$SST = SSR + SSE$$
 
-ahol \\(SSR\\) a modell által megmagyarázott rész, \\(SSE\\) a meg nem magyarázott (hiba) rész.
+ahol:
+- \\(SST = \sum(y_i - \bar{y})^2\\) — Y teljes változékonysága az összátlag körül
+- \\(SSR = \sum(\hat{y}_i - \bar{y})^2\\) — amit a modell megmagyaráz (mennyit "fog meg" a regressziós egyenes)
+- \\(SSE = \sum(y_i - \hat{y}_i)^2\\) — amit a modell nem magyaráz meg (reziduumok négyzetösszege)
 
 $$R^2 = \frac{SSR}{SST} = 1-\frac{SSE}{SST}$$
 
-\\(R^2\\) megmutatja, \\(Y\\) változékonyságának hányad részét magyarázza meg a modell (0 = semennyit, 1 = mindent). Több magyarázó változónál a korrigált \\(R^2\\) (adjusted \\(R^2\\)) azért hasznos, mert az \\(R^2\\) önmagában mindig nő, ha újabb változót adsz a modellhez (még ha az lényegtelen is) — a korrigált változat bünteti a felesleges változók hozzáadását.
+\\(R^2\\) megmutatja, Y változékonyságának hányad részét magyarázza meg a modell (0 = semennyit, 1 = mindent).
+
+**Adjusted R² — miért kell?**
+
+Az \\(R^2\\) önmagában mindig nő, ha újabb változót adsz a modellhez — még ha az a változó teljesen lényegtelen is. Ez félrevezető lehet több magyarázó változónál.
+
+Az adjusted \\(R^2\\) bünteti a felesleges változók hozzáadását: csak akkor nő, ha az új változó valóban javítja a modellt, különben csökken. Ezért több magyarázó változónál mindig adjusted \\(R^2\\)-t kell nézni, nem simát.
+
+**Konfidenciaintervallum vs predikciós intervallum**
+
+Ez egy tipikus vizsgakérdés — a kettő könnyen összekeverhető.
+
+- **Konfidenciaintervallum** az átlagos Y értékre vonatkozik egy adott x-nél: "ha sok mintát vennénk ugyanolyan x értékkel, az átlaguk hol lenne?" Ez szűkebb, mert az átlag kevésbé ingadozik.
+
+- **Predikciós intervallum** egy egyedi új megfigyelésre vonatkozik: "ha kiveszek egyetlen új személyt ezzel az x értékkel, hol lesz az ő Y értéke?" Ez szélesebb, mert egy egyedi megfigyelés sokkal jobban ingadozik, mint az átlag.
+
+Egyszerűen: konfidenciaintervallum az átlagnak, predikciós intervallum egyetlen jövőbeli értéknek. A predikciós intervallum mindig szélesebb.
+
+**Multikollinearitás és VIF**
+
+Multikollinearitás akkor lép fel, ha a magyarázó változók (X-ek) erősen korrelálnak egymással. Ez azért probléma, mert:
+- A becslések bizonytalanná válnak (nagy szórású β-k)
+- Nehéz megmondani, melyik változónak mekkora az önálló hatása
+- Az együtthatók előjele is megváltozhat
+
+A VIF (Variance Inflation Factor) méri, mennyire magyarázható az egyik X a többi X-szel:
+- VIF = 1: nincs multikollinearitás
+- VIF > 10: komoly multikollinearitás (ökölszabály)
+
+**Reziduumdiagnosztika — mit kell látni**
+
+A reziduum = megfigyelt Y - becsült Y. Egy jó modellben a reziduumoknak véletlenszerűen kell szóródniuk — nem szabad bennük semmi mintázatnak lennie.
+
+Mit jeleznek a problémák:
+- **Curved pattern (ívelt mintázat)** a reziduumplotban → a kapcsolat nem lineáris, valószínűleg magasabb fokú tagot vagy más változót kellene hozzáadni
+- **Tölcsér alakú szóródás** (egyre nagyobb eltérések) → nem állandó a variancia (heteroszcedaszticitás), megsérti a Gauss-Markov feltételt
+- **Szisztematikus hullámzás** → autokorrelált hibák, megsérti a függetlenség feltételét
+
+Normalitást Shapiro-Wilk teszttel vagy QQ-plottal ellenőrizzük.
 
 **Mini példa**
 
-10 dolgozó fizetését (\\(Y\\), ezer Ft) és munkatapasztalatát (\\(X\\), év) vizsgáljuk. A becsült modell: \\(\hat{Y} = 250 + 15x\\). Ez azt jelenti, minden plusz év tapasztalat átlagosan 15 ezer Ft-tal növeli a fizetést. Ha \\(R^2=0.72\\), az azt jelenti, a tapasztalat a fizetés varianciájának 72%-át magyarázza meg, a maradék 28% más, a modellben nem szereplő tényezőknek (pl. képzettség, iparág) tudható be.
+10 dolgozó fizetését (\\(Y\\), ezer Ft) és munkatapasztalatát (\\(X\\), év) vizsgáljuk.
 
-<div class="callout exam">
-  <p><strong>Mire figyelj a felismerésnél</strong></p>
-  <p>Két (vagy több) numerikus változó közötti kapcsolat/hatás kérdése → regresszió.</p>
-</div>
+Becsült modell: \\(\hat{Y} = 250 + 15x\\)
 
----
+- \\(\hat\beta_1 = 15\\): minden plusz év tapasztalat átlagosan 15 ezer Ft-tal növeli a fizetést
+- \\(\hat\beta_0 = 250\\): 0 év tapasztalattal 250 ezer Ft az alapfizetés
+- \\(R^2 = 0.72\\): a tapasztalat a fizetés varianciájának 72%-át magyarázza, a maradék 28% más tényezőknek tudható be (pl. képzettség, iparág)
+- Ha x=8 évre konfidenciaintervallum: [355, 375] ezer Ft — az átlagos fizetés ilyen tapasztalattal ebben a tartományban van
+- Ha x=8 évre predikciós intervallum: [310, 420] ezer Ft — egy konkrét személy fizetése ennél szélesebb tartományban mozog
+
+**Mire figyelj a felismerésnél**
+
+Két (vagy több) numerikus változó közötti kapcsolat/hatás kérdése → regresszió. Kategorikus változóhoz ne használd — ott χ² vagy más teszt kell.
 
 ### Idősor-diagnosztikák (Ljung-Box, Dickey-Fuller)
 
