@@ -31,6 +31,8 @@ nav:
   - title: "⚡ Felismerési puska"
     url: /docs/09-puska
     highlight: true
+  - title: Házi feladat
+    url: /docs/10-hazi-feladat
 
 exclude:
   - README.md
