@@ -723,6 +723,78 @@ mjx-container[display="true"] {
 .prose .tetel    { border-left: 4px solid #3fb950; }
 .prose .eljaras  { border-left: 4px solid #f78166; }
 
+/* ===== Megoldás-blokk (lenyitható) ===== */
+.prose details.solution {
+  margin: 1.5em 0;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  background: var(--bg-elev);
+}
+
+.prose details.solution > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  padding: 11px 16px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--accent);
+  gap: 8px;
+  transition: background 0.15s ease;
+}
+
+.prose details.solution > summary::-webkit-details-marker { display: none; }
+.prose details.solution > summary::marker { content: ''; }
+
+.prose details.solution > summary::after {
+  content: '';
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  background-color: currentColor;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  transition: transform 0.22s ease;
+}
+
+.prose details.solution[open] > summary::after {
+  transform: rotate(180deg);
+}
+
+.prose details.solution > summary:hover {
+  background: var(--accent-soft);
+}
+
+.prose details.solution[open] > summary {
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 20%, var(--border));
+}
+
+.prose details.solution > :not(summary) {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.prose details.solution > table {
+  width: auto;
+  max-width: calc(100% - 32px);
+}
+
+.prose details.solution > summary + * {
+  margin-top: 14px;
+}
+
+.prose details.solution > :last-child:not(summary) {
+  margin-bottom: 14px;
+}
+
 /* Táblázat */
 .prose table {
   display: block;

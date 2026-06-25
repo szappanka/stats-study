@@ -491,6 +491,16 @@
     </script>
 
     <script>
+      document.querySelectorAll('details.solution').forEach(function (el) {
+        if (!el.querySelector('summary')) {
+          var s = document.createElement('summary');
+          s.textContent = 'Megoldás';
+          el.prepend(s);
+        }
+      });
+    </script>
+
+    <script>
       // Tooltip buborék .tip elemekhez – position:fixed, nem vágja le semmi
       (function () {
         var bubble = document.createElement("div");

@@ -8,6 +8,9 @@ plugins:
   - jekyll-relative-links
 
 nav:
+  - title: Feladatok
+    url: /docs/feladatok
+    highlight: true
   - title: Kezdőlap
     url: /
   - title: Témák
