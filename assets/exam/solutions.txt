@@ -1,0 +1,168 @@
+Instructions. Answer briefly but precisely. These questions are designed to test conceptual
+understanding: correct interpretation, method choice, model assumptions, and recognition
+of common statistical mistakes. The solutions below are written in a texttt-style font for
+teacher/reference use.
+1. (3 points) A dataset contains the following variables: student ID number, exam score in
+points, satisfaction rating from 1 to 5, and room temperature measured in degrees Celsius.
+For each variable, identify the level of measurement or variable type. Then choose one
+variable for which taking an arithmetic mean would be questionable, and briefly explain
+why.
+Solution.
+Student ID number is a nominal identifier: the numbers are labels, not quantities.
+Exam score in points is quantitative; in most exam contexts it is treated as a
+ratio-type or at least interval-type numerical variable, because differences in points
+have meaning and zero points is a meaningful reference. Satisfaction rating from 1 to
+5 is ordinal: the order is meaningful, but the distances between neighbouring
+categories need not be equal. Celsius temperature is interval-scale: differences are
+meaningful, but the zero point is conventional, so ratios such as “20 degrees is twice
+as warm as 10 degrees” are not meaningful in Celsius.
+Taking the mean of student ID numbers is meaningless, because the numerical codes do
+not measure an amount. Taking the mean of ordinal satisfaction ratings is also
+questionable: it is often done as a rough summary, but it assumes equal spacing
+between categories, which may not be justified.
+2. (3 points) Supposethatthemonthlyelectricityconsumptionsofhouseholdsaremodelledas
+independent observations from a normal distribution with unknown mean µ and unknown
+variance σ2. A random sample of 80 households gives an average monthly electricity
+consumption of 236 kWh. Identify the relevant parameter of the distribution and the
+sample statistic in this situation. Explain why another random sample of 80 households
+would probably give a different average.
+Solution.
+The model says that the observations come from a normal distribution, for example
+X1,...,X80 ∼N(µ,σ2), independently. The most relevant parameter of the distribution
+here is µ, the true expected monthly electricity consumption in the assumed normal
+model. The variance σ2 is also a parameter of the distribution, but the given sample
+average is primarily used to estimate µ.
+The sample statistic is the observed sample mean, here¯
+X = 236 kWh, computed from the
+80 sampled households. A second sample would probably give a different value because
+of sampling variability: different random samples contain different households, so the
+average computed from a finite random sample fluctuates from sample to sample. The
+statistic¯
+X is random before observing the data; the parameter µ is fixed but unknown
+within the model.
+3. (4 points) A report says: “A 95% confidence interval for the mean waiting time is
+[18.2,21.6] minutes.” Decide which interpretations are correct and correct the wrong ones.
+1
+Mathematical Statistics – Concept questions Name:
+(a) There is a 95% probability that this particular interval contains the true mean.
+(b) If we repeated the same sampling procedure many times, about 95% of the intervals
+constructed in this way would contain the true mean.
+(c) About 95% of individual waiting times are between 18.2 and 21.6 minutes.
+(d) The interval gives plausible values for the unknown mean waiting time, not for every
+individual observation.
+Solution.
+(a) is not the standard frequentist interpretation. After the data have been observed,
+this particular interval is fixed, and the unknown mean is treated as fixed. The 95%
+refers to the long-run success rate of the procedure, not to a probability assigned to
+this already computed interval.
+(b) is correct. If the assumptions are satisfied and the same method is repeated many
+times, approximately 95% of the intervals produced by the procedure contain the true
+mean.
+(c) is wrong. A confidence interval for the mean is not an interval that should
+contain 95% of the individual observations. Individual waiting times are usually much
+more variable than the sample mean.
+(d) is correct. The interval should be read as a range of plausible values for the
+distributional mean µ, given the data and the chosen confidence level.
+4. (3 points) In a test of
+H0 : µ= 100 against H1 : µ̸= 100,
+the computed p-value is 0.032. What is the decision at significance level α= 0.05? What
+is the decision at α= 0.01? Explain why the sentence “the probability that H0 is true is
+3.2%” is not a correct interpretation of the p-value.
+Solution.
+At α= 0.05, we reject H0, because p= 0.032 <0.05. At α= 0.01, we do not reject H0,
+because p= 0.032 >0.01.
+The p-value is computed under the assumption that H0 is true. It is the probability,
+assuming H0, of obtaining a test statistic at least as extreme as the one observed.
+It is not the probability that H0 itself is true. The incorrect sentence reverses the
+conditional probability: it treats P(data or more extreme |H0) as if it were
+P(H0 |data).
+5. (3 points) Suppose a null hypothesis is rejected at significance level α= 0.05. What can
+we conclude about the decision at α= 0.10? What can we conclude about the decision at
+α= 0.01? Give a short explanation using the relation between the p-value and α.
+Solution.
+If H0 is rejected at α= 0.05, then the p-value must satisfy p≤0.05. Therefore it is
+certainly also true that p≤0.10, so H0 would also be rejected at α= 0.10.
+At α= 0.01, we cannot know the decision from this information alone. If, for example,
+p= 0.008, then we reject at 0.01. If p= 0.03, then we reject at 0.05 but not at 0.01.
+A smaller significance level means a stricter rejection rule.
+2
+Mathematical Statistics – Concept questions Name:
+6. (3 points) A smoke alarm is treated as a hypothesis test. The null hypothesis is “there is
+no dangerous smoke”, and the alarm rings when the null hypothesis is rejected. In this
+context, describe a Type I error and a Type II error. Which error becomes more likely if
+the alarm is made much less sensitive? Briefly justify your answer.
+Solution.
+A Type I error means rejecting a true null hypothesis. Here this means that there is
+no dangerous smoke, but the alarm rings anyway. This is a false alarm.
+A Type II error means not rejecting a false null hypothesis. Here this means that
+there is dangerous smoke, but the alarm does not ring. This is a missed detection.
+If the alarm is made much less sensitive, it rings less often. Therefore false alarms
+become less likely, but missed detections become more likely. In hypothesis-testing
+language, decreasing sensitivity reduces the chance of Type I errors but increases the
+chance of Type II errors and decreases the power of the test.
+7. (3 points) A researcher wants to use a one-sample t-confidence interval for an unknown
+mean when the variance is unknown. Explain why the Student t-distribution appears
+instead of the standard normal distribution. What role does the sample size play in this
+choice?
+Solution.
+If the variance is unknown, the standard deviation of the distribution σ is replaced by
+the sample standard deviation S. This extra estimation adds uncertainty. For normally
+distributed observations, the standardized quantity
+¯
+X−µ
+S/√n
+has a Student t-distribution with n−1 degrees of freedom, not a standard normal
+distribution.
+The sample size enters through the degrees of freedom n−1. For small n, the
+t-distribution has heavier tails than the normal distribution, so the confidence
+interval is wider. As n grows, the t-distribution becomes very close to the standard
+normal distribution.
+8. (3 points) A researcher fits the simple linear regression model
+Yi = β0 + β1xi + εi,
+where Yi is the final exam score and xi is the number of hours studied. The estimated slope
+is positive. A residual-versus-fitted plot shows a clear curved pattern rather than a random
+cloud. Interpret β1 in words, explain what the curved residual pattern suggests, and decide
+whether the positive slope alone proves that studying more causes higher exam scores.
+Solution.
+The parameter β1 is the slope parameter of the regression model. In this context it
+means the expected change in final exam score associated with one additional hour
+studied, according to the linear model and holding the model structure fixed. If
+β1 >0, the fitted linear relationship says that larger values of x are associated with
+larger expected values of Y.
+A curved pattern in the residual-versus-fitted plot suggests that the linear form may
+be misspecified. The relationship between studying time and exam score may be
+nonlinear, or an important variable may be missing. In a well-fitting simple linear
+model, residuals should not show a systematic curve as a function of the fitted values.
+The positive slope alone does not prove causality. This is an observational
+association unless the study design justifies causal interpretation, for example
+3
+Mathematical Statistics – Concept questions Name:
+through random assignment or a convincing causal design. Confounding variables, such
+as previous knowledge, motivation, course difficulty, or access to tutoring, may affect
+both studying time and exam score.
+9. (3 points) A daily time series records the number of visitors to a website. The plot shows
+a long-term upward trend and a clear weekly pattern. Is weak stationarity plausible for
+the original series? Name one transformation or modelling step that could make the series
+closer to stationary. What would a large positive autocorrelation at lag 7 suggest?
+Solution.
+Weak stationarity is not very plausible for the original series. A weakly stationary
+time series should have a constant expected value and an autocovariance structure
+depending only on the lag, not on the actual time point. A long-term upward trend
+suggests a changing mean, and a weekly pattern suggests systematic seasonality.
+Possible steps include removing or modelling the trend, taking first differences,
+subtracting a fitted trend, using seasonal differencing with lag 7, or explicitly
+including weekday effects in a model. A large positive autocorrelation at lag 7
+suggests weekly seasonality: values observed on the same day of the week tend to be
+similar.
+10. (2 points) A company tests 20 different website variants, each at the 5% significance level,
+and then announces the one variant for which p= 0.04. What is the statistical problem
+with this reasoning? Name one way to make the analysis more reliable.
+Solution.
+The problem is multiple testing, often connected with data snooping or p-hacking. If
+many hypotheses are tested, then even when there is no real effect, the chance of
+finding at least one apparently significant result can be much larger than 5%.
+One solution is to adjust for multiple comparisons, for example by using a Bonferroni
+correction or a false discovery rate procedure. Another solution is to pre-register
+the primary comparison before looking at the data and treat the remaining comparisons
+as exploratory.
+4

@@ -7,7 +7,7 @@ title: Feladatok
 
 ## Mathematical Statistics – Concept questions
 
-**Instructions.** Answer briefly but precisely. These questions are designed to test conceptual understanding: correct interpretation, method choice, assumptions, diagnostics, and common mistakes.
+**Instructions.** Answer briefly but precisely. These questions are designed to test conceptual understanding: correct interpretation, method choice, model assumptions, and recognition of common statistical mistakes.
 
 ---
 
@@ -15,22 +15,22 @@ title: Feladatok
 
 **Situation.** A dataset contains the following variables: student ID number, exam score in points, satisfaction rating from 1 to 5, and room temperature measured in degrees Celsius.
 
-**Task.** For each variable, identify the level of measurement or variable type. Then choose one variable for which taking an arithmetic mean would be questionable, and briefly explain why.
+**Task.** For each variable, identify the level of measurement (mérési szint) or variable type. Then choose one variable for which taking an arithmetic mean (számtani átlag) would be questionable, and briefly explain why.
 
 <details class="solution" markdown="1">
 
-**Variable classification (változók osztályozása):**
+**Változók osztályozása:**
 
-| Variable | Level of measurement (mérési szint) | Why |
+| Változó | Mérési szint | Miért |
 |---|---|---|
-| Student ID number | Nominal (nominális) | Numbers are labels, not quantities |
-| Exam score (points) | Ratio (arány) | Equal differences, true zero (0 points = nothing scored) |
-| Satisfaction rating (1–5) | Ordinal (ordinális) | Order is meaningful, but distances between categories need not be equal |
-| Room temperature (°C) | Interval (intervallum) | Equal differences, but zero is conventional (0°C ≠ no temperature) |
+| Student ID number | Nominal (nominális) | A számok címkék, nem mennyiségek |
+| Exam score (points) | Ratio (arány) | Egyenlő különbségek, valódi nulla (0 pont = semmi sem szerzett) |
+| Satisfaction rating (1–5) | Ordinal (ordinális) | A sorrend értelmes, de a kategóriák közötti távolságok nem feltétlenül egyenlők |
+| Room temperature (°C) | Interval (intervallum) | Egyenlő különbségek, de a nulla konvencionális (0°C ≠ nincs hőmérséklet) |
 
-**Where the mean is questionable (mikor kérdéses az átlag):**
-- **Student ID (azonosítószám):** taking the mean is meaningless — the numbers are arbitrary codes (címkék), not amounts
-- **Satisfaction rating (elégedettségi értékelés):** also questionable — computing the mean assumes equal spacing between categories, which is not guaranteed for ordinal data
+**Mikor kérdéses az átlag:**
+- **Student ID:** az átlag értelmetlen — a számok tetszőleges kódok, nem mennyiségek
+- **Satisfaction rating:** szintén kérdéses — az átlag számítása egyenlő távolságot feltételez a kategóriák között, ami ordinális adatnál nem garantált
 
 </details>
 
@@ -38,11 +38,32 @@ title: Feladatok
 
 ### 2. (3 points)
 
-**Situation.** Suppose that the monthly electricity consumptions of households are modelled as independent observations from a normal distribution with unknown mean μ and unknown variance σ². A random sample of 80 households gives an average monthly electricity consumption of 236 kWh.
+**Situation.** Suppose that the monthly electricity consumptions of households are modelled as independent observations from a normal distribution (eloszlás) with unknown mean μ and unknown variance σ². A random sample of 80 households gives an average monthly electricity consumption of 236 kWh.
 
-**Task.** Identify the relevant parameter of the distribution and the sample statistic in this situation. Explain why another random sample of 80 households would probably give a different average.
+**Task.** Identify the relevant parameter (paraméter) of the distribution (eloszlás) and the sample statistic (mintastatisztika) in this situation. Explain why another random sample of 80 households would probably give a different average.
 
 <details class="solution" markdown="1">
+
+> **Distribution vs. populáció:** A *distribution* (eloszlás) a matematikai modellt jelenti — itt N(μ, σ²), amiből a megfigyelések származnak. A *populáció* az összes háztartást jelenti a valóságban. A μ paraméter mindkettőhöz kötődik: egyszerre az eloszlás várható értéke és a populáció tényleges átlagos fogyasztása.
+
+**Hogyan ismerjem fel:**
+Keywords to look for: *"parameter", "sample statistic", "random sample", "would give a different average"* → this is asking you to distinguish between a fixed population parameter (populációs paraméter) and a random sample statistic (mintastatisztika), and to explain sampling variability (mintavételi ingadozás).
+
+---
+
+**Paraméter:**
+- μ — the true expected monthly electricity consumption of the entire population (all households)
+- It is fixed but unknown (rögzített, de ismeretlen)
+- It does not change from sample to sample
+
+**Sample statistic (mintastatisztika):**
+- X̄ = 236 kWh — the sample mean computed from the 80 sampled households
+- It is known but random (ismert, de véletlen) — it is only an estimate of μ
+
+**Why would another sample give a different average (miért adna más átlagot egy másik minta):**
+- Different households would be selected, each with their own consumption
+- The sample mean fluctuates from sample to sample — this is called sampling variability (mintavételi ingadozás)
+- The parameter μ stays fixed, but the statistic X̄ is random before the data are observed
 
 </details>
 
