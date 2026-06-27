@@ -11,6 +11,9 @@ nav:
   - title: Feladatok
     url: /docs/feladatok
     highlight: true
+  - title: Házi védés
+    url: /docs/hazivedes
+    highlight: true
   - title: Kezdőlap
     url: /
   - title: Témák
