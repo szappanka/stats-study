@@ -74,13 +74,36 @@ title: Feladatok
 
 (a) There is a 95% probability that this particular interval contains the true mean (valódi várható érték).
 
-(b) If we repeated the same sampling procedure (mintavételi eljárás) many times, about 95% of the intervals constructed in this way would contain the true mean (valódi várható érték).
+(b) If we repeated the same sampling procedure (mintavételi eljárás) many times, about 95% of the intervals constructed (kiszámított) in this way would contain the true mean (valódi várható érték).
 
 (c) About 95% of individual waiting times are between 18.2 and 21.6 minutes.
 
-(d) The interval gives plausible values for the unknown mean waiting time, not for every individual observation (egyedi megfigyelés).
+(d) The interval gives plausible (elfogadható, az adatokkal összhangban lévő) values for the unknown mean waiting time, not for every individual observation (egyedi megfigyelés).
 
 <details class="solution" markdown="1">
+
+**Kulcsfogalmak:**
+- **Confidence interval (konfidenciaintervallum)** → az **átlagra** vonatkozik — hol van a valódi populációs átlag?
+- **Prediction interval (predikciós intervallum)** → az **egyéni értékekre** vonatkozik — hol lesz egy konkrét új megfigyelés?
+- **Long-run reliability (hosszú távú megbízhatóság)** → a 95% nem egy konkrét intervallumra vonatkozik, hanem arra hogy sokszori ismétlésnél az intervallumok 95%-a tartalmazza a valódi átlagot
+
+---
+
+**(a) Helytelen (incorrect)**
+
+Miután az adatokat megfigyeltük és az intervallumot kiszámoltuk, az már fix — vagy tartalmazza a valódi átlagot, vagy nem. A 95% nem erre a konkrét intervallumra vonatkozik, hanem a módszer hosszú távú megbízhatóságára (long-run reliability).
+
+**(b) Helyes (correct)**
+
+Ez a klasszikus frequentista értelmezés (frequentist interpretation): ha sokszor megismételjük a mintavételt és minden alkalommal kiszámítjuk az intervallumot, azok kb. 95%-a tartalmazza a valódi átlagot (true mean).
+
+**(c) Helytelen (incorrect)**
+
+A confidence interval az **átlagra** vonatkozik, nem az egyéni megfigyelésekre. Ez összekeveri a confidence interval-t a prediction interval-lal — az egyéni értékek sokkal jobban szórnak mint az átlag, ezért egy prediction interval sokkal szélesebb lenne.
+
+**(d) Helyes (correct)**
+
+Pontosan leírja mit jelent a konfidenciaintervallum: az ismeretlen átlag plauzibilis/elfogadható értékeit adja meg, nem az egyéni megfigyelésekét.
 
 </details>
 
@@ -94,6 +117,30 @@ title: Feladatok
 
 <details class="solution" markdown="1">
 
+**Kulcsfogalmak:**
+- **p-value (p-érték)** → annak valószínűsége, hogy H0 igaz feltételezése mellett legalább ennyire szélsőséges adatot kapnánk
+- **Significance level / α (szignifikanciaszint)** → a döntési küszöb: ha p < α → elutasítjuk H0-t
+- **Prosecutor's fallacy** → a feltételes valószínűség megfordítása: P(adat \| H0) összetévesztése P(H0 \| adat)-tal
+
+---
+
+**Döntések:**
+
+- \\(\alpha = 0.05\\): p = 0.032 < 0.05 → **elutasítjuk H0-t (reject H0)**
+- \\(\alpha = 0.01\\): p = 0.032 > 0.01 → **nem utasítjuk el H0-t (fail to reject H0)**
+
+**Miért helytelen a "H0 igaz valószínűsége 3.2%":**
+
+A p-érték kiszámításakor feltesszük hogy H0 igaz, és azt mérjük hogy mekkora valószínűséggel kapnánk legalább ennyire szélsőséges adatot:
+
+$$p = P(\text{legalább ilyen szélsőséges adat} \mid H_0 \text{ igaz})$$
+
+A helytelen mondat viszont ezt állítja:
+
+$$P(H_0 \text{ igaz} \mid \text{adat}) = 3.2\%$$
+
+Ez megfordítja a feltételes valószínűséget (prosecutor's fallacy) — a p-érték nem mondja meg mekkora valószínűséggel igaz H0, csak azt hogy mennyire meglepő lenne az adatunk, ha H0 igaz lenne.
+
 </details>
 
 ---
@@ -105,6 +152,25 @@ title: Feladatok
 **Task.** What can we conclude about the decision at \\(\alpha = 0.10\\)? What can we conclude about the decision at \\(\alpha = 0.01\\)? Give a short explanation using the relation between the p-value and \\(\alpha\\).
 
 <details class="solution" markdown="1">
+
+**Kulcsfogalmak:**
+- Ha H0-t elutasítottuk α=0.05-nél → biztosan tudjuk hogy p < 0.05
+- Nagyobb α (lazább küszöb) → könnyebb elutasítani H0-t
+- Kisebb α (szigorúbb küszöb) → nehezebb elutasítani H0-t
+
+---
+
+**α = 0.10-nél:**
+
+Ha p < 0.05, akkor biztosan p < 0.10 is → **biztosan elutasítjuk H0-t (reject H0)**
+
+**α = 0.01-nél:**
+
+Nem tudunk dönteni — csak annyit tudunk hogy p < 0.05, de a pontos értéket nem ismerjük:
+- Ha pl. p = 0.008 → p < 0.01 → elutasítjuk H0-t
+- Ha pl. p = 0.03 → p > 0.01 → nem utasítjuk el H0-t
+
+A döntés csak "lefelé" (lazább α irányába) terjeszthető ki biztosan, "felfelé" (szigorúbb α irányába) nem.
 
 </details>
 
@@ -118,15 +184,38 @@ title: Feladatok
 
 <details class="solution" markdown="1">
 
+**Kulcsfogalmak:**
+
+| | H0 igaz | H0 hamis |
+|---|---|---|
+| Nem utasítjuk el H0-t | Helyes döntés | **Type II error (II. típusú hiba)** — hamis negatív (false negative) |
+| Elutasítjuk H0-t | **Type I error (I. típusú hiba)** — hamis pozitív (false positive) | Helyes döntés |
+
+- A két hibatípus egymással szemben áll: ha az egyiket csökkented, a másik nő
+
+---
+
+**Type I error (I. típusú hiba):**
+
+H0 igaz, de a jelző mégis csörög → nincs veszélyes füst, de az alarm mégis jelez → **hamis riasztás (false alarm)**
+
+**Type II error (II. típusú hiba):**
+
+H0 hamis, de a jelző nem csörög → van veszélyes füst, de az alarm nem jelez → **elmulasztott észlelés (missed detection)**
+
+**Kevésbé érzékeny jelző:**
+
+A jelző ritkábban csörög → kevesebb hamis riasztás (I. típusú hiba csökken), de több elmulasztott észlelés (II. típusú hiba nő). A két hibatípus között mindig trade-off van.
+
 </details>
 
 ---
 
 ### 7. (3 points)
 
-**Situation.** A researcher wants to use a one-sample t-confidence interval for an unknown mean when the variance is unknown.
+**Situation.** A researcher wants to use a one-sample t-confidence interval (konfidenciaintervallum) for an unknown mean (ismeretlen várható érték) when the variance (variancia/szórás négyzete) is unknown.
 
-**Task.** Explain why the Student t-distribution appears instead of the standard normal distribution. What role does the sample size play in this choice?
+**Task.** Explain why the Student t-distribution (t-eloszlás) appears instead of the standard normal distribution (standard normális eloszlás). What role does the sample size (mintaméret) play in this choice?
 
 <details class="solution" markdown="1">
 
