@@ -1,0 +1,48 @@
+---
+layout: none
+permalink: /search.json
+---
+{% assign allpages = site.pages | where_exp: "p", "p.url contains '/docs/'" | sort: "url" -%}
+{% assign all_entries = "" | split: "" -%}
+{% for pg in allpages -%}
+{% assign lines = pg.content | split: "
+" -%}
+{% assign in_fence = false -%}
+{% assign cur_heading = "" -%}
+{% assign cur_level = 0 -%}
+{% assign cur_content = "" -%}
+{% for line in lines -%}
+{% if line contains "```" -%}{% if in_fence -%}{% assign in_fence = false -%}{% else -%}{% assign in_fence = true -%}{% endif -%}{% endif -%}
+{% unless in_fence -%}
+{% assign ls = line | lstrip -%}
+{% assign pre4 = ls | slice: 0, 4 -%}
+{% assign pre3 = ls | slice: 0, 3 -%}
+{% if pre4 == "### " or pre3 == "## " -%}
+{% if cur_heading != "" -%}
+{% assign clean = cur_content | strip | remove: '"' | remove: '\' | truncate: 400, "" -%}
+{% capture entry %}{"url":"{{ site.baseurl }}{{ pg.url }}","page":"{{ pg.title }}","heading":"{{ cur_heading }}","content":"{{ clean }}","level":{{ cur_level }}}{% endcapture -%}
+{% assign all_entries = all_entries | push: entry -%}
+{% endif -%}
+{% if pre4 == "### " -%}
+{% assign cur_heading = ls | remove_first: "### " | strip | remove: '"' -%}
+{% assign cur_level = 3 -%}
+{% else -%}
+{% assign cur_heading = ls | remove_first: "## " | strip | remove: '"' -%}
+{% assign cur_level = 2 -%}
+{% endif -%}
+{% assign cur_content = "" -%}
+{% elsif cur_heading != "" -%}
+{% assign ls1 = ls | remove: '"' | remove: '\' -%}
+{% unless ls1 == "" or ls1 == "---" -%}
+{% assign cur_content = cur_content | append: " " | append: ls1 -%}
+{% endunless -%}
+{% endif -%}
+{% endunless -%}
+{% endfor -%}
+{% if cur_heading != "" -%}
+{% assign clean = cur_content | strip | remove: '"' | remove: '\' | truncate: 400, "" -%}
+{% capture entry %}{"url":"{{ site.baseurl }}{{ pg.url }}","page":"{{ pg.title }}","heading":"{{ cur_heading }}","content":"{{ clean }}","level":{{ cur_level }}}{% endcapture -%}
+{% assign all_entries = all_entries | push: entry -%}
+{% endif -%}
+{% endfor -%}
+[{{ all_entries | join: "," }}]
