@@ -24,7 +24,7 @@ title: Feladatok
 | Változó | Mérési szint | Miért |
 |---|---|---|
 | Student ID number | Nominal (nominális) | A számok címkék, nem mennyiségek |
-| Exam score (points) | Ratio (arány) | Egyenlő különbségek, valódi nulla (0 pont = semmi sem szerzett) |
+| Exam score (points) | Ratio / Interval (arány / intervallum) | Egyenlő különbségek, a nulla általában értelmes referencia — de kontextustól függ |
 | Satisfaction rating (1–5) | Ordinal (ordinális) | A sorrend értelmes, de a kategóriák közötti távolságok nem feltétlenül egyenlők |
 | Room temperature (°C) | Interval (intervallum) | Egyenlő különbségek, de a nulla konvencionális (0°C ≠ nincs hőmérséklet) |
 
@@ -219,19 +219,57 @@ A jelző ritkábban csörög → kevesebb hamis riasztás (I. típusú hiba csö
 
 <details class="solution" markdown="1">
 
+**Kulcsfogalmak:**
+- **σ (population standard deviation)** → a populáció valódi szórása — fix, de ismeretlen
+- **S (sample standard deviation)** → a mintából becsült szórás — mintáról mintára ingadozik
+- **Degrees of freedom / szabadságfok** → megmutatja mennyi "szabad" (független) információnk van S becslésére
+
+---
+
+**Miért t-eloszlás és nem normális:**
+
+Ha σ ismert, a standardizált mintaátlag normális eloszlást követ:
+
+$$Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \sim \mathcal{N}(0,1)$$
+
+Ha σ nem ismert, a mintából becsült S szórással helyettesítjük:
+
+$$T = \frac{\bar{X} - \mu}{S/\sqrt{n}} \sim t(n-1)$$
+
+Ez azért okoz eltérést, mert S **mintáról mintára ingadozik** — minden mintánál más S-t kapnánk. Tehát most két véletlen dolog van a képletben: X̄ is ingadozik, ÉS S is ingadozik. Ez a kettős bizonytalanság (extra uncertainty) azt eredményezi, hogy a végeredmény nem normális eloszlású többé, hanem **szélesebb szélű t-eloszlású**.
+
+**Feltétel:** a t-eloszlás használatához is feltesszük hogy a populáció normális eloszlású (vagy elég nagy a minta, hogy a centrális határeloszlás-tétel miatt ez ne számítson).
+
+---
+
+**A szabadságfok (degrees of freedom) és a mintaméret szerepe:**
+
+Az S kiszámításához felhasználjuk X̄-t is — ez "elvesz" egy szabadságfokot:
+
+$$S = \sqrt{\frac{\sum(x_i - \bar{X})^2}{n-1}}$$
+
+- Ha **σ ismert** → nem kell becsülni → mind az n megfigyelés "szabad" → normális eloszlás
+- Ha **σ ismeretlen, S-sel becsüljük** → X̄ elvesz egy szabadságfokot → csak n-1 "szabad" adat marad → t-eloszlás t(n-1) szabadságfokkal
+
+A szabadságfok határozza meg a t-eloszlás alakját:
+- **Kis n** → kis szabadságfok → t-eloszlás szélesebb szélű → szélesebb konfidenciaintervallum
+- **Nagy n** → nagy szabadságfok → S becslése megbízhatóbb → t-eloszlás közelít a normálishoz
+
+Nagy mintánál (kb. n > 30) a t-eloszlás és a normális eloszlás között már alig van különbség.
+
 </details>
 
 ---
 
 ### 8. (3 points)
 
-**Situation.** A researcher fits the simple linear regression model
+**Situation.** A researcher fits the simple linear regression model (egyszerű lineáris regresszió)
 
 $$Y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$$
 
-where \\(Y_i\\) is the final exam score and \\(x_i\\) is the number of hours studied. The estimated slope is positive. A residual-versus-fitted plot shows a clear curved pattern rather than a random cloud.
+where \\(Y_i\\) is the final exam score and \\(x_i\\) is the number of hours studied. The estimated slope (becsült meredekség) is positive. A residual-versus-fitted plot (reziduum-plot) shows a clear curved pattern (ívelt mintázat) rather than a random cloud (véletlen szóródás).
 
-**Task.** Interpret \\(\beta_1\\) in words, explain what the curved residual pattern suggests, and decide whether the positive slope alone proves that studying more causes higher exam scores.
+**Task.** Interpret \\(\beta_1\\) in words, explain what the curved residual pattern (ívelt mintázat a reziduum-plotban) suggests, and decide whether the positive slope alone proves that studying more causes higher exam scores.
 
 <details class="solution" markdown="1">
 
@@ -241,11 +279,41 @@ where \\(Y_i\\) is the final exam score and \\(x_i\\) is the number of hours stu
 
 ### 9. (3 points)
 
-**Situation.** A daily time series records the number of visitors to a website. The plot shows a long-term upward trend and a clear weekly pattern.
+**Situation.** A daily time series (napi idősor) records the number of visitors to a website. The plot shows a long-term upward trend (hosszú távú növekvő trend) and a clear weekly pattern (egyértelmű heti mintázat).
 
-**Task.** Is weak stationarity plausible for the original series? Name one transformation or modelling step that could make the series closer to stationary. What would a large positive autocorrelation at lag 7 suggest?
+**Task.** Is weak stationarity (gyenge stacionaritás) plausible for the original series? Name one transformation (transzformáció) or modelling step that could make the series closer to stationary. What would a large positive autocorrelation (autokorreláció) at lag 7 suggest?
 
 <details class="solution" markdown="1">
+
+**Kulcsfogalmak:**
+- **Weak stationarity (gyenge stacionaritás)** → az idősor "ugyanolyan" marad idővel — nincs trend, nincs ismétlődő mintázat
+- **Autocorrelation (autokorreláció)** → mennyire függ össze egy időpont értéke egy korábbi időpont értékével
+- **Lag** → az időbeli távolság két megfigyelés között (pl. lag 7 = 7 nappal korábbi érték)
+
+**Mire kell a stacionaritás:**
+A legtöbb idősor modell (pl. ARIMA) csak stacionárius adaton működik megbízhatóan. Ha az adatban trend vagy szezonalitás van, a modell rossz előrejelzéseket ad — ezért kell először stacionáriussá tenni a sort.
+
+**Stacionaritás feltételei:**
+1. **Állandó átlag (constant mean)** — az idősor átlaga nem változik idővel (nincs trend)
+2. **Állandó szórás (constant variance)** — az értékek ingadozása nem nő vagy csökken idővel
+3. **Autokorreláció csak a lagnál függ** — az összefüggés két időpont között csak a köztük lévő távolságtól függ, nem attól mikor vagyunk
+
+---
+
+**Plausible-e (ésszerű-e feltételezni) a gyenge stacionaritás?**
+
+Nem plausible, két okból:
+- **Növekvő trend** → az átlag folyamatosan nő → **1. feltétel sérül**
+- **Heti mintázat** → szisztematikus ismétlődő ciklus → **3. feltétel sérül**
+
+**Transzformáció a stacionaritáshoz:**
+
+- **Differenciálás (first differencing)** → minden értékből kivonjuk az előző értéket → eltávolítja a trendet
+- **Szezonális differenciálás (seasonal differencing, lag 7)** → minden értékből kivonjuk a 7 nappal korábbit → eltávolítja a heti mintázatot
+
+**Nagy pozitív autokorreláció lag 7-nél:**
+
+Azt jelenti hogy a mai látogatószám szisztematikusan hasonló a 7 nappal ezelőttihez — vagyis **heti szezonalitás (weekly seasonality)** van. Pl. minden hétfőn hasonló a forgalom mint az előző hétfőn. Ez megerősíti hogy a heti mintázat valódi és szisztematikus, nem véletlen ingadozás.
 
 </details>
 
@@ -253,11 +321,32 @@ where \\(Y_i\\) is the final exam score and \\(x_i\\) is the number of hours stu
 
 ### 10. (2 points)
 
-**Situation.** A company tests 20 different website variants, each at the 5% significance level, and then announces the one variant for which p = 0.04.
+**Situation.** A company tests 20 different website variants (weboldal-variáns), each at the 5% significance level (szignifikanciaszint), and then announces the one variant for which p = 0.04.
 
-**Task.** What is the statistical problem with this reasoning? Name one way to make the analysis more reliable.
+**Task.** What is the statistical problem (statisztikai probléma) with this reasoning? Name one way to make the analysis more reliable (megbízhatóbbá tenni).
 
 <details class="solution" markdown="1">
+
+**Kulcsfogalmak:**
+- **Multiple testing problem (többszörös tesztelés problémája)** → ha sok tesztet futtatsz egyszerre, megnő az esélye hogy véletlenül találsz szignifikáns eredményt
+- **p-hacking** → sok tesztet futtatsz, és csak a szignifikáns eredményt jelented be
+- **Bonferroni-correction (Bonferroni-korrekció)** → az α küszöböt elosztod a tesztek számával: α/m
+
+---
+
+**Mi a probléma:**
+
+Ha 20 tesztet futtatsz α=0.05-tel, minden egyes tesztnél 5% az esélye hogy **véletlenül** szignifikáns eredményt kapsz — még ha valójában nincs is igazi hatás. Ha ezt 20-szor csinálod, a valószínűsége hogy **legalább egyszer** véletlenül szignifikáns eredményt kapsz:
+
+$$P(\text{legalább egy hamis pozitív}) = 1 - (1-0.05)^{20} \approx 64\%$$
+
+Tehát 64% az esélye hogy legalább egy eredmény véletlenből szignifikáns — és a cég pont ezt az egyet jelenti be. Ez **p-hacking** — nem valódi hatást találtak, hanem véletlent.
+
+**Megoldás — Bonferroni-korrekció:**
+
+α/m = 0.05/20 = 0.0025 küszöböt kellene használni minden egyes tesztnél. Ekkor a p=0.04 már **nem lenne szignifikáns** (0.04 > 0.0025).
+
+Másik megoldás: előzetesen rögzíteni melyik variánst tesztelik (pre-registration), és a többit exploratívként kezelni.
 
 </details>
 
