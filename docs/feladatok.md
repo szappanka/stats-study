@@ -273,6 +273,49 @@ where \\(Y_i\\) is the final exam score and \\(x_i\\) is the number of hours stu
 
 <details class="solution" markdown="1">
 
+**Kulcsfogalmak:**
+- **Slope / β₁ (meredekség)** → mennyit változik Y várható értéke átlagosan, ha x eggyel nő — a lineáris modell szerint
+- **Residual (reziduum)** → a megfigyelt és a modell által becsült érték közötti különbség: reziduum = valódi Y − becsült Y. Egy jó modellben a reziduumok véletlenszerűen szóródnak — semmilyen mintázat nem látható bennük
+- **Residual-versus-fitted plot (reziduum-plot)** → a reziduumokat a becsült értékek függvényében ábrázoljuk — ha a modell jó, véletlen felhőt kell látni, nem mintázatot
+- **Causal effect (okozati hatás)** → a korreláció nem jelent okozatot — összefüggés és okozat különböző dolgok
+- **Confounding variable (zavaró változó)** → egy harmadik változó ami mindkét változót befolyásolja
+
+---
+
+**A modell felépítése:**
+
+$$Y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$$
+
+- **\\(Y_i\\)** → a megfigyelt vizsgaeredmény az i-edik diáknál
+- **\\(\beta_0\\) (intercept / tengelymetszet)** → az várható vizsgaeredmény ha x=0 (ha valaki egyáltalán nem tanult)
+- **\\(\beta_1\\) (slope / meredekség)** → mennyit változik Y átlagosan, ha x eggyel nő (egy plusz tanulási óra hatása)
+- **\\(x_i\\)** → a tanulással töltött órák száma az i-edik diáknál
+- **\\(\varepsilon_i\\) (error term / hibatag)** → amit a modell nem magyaráz meg — minden egyéb tényező hatása (pl. motiváció, képesség, alvás). Várható értéke 0, ha a modell jól van illesztve.
+
+**β₁ értelmezése:**
+
+β₁ > 0 azt jelenti hogy minden plusz tanulással töltött óra átlagosan β₁ ponttal **növeli** a várható vizsgaeredményt, a lineáris modell szerint, minden más tényező változatlansága mellett.
+
+**Mit jelent az ívelt mintázat a reziduum-plotban:**
+
+A reziduum az, amennyit a modell téved egy adott megfigyelésnél:
+
+$$\text{reziduum}_i = Y_i - \hat{Y}_i$$
+
+ahol \\(\hat{Y}_i = \hat\beta_0 + \hat\beta_1 x_i\\) a becsült érték.
+
+Egy jól illeszkedő lineáris modellben a reziduumok **véletlenszerűen szóródnak** a nulla körül — nincs bennük semmilyen rendszeres mintázat.
+
+Ha ívelt mintázatot (curved pattern) látunk a reziduum-plotban, az azt jelzi hogy a **linearitás feltétele sérül** — a kapcsolat a tanulási órák és a vizsgaeredmény között nem lineáris. Például egy bizonyos pont után a több tanulás már nem hoz arányos javulást, vagy egy fontos változó hiányzik a modellből. Megoldás: magasabb fokú tagot vagy más változót kellene hozzáadni.
+
+**Bizonyítja-e a pozitív meredekség az okozati hatást:**
+
+Nem. A pozitív meredekség csak **összefüggést (correlation)** mutat, nem **okozatot (causation)**. Ez egy megfigyeléses adat (observational data) — nem véletlenszerű kísérlet. Lehetséges zavaró változók (confounders):
+- A motivált diákok egyszerre tanulnak többet ÉS érnek el jobb eredményt — a motiváció lehet az igazi ok
+- Az okosabb diákok gyorsabban tanulnak ÉS jobb eredményt érnek el
+
+Ahhoz hogy okozati kapcsolatot bizonyítsunk, véletlenszerű kísérlet (randomized experiment) kellene — ahol véletlenszerűen osztják el a diákokat "sokat tanul" és "keveset tanul" csoportokba.
+
 </details>
 
 ---
@@ -419,13 +462,40 @@ Két okból helytelen azt mondani hogy "the typical case has been found":
 
 ---
 
+% innentől nincs átnézve:
+
 ### 3. (3 points)
 
-**Situation.** After giving out harmless 'I survived variance' stickers, a 95% confidence interval for the mean change in number of stickers is [0.5, 1.7]. The corresponding two-sided test of \\(H_0 : \mu = 0\\) gives p = 0.009. A headline draft says: 'We have measured the exact improvement of every individual case.'
+**Situation.** After giving out harmless 'I survived variance' stickers, a 95% confidence interval (konfidenciaintervallum) for the mean change (átlagos változás) in number of stickers is [0.5, 1.7]. The corresponding two-sided test (kétoldali teszt) of \\(H_0 : \mu = 0\\) gives p = 0.009. A headline draft says: 'We have measured the exact improvement (pontos javulás) of every individual case (minden egyedi eset).'
 
-**Task.** Decide at \\(\alpha = 0.05\\) and \\(\alpha = 0.01\\). Use the interval as a cross-check at the 5% level. Then correct the headline.
+**Task.** Decide at \\(\alpha = 0.05\\) and \\(\alpha = 0.01\\). Use the interval as a cross-check (keresztellenőrzés) at the 5% level. Then correct the headline (javítsd ki a címet).
 
 <details class="solution" markdown="1">
+
+**Kulcsfogalmak:**
+- **Confidence interval (konfidenciaintervallum)** → az átlagra vonatkozik, nem az egyéni értékekre
+- **Cross-check (keresztellenőrzés)** → a konfidenciaintervallum és a p-érték ugyanarra a következtetésre kell vezessen
+- **Two-sided test (kétoldali teszt)** → H0: μ=0, H1: μ≠0
+
+---
+
+**Döntések:**
+- \\(\alpha = 0.05\\): p = 0.009 < 0.05 → **elutasítjuk H0-t (reject H0)**
+- \\(\alpha = 0.01\\): p = 0.009 < 0.01 → **elutasítjuk H0-t (reject H0)**
+
+**Cross-check az intervallummal:**
+
+A 95%-os konfidenciaintervallum [0.5, 1.7] — ez **nem tartalmazza a 0-t** (H0 szerinti értéket). Ez megerősíti a döntést: α=0.05-nél elutasítjuk H0-t, mert ha μ=0 lenne, az intervallum tartalmazná.
+
+**A headline javítása:**
+
+Az eredeti headline: *"We have measured the exact improvement of every individual case."*
+
+Ez két okból helytelen:
+- A konfidenciaintervallum az **átlagos változásra** vonatkozik, nem minden egyedi esetre — egyes esetekben csökkent, másokban nőtt a matricák száma
+- A "exact improvement" félrevezető — az intervallum [0.5, 1.7] egy becslési tartomány, nem pontos érték
+
+Helyes headline: *"The mean change in number of stickers is estimated to be between 0.5 and 1.7, which is statistically significant at the 1% level."*
 
 </details>
 
@@ -433,11 +503,34 @@ Két okból helytelen azt mondani hogy "the typical case has been found":
 
 ### 4. (3 points)
 
-**Situation.** Another hypothesis test in the same project gives p = 0.004. A colleague says: 'So the null hypothesis is true with probability 99.6%, and false with probability 0.4%.'
+**Situation.** Another hypothesis test in the same project gives p = 0.004. A colleague says: 'So the null hypothesis (nullhipotézis) is true with probability 99.6%, and false with probability 0.4%.'
 
-**Task.** State the decisions at \\(\alpha = 0.10\\), \\(\alpha = 0.05\\), and \\(\alpha = 0.01\\). Then explain precisely why the colleague's p-value interpretation is wrong.
+**Task.** State the decisions at \\(\alpha = 0.10\\), \\(\alpha = 0.05\\), and \\(\alpha = 0.01\\). Then explain precisely why the colleague's p-value interpretation (p-érték értelmezése) is wrong.
 
 <details class="solution" markdown="1">
+
+**Kulcsfogalmak:**
+- **p-value (p-érték)** → annak valószínűsége, hogy H0 igaz feltételezése mellett legalább ennyire szélsőséges adatot kapnánk
+- **Prosecutor's fallacy** → a feltételes valószínűség megfordítása: P(adat | H0) összetévesztése P(H0 | adat)-tal
+
+---
+
+**Döntések:**
+- \\(\alpha = 0.10\\): p = 0.004 < 0.10 → **elutasítjuk H0-t (reject H0)**
+- \\(\alpha = 0.05\\): p = 0.004 < 0.05 → **elutasítjuk H0-t (reject H0)**
+- \\(\alpha = 0.01\\): p = 0.004 < 0.01 → **elutasítjuk H0-t (reject H0)**
+
+**Miért helytelen a kolléga értelmezése:**
+
+A p-érték kiszámításakor feltesszük hogy H0 igaz, és azt mérjük hogy mekkora valószínűséggel kapnánk legalább ennyire szélsőséges adatot:
+
+$$p = P(\text{legalább ilyen szélsőséges adat} \mid H_0 \text{ igaz})$$
+
+A kolléga viszont ezt állítja:
+
+$$P(H_0 \text{ igaz} \mid \text{adat}) = 99.6\%$$
+
+Ez megfordítja a feltételes valószínűséget (prosecutor's fallacy) — a p-érték nem mondja meg mekkora valószínűséggel igaz H0, csak azt hogy mennyire meglepő lenne az adatunk, ha H0 igaz lenne.
 
 </details>
 
@@ -445,11 +538,31 @@ Két okból helytelen azt mondani hogy "the typical case has been found":
 
 ### 5. (3 points)
 
-**Situation.** The distribution of number of stickers is strongly skewed. Two independent groups have sizes n1 = 31 and n2 = 32. A colleague proposes a standard two-sample t-test only because the sample sizes are not tiny and because the boxplot 'looks funny but friendly'.
+**Situation.** The distribution (eloszlás) of number of stickers is strongly skewed (erősen ferde). Two independent groups (két független csoport) have sizes n1 = 31 and n2 = 32. A colleague proposes a standard two-sample t-test (kétmintás t-teszt) only because the sample sizes are not tiny and because the boxplot 'looks funny but friendly'.
 
-**Task.** What should be checked before accepting this? Name one robust or nonparametric alternative and say what changes in interpretation.
+**Task.** What should be checked (mit kell ellenőrizni) before accepting this? Name one robust or nonparametric alternative (nemparaméteres alternatíva) and say what changes in interpretation (értelmezésben mi változik).
 
 <details class="solution" markdown="1">
+
+**Kulcsfogalmak:**
+- **Normality assumption (normalitás feltétele)** → a kétmintás t-teszt feltételezi hogy az adatok normális eloszlásúak
+- **Skewed distribution (ferde eloszlás)** → nem szimmetrikus eloszlás, ahol a szélsőértékek torzítják az átlagot
+- **Nonparametric alternative (nemparaméteres alternatíva)** → nem feltételezi a normalitást, rangokkal dolgozik
+
+---
+
+**Mit kell ellenőrizni a t-teszt előtt:**
+- **Normalitás (normality)** → bár n1=31 és n2=32 elég nagy, az erősen ferde eloszlás kis mintánál problémás lehet. Normalitást Shapiro-Wilk teszttel vagy QQ-plottal kell ellenőrizni.
+- **A boxplot "looks funny but friendly"** → nem elegendő indok a t-teszt használatára — vizuális ellenőrzés helyett formális tesztet kell futtatni
+- **Egyenlő szórás (equal variance)** → F-teszttel ellenőrizhető, ha nem teljesül → Welch-teszt kell
+
+**Nemparaméteres alternatíva:**
+
+**Mann-Whitney teszt** — nem feltételezi a normalitást, az összes megfigyelést közösen rangsorolja és a rangösszegeket hasonlítja.
+
+**Mi változik az értelmezésben:**
+- A t-teszt az **átlagokat** hasonlítja → "a két csoport átlaga különbözik-e?"
+- A Mann-Whitney az **eloszlások elhelyezkedését / mediánokat** hasonlítja → "az egyik csoport értékei szisztematikusan nagyobbak-e?"
 
 </details>
 
@@ -457,11 +570,37 @@ Két okból helytelen azt mondani hogy "the typical case has been found":
 
 ### 6. (3 points)
 
-**Situation.** A simple linear regression predicts exam confidence rating from number of laptop stickers. The fitted slope is -0.31, SE = 0.14, approximate 95% CI = [-0.58, -0.04], p = 0.026, and R-squared = 0.21. A poster draft claims that one more unit of number of laptop stickers magically causes the outcome to change.
+**Situation.** A simple linear regression (egyszerű lineáris regresszió) predicts exam confidence rating (vizsgamagabiztossági értékelés) from number of laptop stickers. The fitted slope (becsült meredekség) is -0.31, SE = 0.14, approximate 95% CI = [-0.58, -0.04], p = 0.026, and R-squared = 0.21. A poster draft claims that one more unit of number of laptop stickers magically causes (okozza) the outcome to change.
 
-**Task.** Interpret the slope. Decide at \\(\alpha = 0.05\\) and \\(\alpha = 0.01\\) whether the slope differs from 0. Does this regression alone prove a causal effect?
+**Task.** Interpret the slope (értelmezd a meredekséget). Decide at \\(\alpha = 0.05\\) and \\(\alpha = 0.01\\) whether the slope differs from 0. Does this regression alone prove a causal effect (okozati hatást)?
 
 <details class="solution" markdown="1">
+
+**Kulcsfogalmak:**
+- **Slope (meredekség)** → mennyit változik Y átlagosan, ha X eggyel nő — a másik változó változatlan mellett
+- **Causal effect (okozati hatás)** → a korreláció nem jelent okozatot
+- **Confounding variable (zavaró változó)** → egy harmadik változó ami mindkét változót befolyásolja
+
+---
+
+**A meredekség értelmezése:**
+
+β₁ = -0.31 azt jelenti, hogy minden plusz laptop matrica átlagosan **0.31 egységgel csökkenti** a vizsgamagabiztossági értékelést, a lineáris modell szerint. Ha több matricája van valakinek, várhatóan alacsonyabb a magabiztossága.
+
+**Döntések:**
+- \\(\alpha = 0.05\\): p = 0.026 < 0.05 → **a meredekség szignifikánsan különbözik 0-tól (reject H0)**
+- \\(\alpha = 0.01\\): p = 0.026 > 0.01 → **nem szignifikáns (fail to reject H0)**
+
+**Cross-check az intervallummal:**
+A 95%-os CI = [-0.58, -0.04] nem tartalmazza a 0-t → megerősíti az α=0.05-ös döntést.
+
+**Bizonyítja-e a regresszió az okozati hatást:**
+
+Nem. A negatív meredekség csak **összefüggést (correlation)** mutat, nem **okozatot (causation)**. Lehetséges zavaró változók (confounders):
+- A kevésbé magabiztos diákok több matricával díszítik a laptopjukat
+- Egy harmadik változó (pl. szorongás) befolyásolhatja mindkettőt
+
+Ahhoz hogy okozati következtetést vonhassunk le, véletlenszerű kísérlet (randomized experiment) kellene.
 
 </details>
 
@@ -469,11 +608,41 @@ Két okból helytelen azt mondani hogy "the typical case has been found":
 
 ### 7. (3 points)
 
-**Situation.** A follow-up multiple regression adds hours studied, time period, and one control variable to the previous model. R-squared changes from 0.24 to 0.34, adjusted R-squared is 0.2, the p-value for laptop stickers becomes 0.041, VIF for laptop stickers is 6.8, and the residual plot shows a curved pattern. A dashboard celebrates only the larger R-squared.
+**Situation.** A follow-up multiple regression (többszörös lineáris regresszió) adds hours studied (tanulással töltött órák), time period (időszak), and one control variable (kontrollváltozó) to the previous model. R-squared changes from 0.24 to 0.34, adjusted R-squared (korrigált R²) is 0.2, the p-value for laptop stickers becomes 0.041, VIF for laptop stickers is 6.8, and the residual plot (reziduum-plot) shows a curved pattern (ívelt mintázat). A dashboard celebrates only the larger R-squared.
 
-**Task.** What would you say about model improvement, the coefficient test at \\(\alpha = 0.05\\), multicollinearity, and the residual pattern? Why is the naive sentence 'higher R-squared means the model is automatically valid' wrong?
+**Task.** What would you say about model improvement (modell javulása), the coefficient test (együttható tesztje) at \\(\alpha = 0.05\\), multicollinearity (multikollinearitás), and the residual pattern (reziduum mintázat)? Why is the naive sentence 'higher R-squared means the model is automatically valid (érvényes)' wrong?
 
 <details class="solution" markdown="1">
+
+**Kulcsfogalmak:**
+- **R² vs adjusted R² (korrigált R²)** → R² mindig nő ha új változót adsz hozzá, adjusted R² bünteti a felesleges változókat
+- **VIF (Variance Inflation Factor)** → multikollinearitás mértéke — VIF > 10 komoly probléma, VIF > 5 figyelmeztetés
+- **Curved pattern (ívelt mintázat)** → a linearitás feltétele sérül
+
+---
+
+**Model improvement (modell javulása):**
+
+Az R² nőtt (0.24 → 0.34), de az adjusted R² = 0.2, ami **alacsonyabb mint az eredeti R² = 0.24**. Ez azt jelenti hogy az új változók nem javítják érdemben a modellt — a látszólagos javulás csak a több változónak köszönhető, nem valódi javulás.
+
+**Coefficient test (együttható tesztje) α=0.05-nél:**
+
+A laptop stickers p-értéke = 0.041 < 0.05 → **szignifikáns (reject H0)**. De figyelj: a VIF = 6.8 multikollinearitásra utal, ami bizonytalanná teszi ezt az eredményt.
+
+**Multicollinearity (multikollinearitás):**
+
+VIF = 6.8 — ez figyelmeztető jel (ökölszabály: VIF > 10 komoly probléma, de VIF > 5 már figyelmeztetés). A laptop stickers változó erősen korrelál a többi magyarázó változóval, ezért az együttható becslése bizonytalan — az előjele és nagysága torzulhat.
+
+**Residual pattern (reziduum mintázat):**
+
+Az ívelt mintázat (curved pattern) azt jelzi hogy a **linearitás feltétele sérül** — a kapcsolat nem lineáris, magasabb fokú tagot vagy más változót kellene hozzáadni a modellhez.
+
+**Miért helytelen "higher R-squared means the model is automatically valid":**
+
+Az R² csak azt méri hogy a modell mennyi varianciát magyaráz — de nem ellenőrzi:
+- A linearitás feltételét (reziduum-plot ívelt → sérül)
+- A multikollinearitást (VIF = 6.8)
+- Az adjusted R² valójában csökkent → a modell nem javult érdemben
 
 </details>
 
@@ -481,11 +650,36 @@ Két okból helytelen azt mondani hogy "the typical case has been found":
 
 ### 8. (3 points)
 
-**Situation.** The time series weekly average confidence rating shows confidence trend near the exam. The sample autocorrelation at lag 7 is 0.39. The Ljung-Box test on fitted residuals gives p = 0.031, and a Dickey-Fuller-type unit-root test gives p = 0.04. Someone wants to use all three numbers as if they answered the same question.
+**Situation.** The time series (idősor) weekly average confidence rating shows confidence trend (trend) near the exam. The sample autocorrelation (autokorreláció) at lag 7 is 0.39. The Ljung-Box test on fitted residuals (illesztett reziduumok) gives p = 0.031, and a Dickey-Fuller-type unit-root test (egységgyök teszt) gives p = 0.04. Someone wants to use all three numbers as if they answered the same question.
 
-**Task.** Interpret the lag-7 autocorrelation. What are the null hypotheses of the two tests, and what are the decisions at \\(\alpha = 0.05\\)? Why are these not the same diagnostic question?
+**Task.** Interpret the lag-7 autocorrelation (lag 7-es autokorreláció). What are the null hypotheses (nullhipotézisek) of the two tests, and what are the decisions at \\(\alpha = 0.05\\)? Why are these not the same diagnostic question (diagnosztikai kérdés)?
 
 <details class="solution" markdown="1">
+
+**Kulcsfogalmak:**
+- **Autocorrelation (autokorreláció)** → mennyire függ össze egy időpont értéke egy korábbi időpont értékével
+- **Ljung-Box teszt** → van-e még autokorreláció a reziduumokban (a modell hiányos-e)?
+- **Dickey-Fuller teszt** → stacionárius-e az idősor (van-e benne trend/egységgyök)?
+
+---
+
+**Lag-7 autokorreláció értelmezése:**
+
+Az autokorreláció lag 7-nél = 0.39 — ez pozitív és elég nagy érték. Azt jelenti hogy a mai érték és a 7 nappal ezelőtti érték **szisztematikusan hasonlít egymásra** → **heti szezonalitás (weekly seasonality)** van. Pl. minden hétfőn hasonló a magabiztossági értékelés mint az előző hétfőn.
+
+**A két teszt nullhipotézisei és döntései:**
+
+| Teszt | H0 | p-érték | Döntés α=0.05-nél |
+|---|---|---|---|
+| Ljung-Box | nincs autokorreláció a reziduumokban (a modell jól ragadta meg az időbeli mintázatot) | 0.031 | p < 0.05 → **elutasítjuk H0-t** → van még autokorreláció, a modell hiányos |
+| Dickey-Fuller | van egységgyök (az idősor nem stacionárius, van trend) | 0.04 | p < 0.05 → **elutasítjuk H0-t** → az idősor stacionárius |
+
+**Miért nem ugyanaz a két kérdés:**
+
+- A **Ljung-Box** a már illesztett modell **reziduumait** vizsgálja — van-e még kihasználatlan időbeli mintázat a hibákban?
+- A **Dickey-Fuller** magát az **eredeti idősort** vizsgálja — van-e benne trend/egységgyök?
+
+Az autokorreláció (0.39) az eredeti adatra vonatkozik, a Ljung-Box a modell reziduumaira, a Dickey-Fuller a sor stacionaritására — három különböző kérdés, nem cserélhetők fel.
 
 </details>
 
@@ -493,11 +687,41 @@ Két okból helytelen azt mondani hogy "the typical case has been found":
 
 ### 9. (3 points)
 
-**Situation.** A dashboard says method A is better overall. In easy cases, A has 76/95 successes and B has 41/45 successes. In hard cases, A has 10/45 successes and B has 25/85 successes. The dashboard ignores the easy/hard split because the overall bar chart looks cleaner.
+**Situation.** A dashboard says method A is better overall (összességében). In easy cases (könnyű esetek), A has 76/95 successes (siker) and B has 41/45 successes. In hard cases (nehéz esetek), A has 10/45 successes and B has 25/85 successes. The dashboard ignores the easy/hard split (könnyű/nehéz felosztást) because the overall bar chart (összesített oszlopdiagram) looks cleaner.
 
-**Task.** Compute the within-stratum success rates. What naive conclusion is dangerous, and what should be done before making a recommendation?
+**Task.** Compute the within-stratum success rates (rétegen belüli sikerarányok). What naive conclusion (naiv következtetés) is dangerous, and what should be done before making a recommendation (ajánlás)?
 
 <details class="solution" markdown="1">
+
+**Kulcsfogalmak:**
+- **Simpson's paradox (Simpson-paradoxon)** → minden alcsoportban az egyik módszer jobb, de összesítve megfordul az eredmény
+- **Within-stratum success rate (rétegen belüli sikerarány)** → alcsoportonként kiszámított arány
+- **Confounding variable (zavaró változó)** → az eset nehézsége befolyásolja mind a módszer választását, mind a sikert
+
+---
+
+**Within-stratum success rates (rétegen belüli sikerarányok):**
+
+| | Easy cases (könnyű) | Hard cases (nehéz) |
+|---|---|---|
+| Method A | 76/95 = **80%** | 10/45 = **22%** |
+| Method B | 41/45 = **91%** | 25/85 = **29%** |
+
+Mindkét alcsoportban **B jobb mint A**.
+
+**Összesített arányok (overall rates):**
+- A: (76+10)/(95+45) = 86/140 = **61%**
+- B: (41+25)/(45+85) = 66/130 = **51%**
+
+Összesítve A jobbnak tűnik — de ez **Simpson-paradoxon**!
+
+**Miért veszélyes a naiv következtetés:**
+
+Az összesített arány azért félrevezető, mert A módszert főleg könnyű esetekre alkalmazták (95 könnyű vs 45 nehéz), B módszert pedig főleg nehéz esetekre (45 könnyű vs 85 nehéz). Az eset nehézsége egy **confounding variable** — befolyásolja mind a módszer választását, mind a sikert.
+
+**Mit kell tenni:**
+
+Alcsoportonként (rétegek szerint) kell elemezni — az easy/hard split nem hagyható figyelmen kívül. A helyes következtetés: **B módszer jobb** mind a könnyű, mind a nehéz esetekben.
 
 </details>
 
@@ -505,10 +729,40 @@ Két okból helytelen azt mondani hogy "the typical case has been found":
 
 ### 10. (3 points)
 
-**Situation.** Two estimators of a target value θ are compared in a simulation where the true value is θ = 100. Estimator A has simulation mean 100.2 and standard error 8. Estimator B has simulation mean 96.5 and standard error 3.1. A naive analyst says: 'B is automatically better because its standard error is smaller.'
+**Situation.** Two estimators (becslők) of a target value θ are compared in a simulation where the true value (valódi érték) is θ = 100. Estimator A has simulation mean (szimulációs átlag) 100.2 and standard error (standard hiba) 8. Estimator B has simulation mean 96.5 and standard error 3.1. A naive analyst says: 'B is automatically better because its standard error is smaller.'
 
-**Task.** Compute the approximate bias and MSE = bias² + variance for both estimators, using SE squared as the variance. Is the naive sentence correct as stated?
+**Task.** Compute the approximate bias (torzítás) and MSE = bias² + variance for both estimators, using SE squared as the variance. Is the naive sentence correct as stated?
 
 <details class="solution" markdown="1">
+
+**Kulcsfogalmak:**
+- **Bias (torzítás)** → a becslő átlagos eltérése a valódi értéktől: bias = szimulációs átlag − θ
+- **Variance (variancia)** → a becslő ingadozása: SE²
+- **MSE (Mean Squared Error)** → bias² + variance — a becslő összesített hibája
+
+---
+
+**Számítások:**
+
+**Estimator A:**
+- Bias = 100.2 − 100 = **0.2**
+- Variance = 8² = **64**
+- MSE = 0.2² + 64 = 0.04 + 64 = **64.04**
+
+**Estimator B:**
+- Bias = 96.5 − 100 = **-3.5**
+- Variance = 3.1² = **9.61**
+- MSE = (-3.5)² + 9.61 = 12.25 + 9.61 = **21.86**
+
+**Összefoglalás:**
+
+| | Bias | Variance | MSE |
+|---|---|---|---|
+| Estimator A | 0.2 | 64 | 64.04 |
+| Estimator B | -3.5 | 9.61 | 21.86 |
+
+**A naiv mondat helyes-e:**
+
+Nem teljesen. Bár B standard hibája kisebb (kisebb variancia), B **torzított (biased)** — átlagosan 3.5 egységgel alulbecsli a valódi értéket. Az MSE alapján B (21.86) jobb mint A (64.04), de ez nem azért van mert a standard hibája kisebb — hanem mert a kisebb variancia kompenzálja a torzítást. A naiv mondat figyelmen kívül hagyja a bias-t, ezért nem teljes magyarázat.
 
 </details>
