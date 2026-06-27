@@ -46,24 +46,21 @@ title: Feladatok
 
 > **Distribution vs. populáció:** A *distribution* (eloszlás) a matematikai modellt jelenti — itt N(μ, σ²), amiből a megfigyelések származnak. A *populáció* az összes háztartást jelenti a valóságban. A μ paraméter mindkettőhöz kötődik: egyszerre az eloszlás várható értéke és a populáció tényleges átlagos fogyasztása.
 
-**Hogyan ismerjem fel:**
-Keywords to look for: *"parameter", "sample statistic", "random sample", "would give a different average"* → this is asking you to distinguish between a fixed population parameter (populációs paraméter) and a random sample statistic (mintastatisztika), and to explain sampling variability (mintavételi ingadozás).
-
 ---
 
-**Paraméter:**
-- μ — the true expected monthly electricity consumption of the entire population (all households)
-- It is fixed but unknown (rögzített, de ismeretlen)
-- It does not change from sample to sample
+**Paraméter (parameter):** egy olyan szám, amely a teljes populációt vagy a modellt jellemzi.
+- μ — a háztartások valódi várható havi villamosenergia-fogyasztása (a teljes populációban)
+- Rögzített, de ismeretlen (fixed but unknown)
+- Mintáról mintára nem változik
 
-**Sample statistic (mintastatisztika):**
-- X̄ = 236 kWh — the sample mean computed from the 80 sampled households
-- It is known but random (ismert, de véletlen) — it is only an estimate of μ
+**Mintastatisztika (sample statistic):** egy olyan szám, amelyet a mintából számítunk ki, és a paraméter becslésére szolgál.
+- X̄ = 236 kWh — a 80 háztartásból számított mintaátlag
+- Ismert, de véletlen (known but random) — csak μ becslése
 
-**Why would another sample give a different average (miért adna más átlagot egy másik minta):**
-- Different households would be selected, each with their own consumption
-- The sample mean fluctuates from sample to sample — this is called sampling variability (mintavételi ingadozás)
-- The parameter μ stays fixed, but the statistic X̄ is random before the data are observed
+**Miért adna más átlagot egy másik minta:**
+- Különböző háztartások kerülnének a mintába, mindegyik a saját fogyasztásával
+- A mintaátlag mintáról mintára ingadozik — ezt nevezzük mintavételi ingadozásnak (sampling variability)
+- A μ paraméter rögzített marad, de az X̄ statisztika véletlen az adatok megfigyelése előtt
 
 </details>
 
@@ -71,17 +68,17 @@ Keywords to look for: *"parameter", "sample statistic", "random sample", "would 
 
 ### 3. (4 points)
 
-**Situation.** A report says: "A 95% confidence interval for the mean waiting time is [18.2, 21.6] minutes."
+**Situation.** A report says: "A 95% confidence interval (konfidencia-intervallum) for the mean waiting time is [18.2, 21.6] minutes."
 
 **Task.** Decide which interpretations are correct and correct the wrong ones.
 
-(a) There is a 95% probability that this particular interval contains the true mean.
+(a) There is a 95% probability that this particular interval contains the true mean (valódi várható érték).
 
-(b) If we repeated the same sampling procedure many times, about 95% of the intervals constructed in this way would contain the true mean.
+(b) If we repeated the same sampling procedure (mintavételi eljárás) many times, about 95% of the intervals constructed in this way would contain the true mean (valódi várható érték).
 
 (c) About 95% of individual waiting times are between 18.2 and 21.6 minutes.
 
-(d) The interval gives plausible values for the unknown mean waiting time, not for every individual observation.
+(d) The interval gives plausible values for the unknown mean waiting time, not for every individual observation (egyedi megfigyelés).
 
 <details class="solution" markdown="1">
 
