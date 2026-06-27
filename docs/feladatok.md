@@ -356,7 +356,7 @@ Másik megoldás: előzetesen rögzíteni melyik variánst tesztelik (pre-regist
 
 **Instructions.** Answer briefly but precisely. Each question is worth 3 points. The point is statistical understanding: interpretation, method choice, assumptions, diagnostics, and common mistakes.
 
-**Case story – The laptop-sticker confidence census.** A research team investigates laptop stickers and exam confidence. The target population is all students attending review sessions before the exam, while the available dataset is 220 review-session attendances. Each row is one student-attendance. The spreadsheet contains laptop observation code, sticker theme, exam confidence from 1 to 5, number of stickers, a yes/no variable indicating whether had a statistics sticker, and the time series weekly average confidence rating. The team wants a responsible conclusion, not a headline that sounds impressive only because it has a decimal point.
+**Case story – The laptop-sticker confidence census (laptopmatrica megbízhatósági felmérés).** A research team investigates laptop stickers and exam confidence (vizsgamagabiztosság). The target population (célpopuláció) is all students attending review sessions (vizsgafelkészítő foglalkozások) before the exam, while the available dataset (elérhető adatkészlet) is 220 review-session attendances (foglalkozás-látogatások). Each row is one student-attendance (egy diák-foglalkozás párosítás). The spreadsheet contains laptop observation code (laptopmegfigyelési kód), sticker theme (matrica témája), exam confidence from 1 to 5 (vizsgamagabiztosság 1-5 skálán), number of stickers (matricák száma), a yes/no variable (igen/nem változó) indicating whether had a statistics sticker (volt-e statisztika matricája), and the time series weekly average confidence rating (heti átlagos magabiztossági értékelés idősora). The team wants a responsible conclusion (következtetés), not a headline that sounds impressive only because it has a decimal point.
 
 ---
 
@@ -368,17 +368,52 @@ Másik megoldás: előzetesen rögzíteni melyik variánst tesztelik (pre-regist
 
 <details class="solution" markdown="1">
 
+**Population, sample, observational unit (populáció, minta, megfigyelési egység):**
+- **Population (populáció):** all students attending review sessions before the exam — az összes diák aki vizsgafelkészítő foglalkozáson vett részt
+- **Sample (minta):** the 96 rows in the dataset — a 96 soros adathalmaz, ami a 220-ból van kivéve
+- **Observational unit (megfigyelési egység):** one student-attendance — egy diák egy foglalkozáson való részvétele
+
+**Variable classification (változók osztályozása):**
+
+| Variable | Level of measurement (mérési szint) | Miért |
+|---|---|---|
+| Laptop observation code | Nominal (nominális) | Azonosító kód, nem mennyiség |
+| Sticker theme | Nominal (nominális) | Kategóriák, nincs sorrend |
+| Exam confidence (1–5) | Ordinal (ordinális) | Van sorrend, de a távolságok nem feltétlenül egyenlők |
+| Number of stickers | Ratio (arány) | Egyenlő különbségek, valódi nulla (0 matrica = nincs matrica) |
+| Yes/no statistics sticker | Nominal (nominális) | Két kategória (igen/nem), nincs mennyiség |
+
+**Mikor értelmetlen az átlag:**
+- **Laptop observation code:** az átlag értelmetlen — a számok tetszőleges kódok (labels), nem mennyiségek
+- **Sticker theme:** az átlag értelmetlen — kategóriák, nincs numerikus jelentésük
+- **Yes/no statistics sticker:** az átlag értelmetlen — két kategória (igen/nem), nem mennyiség
+- **Exam confidence (1–5):** kérdéses — az átlag feltételezi hogy a távolságok egyenlők a kategóriák között, ami ordinális adatnál nem garantált
+
 </details>
 
 ---
 
 ### 2. (3 points)
 
-**Situation.** A five-row pilot sample of number of stickers is: 16, 18, 19, 21, 43. A short report gives only the sample mean and announces that the typical case has been found.
+**Situation.** A five-row pilot sample (ötsorosminta) of number of stickers is: 16, 18, 19, 21, 43. A short report gives only the sample mean (mintaátlag) and announces that the typical case (tipikus eset) has been found.
 
-**Task.** Compute the sample mean and the median. Which one is more robust in this small sample, and what is the exact warning against the naive report?
+**Task.** Compute the sample mean (mintaátlag) and the median (medián). Which one is more robust (robusztusabb) in this small sample, and what is the exact warning against the naive report (naiv jelentés)?
 
 <details class="solution" markdown="1">
+
+**Számítások:**
+- **Sample mean (mintaátlag):** (16 + 18 + 19 + 21 + 43) / 5 = 117 / 5 = **23.4**
+- **Median (medián):** a középső érték rendezett sorban: 16, 18, **19**, 21, 43 → **19**
+
+**Melyik robusztusabb (more robust):**
+
+A medián robusztusabb ebben az esetben, mert a 43-as érték egy kiugró érték (outlier) ami felfelé húzza az átlagot (23.4), így az átlag nem jellemzi a tipikus esetet. A medián (19) nem érzékeny a kiugró értékekre — csak a középső értéket veszi figyelembe.
+
+**Warning against the naive report (figyelmeztetés a naiv jelentés ellen):**
+
+Két okból helytelen azt mondani hogy "the typical case has been found":
+- **Kis minta (small sample)** — 5 sor alapján nem lehet általánosítani a populációra, a mintavételi ingadozás (sampling variability) nagy
+- **Kiugró érték (outlier)** — a 43-as érték torzítja az átlagot, ezért az átlag nem jellemzi a tipikus esetet. A medián jobb leíró statisztika lenne ebben az esetben
 
 </details>
 
