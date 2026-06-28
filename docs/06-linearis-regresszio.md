@@ -121,6 +121,14 @@ $$\hat{\beta} = (X^TX)^{-1}X^TY$$
 
 ## Legkisebb négyzetek módszere (OLS)
 
+<div class="concept" markdown="1">
+**Reziduális (reziduum):** a megfigyelt és a modell által becsült érték különbsége:
+
+$$e_i = Y_i - \hat{Y}_i$$
+
+Különbség a hibataghoz képest: a hibatag \\(\varepsilon_i\\) az igazi, elméleti hiba (nem megfigyelhető), míg a reziduális \\(e_i\\) a becsült modellből számított, megfigyelhető különbség.
+</div>
+
 ### Levezetés egyváltozós esetben
 
 <div class="eljaras" markdown="1">

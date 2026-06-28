@@ -617,6 +617,8 @@ Ahhoz hogy okozati következtetést vonhassunk le, véletlenszerű kísérlet (r
 **Kulcsfogalmak:**
 - **R² vs adjusted R² (korrigált R²)** → R² mindig nő ha új változót adsz hozzá, adjusted R² bünteti a felesleges változókat
 - **VIF (Variance Inflation Factor)** → multikollinearitás mértéke — VIF > 10 komoly probléma, VIF > 5 figyelmeztetés
+- **Reziduum (residual)** → a megfigyelt és a becsült érték különbsége: \\(e_i = Y_i - \hat{Y}_i\\)
+- **Reziduum-plot** → a reziduumokat a becsült értékek függvényében ábrázoljuk — jó modellben véletlen felhőt kell látni, nem mintázatot
 - **Curved pattern (ívelt mintázat)** → a linearitás feltétele sérül
 
 ---
